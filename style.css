@@ -78,7 +78,12 @@ p {
    cursor: pointer;
 }
 
+.social-icon a {
+   width: 24px;
+   height: 24px;
+}
+
 .social-icon:hover {
     background-color: #E0E0E0;
-    border-radius: 20px;
+    border-radius: 50%;
 }
