@@ -36,6 +36,11 @@
   body {
     font-family: "Inter", sans-serif;
   }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @layer components {

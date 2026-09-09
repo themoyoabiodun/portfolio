@@ -25,9 +25,7 @@ export default function App() {
 
         <a
           href="https://themoyo.framer.website/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="portfolio-button inline-flex items-center justify-center rounded-full bg-[#171717] px-4 py-2 text-sm font-medium text-white animate-fade-in-up motion-reduce:animate-fade-in"
+          className="portfolio-button inline-flex h-9 items-center justify-center rounded-full bg-[#171717] px-4 text-sm font-medium text-white animate-fade-in-up motion-reduce:animate-fade-in sm:h-7"
           style={{ animationDelay: "120ms" }}
         >
           Portfolio
