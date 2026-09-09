@@ -19,7 +19,6 @@ export default function App() {
         <div className="animate-fade-in-up motion-reduce:animate-fade-in">
           <Avatar
             src={`${import.meta.env.BASE_URL}asset/moyo.png`}
-            fullSrc={`${import.meta.env.BASE_URL}asset/moyo-full.jpg`}
             alt="Moyo Abiodun"
           />
         </div>
