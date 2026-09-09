@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
   AnimatePresence,
+  animate,
   motion,
   useMotionValue,
   useSpring,
@@ -17,6 +18,7 @@ const TILT_SPRING = { stiffness: 150, damping: 15, mass: 0.5 };
 const SCALE_SPRING = { stiffness: 300, damping: 20 };
 const HOVER_MORPH_TRANSITION = { duration: 0.5, ease: [0.77, 0, 0.175, 1] };
 const HOVER_MORPH_RADIUS = "38% 62% 58% 42% / 42% 45% 55% 58%";
+const CIRCLE_RADIUS = "50%";
 
 // Shared-element expand: "Snappy Out" from easing.dev — cubic-bezier(0.19, 1,
 // 0.22, 1), a zero-overshoot deceleration. Used as a *tween*, not a spring,
@@ -25,8 +27,8 @@ const HOVER_MORPH_RADIUS = "38% 62% 58% 42% / 42% 45% 55% 58%";
 // tween one way and a default spring the other.
 const EXPAND_EASE = [0.19, 1, 0.22, 1];
 const EXPAND_TRANSITION = { type: "tween", duration: 0.5, ease: EXPAND_EASE };
-const LAYOUT_TRANSITION = { layout: EXPAND_TRANSITION, borderRadius: HOVER_MORPH_TRANSITION };
-const REDUCED_LAYOUT_TRANSITION = { layout: { duration: 0 }, borderRadius: { duration: 0 } };
+const LAYOUT_TRANSITION = { layout: EXPAND_TRANSITION };
+const REDUCED_LAYOUT_TRANSITION = { layout: { duration: 0 } };
 const BACKDROP_TRANSITION = { duration: 0.3, ease: [0.23, 1, 0.32, 1] };
 const CLOSE_BUTTON_TRANSITION = { duration: 0.2, ease: [0.23, 1, 0.32, 1] };
 
@@ -40,20 +42,25 @@ export default function Avatar({ src, fullSrc, alt }) {
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  // Owned directly (not via whileHover) so a click mid-hover can force it
+  // back to a clean circle instantly — see resetTilt below.
+  const borderRadius = useMotionValue(CIRCLE_RADIUS);
 
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), TILT_SPRING);
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), TILT_SPRING);
   const scale = useSpring(1, SCALE_SPRING);
 
   // The shared-element expand should always grow from the avatar's neutral,
-  // untilted pose — otherwise a hover in progress at click time bakes a
-  // skewed starting transform into the transition.
+  // untilted, perfectly circular pose. Without this, clicking mid-hover
+  // could catch the tilt spring or the hover-morph blob mid-flight and bake
+  // a skewed or lopsided starting shape into the shared transition.
   function resetTilt() {
     mouseX.jump(0);
     mouseY.jump(0);
     rotateX.jump(0);
     rotateY.jump(0);
     scale.jump(1);
+    borderRadius.jump(CIRCLE_RADIUS);
   }
 
   function handleMouseMove(event) {
@@ -66,12 +73,14 @@ export default function Avatar({ src, fullSrc, alt }) {
   function handleEnter() {
     if (prefersReducedMotion) return;
     scale.set(1.08);
+    animate(borderRadius, HOVER_MORPH_RADIUS, HOVER_MORPH_TRANSITION);
   }
 
   function handleLeave() {
     mouseX.set(0);
     mouseY.set(0);
     scale.set(1);
+    animate(borderRadius, CIRCLE_RADIUS, HOVER_MORPH_TRANSITION);
   }
 
   function openLightbox() {
@@ -116,10 +125,9 @@ export default function Avatar({ src, fullSrc, alt }) {
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
             layoutId={LAYOUT_ID}
-            initial={{ borderRadius: "50%" }}
-            whileHover={prefersReducedMotion ? undefined : { borderRadius: HOVER_MORPH_RADIUS }}
             transition={prefersReducedMotion ? REDUCED_LAYOUT_TRANSITION : LAYOUT_TRANSITION}
             style={{
+              borderRadius,
               rotateX: prefersReducedMotion ? 0 : rotateX,
               rotateY: prefersReducedMotion ? 0 : rotateY,
               scale,
