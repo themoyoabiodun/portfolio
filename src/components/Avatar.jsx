@@ -137,6 +137,7 @@ export default function Avatar({ src, fullSrc, alt }) {
           >
             <motion.img
               layout
+              transition={prefersReducedMotion ? REDUCED_LAYOUT_TRANSITION : LAYOUT_TRANSITION}
               src={src}
               alt=""
               draggable={false}
@@ -156,7 +157,7 @@ export default function Avatar({ src, fullSrc, alt }) {
               exit={{ opacity: 0 }}
               transition={BACKDROP_TRANSITION}
               style={{
-                backgroundColor: "#232c24",
+                backgroundColor: "#070707",
                 backgroundImage: `url(${lightboxGlow})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -175,6 +176,7 @@ export default function Avatar({ src, fullSrc, alt }) {
               >
                 <motion.img
                   layout
+                  transition={prefersReducedMotion ? REDUCED_LAYOUT_TRANSITION : LAYOUT_TRANSITION}
                   src={fullSrc}
                   alt={alt}
                   className="h-full w-full object-cover"
