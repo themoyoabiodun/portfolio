@@ -17,7 +17,11 @@ export default function App() {
     <div className="flex h-screen items-center justify-center bg-[#F5F5F5]">
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="animate-fade-in-up motion-reduce:animate-fade-in">
-          <Avatar src={`${import.meta.env.BASE_URL}asset/moyo.png`} alt="Moyo Abiodun" />
+          <Avatar
+            src={`${import.meta.env.BASE_URL}asset/moyo.png`}
+            fullSrc={`${import.meta.env.BASE_URL}asset/moyo-full.jpg`}
+            alt="Moyo Abiodun"
+          />
         </div>
 
         <div
