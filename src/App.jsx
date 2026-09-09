@@ -1,16 +1,4 @@
 import Avatar from "./components/Avatar.jsx";
-import SocialLink from "./components/SocialLink.jsx";
-import { LinkedInIcon, XIcon, InstagramIcon } from "./components/icons.jsx";
-
-const socials = [
-  { href: "https://www.linkedin.com/in/moyo99/", label: "LinkedIn", Icon: LinkedInIcon },
-  { href: "https://x.com/themoyoabiodun", label: "X", Icon: XIcon },
-  {
-    href: "https://www.instagram.com/themoyoabiodun?igsh=M3J1YXBtOTJzb2Fp&utm_source=qr/",
-    label: "Instagram",
-    Icon: InstagramIcon,
-  },
-];
 
 export default function App() {
   return (
@@ -24,7 +12,7 @@ export default function App() {
         </div>
 
         <div
-          className="mb-4 flex flex-col items-center justify-center animate-fade-in-up motion-reduce:animate-fade-in"
+          className="flex flex-col items-center justify-center animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "60ms" }}
         >
           <h1 className="m-0 text-[15px] font-medium leading-[26px] text-[#1A1A1A]">
@@ -44,19 +32,6 @@ export default function App() {
         >
           Portfolio
         </a>
-
-        <ul
-          className="m-0 flex list-none gap-1 p-0 animate-fade-in-up motion-reduce:animate-fade-in"
-          style={{ animationDelay: "180ms" }}
-        >
-          {socials.map(({ href, label, Icon }) => (
-            <li key={label}>
-              <SocialLink href={href} label={label}>
-                <Icon />
-              </SocialLink>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
