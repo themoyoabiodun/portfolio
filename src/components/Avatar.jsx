@@ -8,7 +8,6 @@ import {
   useTransform,
   useReducedMotion,
 } from "motion/react";
-import closeIcon from "../assets/close-icon.svg";
 import lightboxGlow from "../assets/lightbox-backdrop.svg";
 
 // Gesture-driven tilt: a spring, not a tween, so it can be interrupted and
@@ -19,10 +18,15 @@ const SCALE_SPRING = { stiffness: 300, damping: 20 };
 const HOVER_MORPH_TRANSITION = { duration: 0.5, ease: [0.77, 0, 0.175, 1] };
 const HOVER_MORPH_RADIUS = "38% 62% 58% 42% / 42% 45% 55% 58%";
 
-// Shared-element expand: also a layout animation, so also a spring —
-// Apple-style config (duration + bounce) is easier to reason about than
-// raw physics, and a low bounce keeps a modal-open feeling controlled.
-const EXPAND_SPRING = { type: "spring", duration: 0.5, bounce: 0.15 };
+// Shared-element expand: "Snappy Out" from easing.dev — cubic-bezier(0.19, 1,
+// 0.22, 1), a zero-overshoot deceleration. Used as a *tween*, not a spring,
+// and applied identically on both the small avatar and the expanded card so
+// open and close read as the same motion in reverse, rather than a smooth
+// tween one way and a default spring the other.
+const EXPAND_EASE = [0.19, 1, 0.22, 1];
+const EXPAND_TRANSITION = { type: "tween", duration: 0.5, ease: EXPAND_EASE };
+const LAYOUT_TRANSITION = { layout: EXPAND_TRANSITION, borderRadius: HOVER_MORPH_TRANSITION };
+const REDUCED_LAYOUT_TRANSITION = { layout: { duration: 0 }, borderRadius: { duration: 0 } };
 const BACKDROP_TRANSITION = { duration: 0.3, ease: [0.23, 1, 0.32, 1] };
 const CLOSE_BUTTON_TRANSITION = { duration: 0.2, ease: [0.23, 1, 0.32, 1] };
 
@@ -40,6 +44,17 @@ export default function Avatar({ src, fullSrc, alt }) {
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), TILT_SPRING);
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), TILT_SPRING);
   const scale = useSpring(1, SCALE_SPRING);
+
+  // The shared-element expand should always grow from the avatar's neutral,
+  // untilted pose — otherwise a hover in progress at click time bakes a
+  // skewed starting transform into the transition.
+  function resetTilt() {
+    mouseX.jump(0);
+    mouseY.jump(0);
+    rotateX.jump(0);
+    rotateY.jump(0);
+    scale.jump(1);
+  }
 
   function handleMouseMove(event) {
     if (prefersReducedMotion || !ref.current) return;
@@ -59,6 +74,16 @@ export default function Avatar({ src, fullSrc, alt }) {
     scale.set(1);
   }
 
+  function openLightbox() {
+    resetTilt();
+    setIsOpen(true);
+  }
+
+  function closeLightbox() {
+    resetTilt();
+    setIsOpen(false);
+  }
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -67,7 +92,7 @@ export default function Avatar({ src, fullSrc, alt }) {
     closeButtonRef.current?.focus();
 
     function handleKeyDown(event) {
-      if (event.key === "Escape") setIsOpen(false);
+      if (event.key === "Escape") closeLightbox();
     }
     window.addEventListener("keydown", handleKeyDown);
 
@@ -75,6 +100,7 @@ export default function Avatar({ src, fullSrc, alt }) {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
@@ -84,7 +110,7 @@ export default function Avatar({ src, fullSrc, alt }) {
           <motion.button
             type="button"
             aria-label={`View larger photo of ${alt}`}
-            onClick={() => setIsOpen(true)}
+            onClick={openLightbox}
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleEnter}
@@ -92,7 +118,7 @@ export default function Avatar({ src, fullSrc, alt }) {
             layoutId={LAYOUT_ID}
             initial={{ borderRadius: "50%" }}
             whileHover={prefersReducedMotion ? undefined : { borderRadius: HOVER_MORPH_RADIUS }}
-            transition={{ borderRadius: HOVER_MORPH_TRANSITION }}
+            transition={prefersReducedMotion ? REDUCED_LAYOUT_TRANSITION : LAYOUT_TRANSITION}
             style={{
               rotateX: prefersReducedMotion ? 0 : rotateX,
               rotateY: prefersReducedMotion ? 0 : rotateY,
@@ -122,7 +148,7 @@ export default function Avatar({ src, fullSrc, alt }) {
               exit={{ opacity: 0 }}
               transition={BACKDROP_TRANSITION}
               style={{
-                backgroundColor: "#52af5a",
+                backgroundColor: "#232c24",
                 backgroundImage: `url(${lightboxGlow})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -130,12 +156,12 @@ export default function Avatar({ src, fullSrc, alt }) {
               role="dialog"
               aria-modal="true"
               aria-label={`${alt} — enlarged photo`}
-              onClick={() => setIsOpen(false)}
+              onClick={closeLightbox}
             >
               <motion.div
                 layoutId={LAYOUT_ID}
-                transition={{ layout: prefersReducedMotion ? { duration: 0 } : EXPAND_SPRING }}
-                style={{ borderRadius: 16, aspectRatio: "406 / 447", width: "min(406px, 82vw)" }}
+                transition={prefersReducedMotion ? REDUCED_LAYOUT_TRANSITION : LAYOUT_TRANSITION}
+                style={{ borderRadius: 266, aspectRatio: "346 / 380", width: "min(346px, 82vw)" }}
                 className="overflow-hidden bg-white shadow-[0_8px_16px_0_rgba(0,0,0,0.16)]"
                 onClick={(event) => event.stopPropagation()}
               >
@@ -150,7 +176,7 @@ export default function Avatar({ src, fullSrc, alt }) {
               <motion.button
                 ref={closeButtonRef}
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={closeLightbox}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
@@ -158,9 +184,8 @@ export default function Avatar({ src, fullSrc, alt }) {
                   ...CLOSE_BUTTON_TRANSITION,
                   delay: prefersReducedMotion ? 0 : 0.15,
                 }}
-                className="flex h-8 cursor-pointer items-center gap-1 rounded-full border-0 bg-white/50 px-3.5 py-0.5 text-sm font-semibold tracking-[0.1px] text-white"
+                className="flex h-8 cursor-pointer items-center rounded-full border-0 bg-white/30 px-3.5 py-0.5 text-sm font-semibold tracking-[0.1px] text-white"
               >
-                <img src={closeIcon} alt="" className="h-4 w-4" />
                 Close
               </motion.button>
             </motion.div>
