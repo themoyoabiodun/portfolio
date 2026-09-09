@@ -184,7 +184,7 @@ export default function Avatar({ src, fullSrc, alt }) {
                   ...CLOSE_BUTTON_TRANSITION,
                   delay: prefersReducedMotion ? 0 : 0.15,
                 }}
-                className="flex h-8 cursor-pointer items-center rounded-full border-0 bg-white/30 px-3.5 py-0.5 text-sm font-semibold tracking-[0.1px] text-white"
+                className="close-pill flex h-8 cursor-pointer items-center rounded-full border-0 bg-white/30 px-3.5 py-0.5 text-sm font-semibold tracking-[0.1px] text-white"
               >
                 Close
               </motion.button>
