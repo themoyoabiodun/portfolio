@@ -95,7 +95,7 @@ export default function LinkPreview({ children, href, url, icon, color }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="link-preview-trigger whitespace-nowrap underline decoration-dotted decoration-[10%] [text-decoration-skip-ink:none]"
+        className="link-preview-trigger dotted-underline whitespace-nowrap"
         onPointerDown={(e) => {
           lastPointerType.current = e.pointerType;
         }}

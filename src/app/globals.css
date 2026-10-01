@@ -107,6 +107,26 @@
 }
 
 @layer components {
+  /* Dotted underline with round dots. CSS "dotted" decorations render square
+     dots, so the dots are drawn as a repeating radial gradient instead:
+     diameter = 10% of the font size (the design's thickness), one dot every
+     2 diameters, sitting 20% of the font size below the baseline (Inter's
+     baseline is 1em below the top of the inline box). The bottom padding
+     extends the inline box so the dots aren't clipped; padding on inline
+     text doesn't change line spacing. */
+  .dotted-underline {
+    text-decoration: none;
+    background-image: radial-gradient(
+      circle closest-side,
+      currentColor 90%,
+      transparent
+    );
+    background-size: 0.2em 0.1em;
+    background-repeat: repeat-x;
+    background-position: 0 1.2em;
+    padding-bottom: 0.15em;
+  }
+
   /* Link preview toolbar (animate skill, tooltip recipe): grows out of the
      underlined name it belongs to, never from nothing. Exit is faster than
      entry; transitions (not keyframes) so rapid hovers retarget smoothly. */
