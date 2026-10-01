@@ -3,10 +3,26 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 
-// Looping, muted preview clip that starts as soon as the page loads.
-// `autoPlay` lets the browser start it before hydration; the effect makes
-// sure it's playing (or, with reduced motion, paused on its poster/first
-// frame) once React takes over.
+// Every card video on the page joins one group. Playback starts for all of
+// them together once each can play (or after a short timeout, so one slow
+// clip can't hold the rest back), then each loops on its own.
+const group = new Set();
+const START_TIMEOUT_MS = 2500;
+let started = false;
+let timer = null;
+
+function startAll(force = false) {
+  if (started) return;
+  const videos = [...group];
+  if (!force && !videos.every((v) => v.readyState >= 3)) return;
+  started = true;
+  clearTimeout(timer);
+  for (const v of videos) {
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  }
+}
+
 export default function CardVideo({ src, poster, label }) {
   const ref = useRef(null);
   const prefersReducedMotion = useReducedMotion();
@@ -14,11 +30,26 @@ export default function CardVideo({ src, poster, label }) {
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
+
+    // Reduced motion: stay paused on the poster/first frame.
     if (prefersReducedMotion) {
       video.pause();
-    } else {
-      video.play().catch(() => {});
+      return;
     }
+
+    group.add(video);
+    // A video that joins after the group started (e.g. reduced motion
+    // switched off) just plays.
+    if (started) video.play().catch(() => {});
+    const onReady = () => startAll();
+    video.addEventListener("canplay", onReady);
+    onReady();
+    timer ??= setTimeout(() => startAll(true), START_TIMEOUT_MS);
+
+    return () => {
+      video.removeEventListener("canplay", onReady);
+      group.delete(video);
+    };
   }, [prefersReducedMotion]);
 
   return (
@@ -27,7 +58,6 @@ export default function CardVideo({ src, poster, label }) {
       src={src}
       poster={poster}
       aria-label={label}
-      autoPlay
       muted
       loop
       playsInline

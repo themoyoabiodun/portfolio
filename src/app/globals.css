@@ -5,8 +5,11 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-  --animate-fade-in-up: fade-in-up 500ms var(--ease-out) both;
-  --animate-fade-in: fade-in 500ms ease both;
+  /* "backwards", not "both": once an entrance ends it drops its transform,
+     so images and video aren't left on a promoted layer at a sub-pixel
+     offset, which renders them soft. */
+  --animate-fade-in-up: fade-in-up 500ms var(--ease-out) backwards;
+  --animate-fade-in: fade-in 500ms ease backwards;
 }
 
 @keyframes fade-in-up {
