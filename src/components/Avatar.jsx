@@ -4,18 +4,21 @@ import { useRef } from "react";
 import {
   animate,
   motion,
+  useMotionTemplate,
   useMotionValue,
   useSpring,
   useTransform,
   useReducedMotion,
 } from "motion/react";
 
-// Gesture-driven tilt: a spring, not a tween, so it can be interrupted and
-// carries velocity as the pointer moves — see animate skill, "reach for a
-// spring" for mouse-tracking.
-const TILT_SPRING = { stiffness: 150, damping: 15, mass: 0.5 };
-const SCALE_SPRING = { stiffness: 300, damping: 20 };
-const HOVER_MORPH_TRANSITION = { duration: 0.5, ease: [0.77, 0, 0.175, 1] };
+// Decorative mouse-tracking: a spring, not a tween, so it can be interrupted
+// and carries velocity as the pointer moves. Apple-style config from the
+// animate skill (0.5s, bounce 0.2).
+const SPRING = { visualDuration: 0.5, bounce: 0.2 };
+// Hover is a tens-of-times interaction, so the morph stays short; on-screen
+// shape change uses the strong ease-in-out curve.
+const HOVER_MORPH_TRANSITION = { duration: 0.25, ease: [0.77, 0, 0.175, 1] };
+const HOVER_SCALE = 1.05;
 const HOVER_MORPH_RADIUS = "38% 62% 58% 42% / 42% 45% 55% 58%";
 const CIRCLE_RADIUS = "50%";
 
@@ -37,9 +40,12 @@ export default function Avatar({ src, alt }) {
   const mouseY = useMotionValue(0);
   const borderRadius = useMotionValue(CIRCLE_RADIUS);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), TILT_SPRING);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), TILT_SPRING);
-  const scale = useSpring(1, SCALE_SPRING);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), SPRING);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), SPRING);
+  const scale = useSpring(1, SPRING);
+  // One full transform string instead of Motion's rotateX/rotateY/scale
+  // shorthands, which skip hardware acceleration.
+  const transform = useMotionTemplate`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
 
   function handleMouseMove(event) {
     if (prefersReducedMotion || !ref.current || !canHover()) return;
@@ -50,7 +56,7 @@ export default function Avatar({ src, alt }) {
 
   function handleEnter() {
     if (prefersReducedMotion || !canHover()) return;
-    scale.set(1.08);
+    scale.set(HOVER_SCALE);
     animate(borderRadius, HOVER_MORPH_RADIUS, HOVER_MORPH_TRANSITION);
   }
 
@@ -71,9 +77,7 @@ export default function Avatar({ src, alt }) {
         onMouseLeave={handleLeave}
         style={{
           borderRadius,
-          rotateX: prefersReducedMotion ? 0 : rotateX,
-          rotateY: prefersReducedMotion ? 0 : rotateY,
-          scale,
+          transform: prefersReducedMotion ? "none" : transform,
           transformStyle: "preserve-3d",
         }}
         className="relative h-12 w-12 overflow-hidden bg-[var(--color-avatar-bg)] shadow-[0px_6px_7px_0px_rgba(0,0,0,0.3),0px_0px_0px_1px_rgba(0,0,0,0.06)] will-change-transform"
