@@ -2,12 +2,14 @@ import Avatar from "@/components/Avatar";
 import Nav from "@/components/Nav";
 import WorkCard from "@/components/WorkCard";
 
-// Card widths in Figma's proportions (183 / 232.5 / 232.5 at 135.5 tall, here
-// doubled to stay whole numbers); cards keep them as the row scales down.
+// Card sizes from Figma (all 164px tall); cards keep these proportions as
+// the row scales down.
+const CARD_HEIGHT = 164;
+
 const WORK = [
-  { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 366 },
-  { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 465 },
-  { name: "rank-card", alt: "Rank “Finish setup” card", width: 465 },
+  { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 183 },
+  { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 232 },
+  { name: "rank-card", alt: "Rank “Finish setup” card", width: 233 },
 ];
 
 function Highlight({ children }) {
@@ -57,7 +59,7 @@ export default function Home() {
         {/* Cards continue the page's 60ms entrance stagger instead of
             arriving as one block. */}
         {WORK.map((item, i) => (
-          <WorkCard key={item.name} {...item} delay={180 + i * 60} />
+          <WorkCard key={item.name} {...item} height={CARD_HEIGHT} delay={180 + i * 60} />
         ))}
       </section>
     </main>
