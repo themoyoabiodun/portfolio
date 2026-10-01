@@ -106,13 +106,63 @@
   }
 }
 
+@layer components {
+  /* Link preview toolbar (animate skill, tooltip recipe): grows out of the
+     underlined name it belongs to, never from nothing. Exit is faster than
+     entry; transitions (not keyframes) so rapid hovers retarget smoothly. */
+  .link-preview-toolbar {
+    transform-origin: bottom left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(var(--preview-shift, 0px), 4px) scale(0.97);
+    transition:
+      opacity 100ms var(--ease-out),
+      transform 100ms var(--ease-out),
+      visibility 0s linear 100ms;
+  }
+
+  .link-preview-toolbar[data-open] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(var(--preview-shift, 0px), 0) scale(1);
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      visibility 0s;
+  }
+
+  .link-preview-toolbar[data-instant] {
+    transition-duration: 0ms;
+  }
+
+  .link-preview-chevron {
+    transition: transform 150ms var(--ease-out);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
+  .link-preview-toolbar:hover .link-preview-chevron {
+    transform: translateX(2px);
+  }
+
   .nav-link:not([aria-current="page"]):hover {
     background-color: var(--color-nav-hover);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Keep the fade, drop the movement. */
+  .link-preview-toolbar,
+  .link-preview-toolbar[data-open] {
+    transform: translateX(var(--preview-shift, 0px));
+  }
+
+  .link-preview-chevron {
+    transition: none;
+  }
+
   .nav-link {
     transition: background-color 150ms ease;
   }
