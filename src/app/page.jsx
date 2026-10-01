@@ -45,8 +45,8 @@ export default function Home() {
             Anchor (YC S22)
           </LinkPreview> to savings, budgeting, and
           investment products at <LinkPreview
-            href="https://www.userank.app"
-            url="www.userank.app"
+            href="https://www.userank.com"
+            url="www.userank.com"
             icon="/asset/icons/rank.svg"
             color="#F97501"
           >
