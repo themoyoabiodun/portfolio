@@ -33,12 +33,12 @@
     -moz-osx-font-smoothing: grayscale;
     color-scheme: light dark;
 
-    --color-bg: #f5f5f5;
-    --color-text-primary: #1a1a1a;
+    --color-bg: #ffffff;
+    --color-text-primary: #171717;
     --color-text-secondary: #676767;
-    --color-button-bg: #171717;
-    --color-button-bg-hover: #262626;
-    --color-button-text: #ffffff;
+    --color-card-bg: #edecec;
+    --color-avatar-bg: #6c6c6c;
+    --color-nav-hover: #f2f2f2;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -46,14 +46,15 @@
       --color-bg: #070707;
       --color-text-primary: #f5f5f5;
       --color-text-secondary: #a3a3a3;
-      --color-button-bg: #f5f5f5;
-      --color-button-bg-hover: #e5e5e5;
-      --color-button-text: #171717;
+      --color-card-bg: #1a1a1a;
+      --color-avatar-bg: #3a3a3a;
+      --color-nav-hover: #1f1f1f;
     }
   }
 
   body {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-inter), "Inter", sans-serif;
+    background-color: var(--color-bg);
   }
 
   a,
@@ -63,29 +64,29 @@
 }
 
 @layer components {
-  .portfolio-button {
+  .nav-link {
     transition:
       background-color 150ms ease,
       transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .portfolio-button:active {
+  .nav-link:active {
     transform: scale(0.96);
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .portfolio-button:hover {
-    background-color: var(--color-button-bg-hover);
+  .nav-link:hover {
+    background-color: var(--color-nav-hover);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .portfolio-button {
+  .nav-link {
     transition: background-color 150ms ease;
   }
 
-  .portfolio-button:active {
+  .nav-link:active {
     transform: none;
   }
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import {
   animate,
@@ -74,13 +76,14 @@ export default function Avatar({ src, alt }) {
           scale,
           transformStyle: "preserve-3d",
         }}
-        className="h-11 w-11 overflow-hidden will-change-transform"
+        className="relative h-12 w-12 overflow-hidden bg-[var(--color-avatar-bg)] shadow-[0px_6px_7px_0px_rgba(0,0,0,0.3),0px_0px_0px_1px_rgba(0,0,0,0.06)] will-change-transform"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element -- static export, no optimizer */}
         <img
           src={src}
           alt={alt}
           draggable={false}
-          className="h-full w-full object-cover"
+          className="absolute left-1/2 top-[-1px] h-[65px] w-[52px] max-w-none -translate-x-1/2 object-cover"
         />
       </motion.div>
     </div>
