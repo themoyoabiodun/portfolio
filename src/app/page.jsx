@@ -1,22 +1,17 @@
 import Avatar from "@/components/Avatar";
+import LinkPreview from "@/components/LinkPreview";
 import Nav from "@/components/Nav";
 import WorkCard from "@/components/WorkCard";
 
-// Card widths in Figma's proportions (183 / 232.5 / 232.5 at 135.5 tall, here
-// doubled to stay whole numbers); cards keep them as the row scales down.
-const WORK = [
-  { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 366 },
-  { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 465 },
-  { name: "rank-card", alt: "Rank “Finish setup” card", width: 465 },
-];
+// Card sizes from Figma (all 164px tall); cards keep these proportions as
+// the row scales down.
+const CARD_HEIGHT = 164;
 
-function Highlight({ children }) {
-  return (
-    <span className="underline decoration-dotted decoration-[10%] [text-decoration-skip-ink:none]">
-      {children}
-    </span>
-  );
-}
+const WORK = [
+  { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 183 },
+  { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 232 },
+  { name: "rank-card", alt: "Rank “Finish setup” card", width: 233 },
+];
 
 export default function Home() {
   return (
@@ -41,8 +36,22 @@ export default function Home() {
           Moyo is a Product designer helping founders turn their early ideas
           into shipped products. Most of my work has been in the Fintech
           ecosystem, from payment, card, and banking infrastructure at{" "}
-          <Highlight>Anchor (YC S22)</Highlight> to savings, budgeting, and
-          investment products at <Highlight>Rank (YC W22)</Highlight>. Along
+          <LinkPreview
+            href="https://www.getanchor.co"
+            url="www.getanchor.co"
+            icon="/asset/icons/anchor.svg"
+            color="#045137"
+          >
+            Anchor (YC S22)
+          </LinkPreview> to savings, budgeting, and
+          investment products at <LinkPreview
+            href="https://www.userank.app"
+            url="www.userank.app"
+            icon="/asset/icons/rank.svg"
+            color="#F97501"
+          >
+            Rank (YC W22)
+          </LinkPreview>. Along
           the way, I’ve helped teams maintain and build design systems and
           product foundation crafted with excellence, needed to move quickly
           without losing consistency.
@@ -57,7 +66,7 @@ export default function Home() {
         {/* Cards continue the page's 60ms entrance stagger instead of
             arriving as one block. */}
         {WORK.map((item, i) => (
-          <WorkCard key={item.name} {...item} delay={180 + i * 60} />
+          <WorkCard key={item.name} {...item} height={CARD_HEIGHT} delay={180 + i * 60} />
         ))}
       </section>
     </main>
