@@ -25,7 +25,7 @@ export default function Home() {
 
       <section
         id="about"
-        className="mt-[68px] flex scroll-mt-16 flex-col items-center gap-10 text-center"
+        className="mt-[69px] flex scroll-mt-16 flex-col items-center gap-10 text-center"
       >
         <div
           className="animate-fade-in-up motion-reduce:animate-fade-in"
@@ -35,12 +35,12 @@ export default function Home() {
         </div>
 
         <p
-          className="m-0 max-w-[443px] text-sm font-medium leading-5 text-[var(--color-text-primary)] animate-fade-in-up motion-reduce:animate-fade-in"
+          className="m-0 max-w-[443px] text-sm font-medium leading-[22px] text-[var(--color-text-primary)] animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "120ms" }}
         >
           Moyo is a Product designer helping founders turn their early ideas
           into shipped products. Most of my work has been in the Fintech
-          ecosystem from payment, card and banking infrastructure at{" "}
+          ecosystem, from payment, card, and banking infrastructure at{" "}
           <Highlight>Anchor (YC S22)</Highlight> to savings, budgeting, and
           investment products at <Highlight>Rank (YC W22)</Highlight>. Along
           the way, I’ve helped teams maintain and build design systems and

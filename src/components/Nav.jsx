@@ -12,13 +12,13 @@ const LINKS = [
 export default function Nav() {
   return (
     <header className="sticky top-0 z-10 -mx-4 bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] py-3 backdrop-blur-md md:-mx-[52px]">
-      <nav className="flex items-center justify-center gap-2 animate-fade-in-up motion-reduce:animate-fade-in">
+      <nav className="flex items-center justify-center gap-1 animate-fade-in-up motion-reduce:animate-fade-in">
         {LINKS.map(({ label, href, current }) => (
           <a
             key={label}
             href={href}
             aria-current={current ? "page" : undefined}
-            className="nav-link rounded-[4px] px-3 py-0.5 text-sm font-medium leading-[21px] whitespace-nowrap text-[var(--color-text-primary)]"
+            className="nav-link inline-flex h-6 items-center rounded-[4px] px-3 text-sm font-medium leading-[21px] whitespace-nowrap text-[var(--color-text-primary)]"
           >
             {label}
           </a>
