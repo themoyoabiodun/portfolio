@@ -45,7 +45,7 @@ export default function Home() {
           investment products at <Highlight>Rank (YC W22)</Highlight>. Along
           the way, I’ve helped teams maintain and build design systems and
           product foundation crafted with excellence, needed to move quickly
-          without loosing consistency.
+          without losing consistency.
         </p>
       </section>
 
