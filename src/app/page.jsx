@@ -20,12 +20,12 @@ function Highlight({ children }) {
 
 export default function Home() {
   return (
-    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[54px] pb-32 md:px-[52px]">
+    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[42px] pb-32 md:px-[52px]">
       <Nav />
 
       <section
         id="about"
-        className="mt-[111px] flex flex-col items-center gap-[41px] text-center"
+        className="mt-[99px] flex scroll-mt-16 flex-col items-center gap-[41px] text-center"
       >
         <div
           className="animate-fade-in-up motion-reduce:animate-fade-in"
@@ -52,7 +52,7 @@ export default function Home() {
       <section
         id="work"
         aria-label="Selected work"
-        className="mx-auto mt-[101px] flex max-w-[1336px] flex-col gap-5 md:flex-row md:items-center"
+        className="mx-auto mt-[101px] flex scroll-mt-16 max-w-[1336px] flex-col gap-5 md:flex-row md:items-center"
       >
         {/* Cards continue the page's 60ms entrance stagger instead of
             arriving as one block. */}
