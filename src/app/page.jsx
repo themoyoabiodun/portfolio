@@ -31,7 +31,7 @@ export default function Home() {
           className="animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "60ms" }}
         >
-          <Avatar src="/asset/moyo.png" alt="Moyo Abiodun" />
+          <Avatar src="/asset/headshot.png" alt="Moyo Abiodun" />
         </div>
 
         <p
