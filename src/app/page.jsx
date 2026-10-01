@@ -5,9 +5,9 @@ import WorkCard from "@/components/WorkCard";
 // Widths are the Figma frame widths (all 271px tall); cards keep these
 // proportions as the row scales down.
 const WORK = [
-  { src: "asset/work/budget-fix.png", alt: "Budget fix widget on an iPhone home screen", width: 366 },
-  { src: "asset/work/scroll-interaction.png", alt: "Anchor application review scroll interaction", width: 465 },
-  { src: "asset/work/rank-card.png", alt: "Rank “Finish setup” card", width: 465 },
+  { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 366 },
+  { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 465 },
+  { name: "rank-card", alt: "Rank “Finish setup” card", width: 465 },
 ];
 
 function Highlight({ children }) {
@@ -56,7 +56,7 @@ export default function Home() {
         style={{ animationDelay: "180ms" }}
       >
         {WORK.map((item) => (
-          <WorkCard key={item.src} {...item} />
+          <WorkCard key={item.name} {...item} />
         ))}
       </section>
     </main>
