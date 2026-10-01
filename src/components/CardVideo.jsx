@@ -3,8 +3,10 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 
-// Looping, muted preview clip. With reduced motion the clip stays paused on
-// its poster/first frame instead of autoplaying.
+// Looping, muted preview clip that starts as soon as the page loads.
+// `autoPlay` lets the browser start it before hydration; the effect makes
+// sure it's playing (or, with reduced motion, paused on its poster/first
+// frame) once React takes over.
 export default function CardVideo({ src, poster, label }) {
   const ref = useRef(null);
   const prefersReducedMotion = useReducedMotion();
@@ -25,10 +27,11 @@ export default function CardVideo({ src, poster, label }) {
       src={src}
       poster={poster}
       aria-label={label}
+      autoPlay
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="auto"
       className="absolute inset-0 h-full w-full object-cover"
     />
   );
