@@ -62,7 +62,7 @@ export default function CardVideo({ src, poster, label }) {
       loop
       playsInline
       preload="auto"
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full rounded-[inherit] object-cover"
     />
   );
 }

@@ -16,7 +16,7 @@ export default function WorkCard({ name, alt, width, height, delay }) {
 
   return (
     <div
-      className="relative aspect-[var(--card-ratio)] w-full overflow-hidden bg-[var(--color-card-bg)] animate-fade-in-up motion-reduce:animate-fade-in md:w-auto md:flex-[var(--card-grow)_1_0%]"
+      className="relative isolate aspect-[var(--card-ratio)] w-full overflow-hidden rounded-[4px] bg-[var(--color-card-bg)] animate-fade-in-up motion-reduce:animate-fade-in md:w-auto md:flex-[var(--card-grow)_1_0%]"
       style={{
         "--card-ratio": `${width} / ${height}`,
         "--card-grow": width,
@@ -32,7 +32,7 @@ export default function WorkCard({ name, alt, width, height, delay }) {
             src={image}
             alt={alt}
             draggable={false}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full rounded-[inherit] object-cover"
           />
         )
       )}
