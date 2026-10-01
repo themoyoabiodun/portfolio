@@ -20,7 +20,7 @@ function Highlight({ children }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--color-bg)] px-4 pt-[54px] pb-32 md:px-[52px]">
+    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[54px] pb-32 md:px-[52px]">
       <Nav />
 
       <section
@@ -52,11 +52,12 @@ export default function Home() {
       <section
         id="work"
         aria-label="Selected work"
-        className="mx-auto mt-[101px] flex max-w-[1336px] flex-col gap-5 animate-fade-in-up motion-reduce:animate-fade-in md:flex-row md:items-center"
-        style={{ animationDelay: "180ms" }}
+        className="mx-auto mt-[101px] flex max-w-[1336px] flex-col gap-5 md:flex-row md:items-center"
       >
-        {WORK.map((item) => (
-          <WorkCard key={item.name} {...item} />
+        {/* Cards continue the page's 60ms entrance stagger instead of
+            arriving as one block. */}
+        {WORK.map((item, i) => (
+          <WorkCard key={item.name} {...item} delay={180 + i * 60} />
         ))}
       </section>
     </main>
