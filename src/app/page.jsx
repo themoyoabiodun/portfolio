@@ -3,14 +3,17 @@ import LinkPreview from "@/components/LinkPreview";
 import Nav from "@/components/Nav";
 import WorkCard from "@/components/WorkCard";
 
-// Card sizes from Figma (all 164px tall); cards keep these proportions as
-// the row scales down.
+// Two rows of three cards, all 164px tall, in Figma's column widths
+// (183 / 232 / 233). Cards keep these proportions as the grid scales down.
 const CARD_HEIGHT = 164;
 
 const WORK = [
   { name: "budget-fix", alt: "Budget fix widget on an iPhone home screen", width: 183 },
   { name: "scroll-interaction", alt: "Anchor application review scroll interaction", width: 232 },
   { name: "rank-card", alt: "Rank “Finish setup” card", width: 233 },
+  { name: "slow-animation", alt: "Selected works list animation", width: 183 },
+  { name: "portfolio-mobile", alt: "Mobile portfolio on an iPhone", width: 232 },
+  { name: "navigation", alt: "Anchor dashboard sidebar navigation", width: 233 },
 ];
 
 export default function Home() {
@@ -61,7 +64,7 @@ export default function Home() {
       <section
         id="work"
         aria-label="Selected work"
-        className="mx-auto mt-20 flex scroll-mt-16 max-w-[668px] flex-col gap-2.5 md:flex-row md:items-center"
+        className="mx-auto mt-20 grid max-w-[664px] scroll-mt-16 grid-cols-1 gap-2 md:grid-cols-[183fr_232fr_233fr]"
       >
         {/* Cards continue the page's 60ms entrance stagger instead of
             arriving as one block. */}
