@@ -11,7 +11,7 @@ export const CASE_STUDIES = {
       { icon: "date", label: "Date", value: "August, 2026" },
     ],
     link: {
-      label: "Use the bottom navigation behaviour package",
+      label: "https://github.com/themoyoabiodun/bottom-navigation-behaviour",
       href: "https://github.com/themoyoabiodun/bottom-navigation-behaviour",
     },
     sections: [

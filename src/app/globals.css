@@ -48,7 +48,7 @@
     --color-nav-hover: #f2f2f2;
     --color-nav-active: #ededed;
     --color-drawer-bg: #ffffff;
-    --color-drawer-button: #e2e2e2;
+    --color-drawer-button: #ebebeb;
     --color-drawer-muted: #707070;
     --color-drawer-link: #0065e9;
     --color-drawer-code: #efefef;
@@ -201,8 +201,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .drawer-link:hover {
-    text-decoration: underline;
-    text-underline-offset: 20%;
+    text-decoration-thickness: 2px;
   }
 
   .drawer-close:hover {
