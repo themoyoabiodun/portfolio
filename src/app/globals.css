@@ -47,6 +47,11 @@
     --color-avatar-bg: #6c6c6c;
     --color-nav-hover: #f2f2f2;
     --color-nav-active: #ededed;
+    --color-drawer-bg: #ffffff;
+    --color-drawer-button: #e2e2e2;
+    --color-drawer-muted: #707070;
+    --color-drawer-link: #0065e9;
+    --color-drawer-code: #efefef;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -58,6 +63,11 @@
       --color-avatar-bg: #3a3a3a;
       --color-nav-hover: #1f1f1f;
       --color-nav-active: #262626;
+      --color-drawer-bg: #111111;
+      --color-drawer-button: #2a2a2a;
+      --color-drawer-muted: #a3a3a3;
+      --color-drawer-link: #4d9bff;
+      --color-drawer-code: #1c1c1c;
     }
   }
 
@@ -107,6 +117,33 @@
 }
 
 @layer components {
+  /* Cards with a case study: press feedback on the whole card (animate
+     skill: scale 0.97, 160ms ease-out). */
+  .work-card:has(.case-study-button) {
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .work-card:has(.case-study-button:active) {
+    transform: scale(0.97);
+  }
+
+  .case-study-button:focus-visible,
+  .drawer-close:focus-visible,
+  .drawer-link:focus-visible {
+    outline: 2px solid var(--color-drawer-link);
+    outline-offset: 2px;
+  }
+
+  .drawer-close {
+    transition:
+      background-color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  .drawer-close:active {
+    transform: scale(0.97);
+  }
+
   /* Dotted underline with round dots. CSS "dotted" decorations render square
      dots, so the dots are drawn as a repeating radial gradient instead:
      diameter = 10% of the font size (the design's thickness), one dot every
@@ -163,6 +200,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .drawer-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 20%;
+  }
+
+  .drawer-close:hover {
+    background-color: color-mix(in srgb, var(--color-drawer-button) 85%, var(--color-text-primary));
+  }
+
   .link-preview-toolbar:hover .link-preview-chevron {
     transform: translateX(2px);
   }
@@ -173,6 +219,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .work-card:has(.case-study-button:active),
+  .drawer-close:active {
+    transform: none;
+  }
+
   /* Keep the fade, drop the movement. */
   .link-preview-toolbar,
   .link-preview-toolbar[data-open] {

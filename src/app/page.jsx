@@ -1,7 +1,9 @@
 import Avatar from "@/components/Avatar";
+import { CaseStudyProvider } from "@/components/CaseStudyDrawer";
 import LinkPreview from "@/components/LinkPreview";
 import Nav from "@/components/Nav";
 import WorkCard from "@/components/WorkCard";
+import { workMedia } from "@/lib/publicFile";
 
 // Two rows of three cards, all 164px tall, in Figma's column widths
 // (183 / 232 / 233). Cards keep these proportions as the grid scales down.
@@ -17,6 +19,8 @@ const WORK = [
 ];
 
 export default function Home() {
+  const media = Object.fromEntries(WORK.map(({ name }) => [name, workMedia(name)]));
+
   return (
     <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[42px] pb-32 md:px-[52px]">
       <Nav />
@@ -61,17 +65,19 @@ export default function Home() {
         </p>
       </section>
 
-      <section
-        id="work"
-        aria-label="Selected work"
-        className="mx-auto mt-20 grid max-w-[664px] scroll-mt-16 grid-cols-1 gap-2 md:grid-cols-[183fr_232fr_233fr]"
-      >
-        {/* Cards continue the page's 60ms entrance stagger instead of
-            arriving as one block. */}
-        {WORK.map((item, i) => (
-          <WorkCard key={item.name} {...item} height={CARD_HEIGHT} delay={180 + i * 60} />
-        ))}
-      </section>
+      <CaseStudyProvider media={media}>
+        <section
+          id="work"
+          aria-label="Selected work"
+          className="mx-auto mt-20 grid max-w-[664px] scroll-mt-16 grid-cols-1 gap-2 md:grid-cols-[183fr_232fr_233fr]"
+        >
+          {/* Cards continue the page's 60ms entrance stagger instead of
+              arriving as one block. */}
+          {WORK.map((item, i) => (
+            <WorkCard key={item.name} {...item} height={CARD_HEIGHT} delay={180 + i * 60} />
+          ))}
+        </section>
+      </CaseStudyProvider>
     </main>
   );
 }
