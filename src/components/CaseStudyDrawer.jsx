@@ -229,19 +229,32 @@ function Drawer({ study, media, onClose }) {
                   ? { opacity: bigOpacity }
                   : { opacity: bigOpacity, scale: bigScale, filter: bigBlur }
               }
-              className="max-w-[373px] origin-top-left text-2xl font-semibold leading-8 tracking-[-0.48px]"
+              className="max-w-full origin-top-left text-2xl font-bold leading-8 tracking-[-0.48px]"
             >
               {study.title}
             </motion.h2>
 
             <dl className="grid w-full grid-cols-[119px_1fr] gap-x-4 gap-y-2 text-[13px] font-medium leading-[19px]">
-              {study.meta.map(({ icon, label, value }) => (
+              {study.meta.map(({ icon, label, value, href }) => (
                 <div key={label} className="contents">
                   <dt className="flex items-center gap-2 text-[var(--color-drawer-muted)]">
                     <Icon name={icon} />
                     {label}
                   </dt>
-                  <dd>{value}</dd>
+                  <dd>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="drawer-link dotted-underline"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      value
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -259,18 +272,6 @@ function Drawer({ study, media, onClose }) {
                   />
                 )}
               </div>
-            )}
-
-            {study.link && (
-              <a
-                href={study.link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="drawer-link flex w-full items-center gap-2 break-all text-sm font-medium leading-[22px] text-[var(--color-drawer-link)] underline"
-              >
-                <Icon name="package" />
-                <span className="min-w-0 flex-1">{study.link.label}</span>
-              </a>
             )}
 
             <div className="case-study-prose w-full">
