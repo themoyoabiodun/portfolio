@@ -8,7 +8,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import { CASE_STUDIES } from "@/content/caseStudies";
 import CardVideo from "./CardVideo";
 
@@ -19,6 +25,16 @@ const ENTER = { duration: 0.5, ease: EASE_DRAWER };
 const EXIT = { duration: 0.3, ease: EASE_DRAWER };
 const OFFSCREEN = "translateX(110%)";
 const ONSCREEN = "translateX(0%)";
+
+// Title morph (Figma 2217:1186): as the large title scrolls up under the
+// header, it shrinks toward the top-left and fades; the compact title then
+// rises into the header. A light blur blends the two into one perceived
+// change instead of two overlapping texts (animate skill, crossfade
+// recipe). Scroll-linked, so it tracks the thumb and reverses for free.
+// Distances are scrollTop in px: the large title spans 16-80px.
+const MORPH_OUT = [0, 48];
+const MORPH_IN = [36, 72];
+const TITLE_SCALE = 18 / 24; // 18px header title / 24px large title
 
 const CaseStudyContext = createContext(null);
 
@@ -101,14 +117,14 @@ function Block({ block }) {
     );
   }
   if (block.h2) {
-    return <h3 className="text-base font-semibold leading-6">{block.h2}</h3>;
+    return <h3 className="text-base font-bold leading-6">{block.h2}</h3>;
   }
   if (block.h3) {
     return <h4 className="text-sm font-semibold leading-[21px]">{block.h3}</h4>;
   }
   if (block.list) {
     return (
-      <ul className="list-disc pl-[21px] text-sm leading-[22px]">
+      <ul className="list-disc pl-[19.5px] text-[13px] leading-[19px]">
         {block.list.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -122,14 +138,23 @@ function Block({ block }) {
       </pre>
     );
   }
-  return <p className="text-sm leading-[22px]">{block.p}</p>;
+  return <p className="text-[13px] leading-[19px]">{block.p}</p>;
 }
 
 function Drawer({ study, media, onClose }) {
   const reduce = useReducedMotion();
   const panelRef = useRef(null);
   const closeRef = useRef(null);
+  const scrollRef = useRef(null);
   const titleId = "case-study-title";
+
+  const { scrollY } = useScroll({ container: scrollRef });
+  const bigOpacity = useTransform(scrollY, MORPH_OUT, [1, 0]);
+  const bigScale = useTransform(scrollY, MORPH_OUT, [1, TITLE_SCALE]);
+  const bigBlur = useTransform(scrollY, MORPH_OUT, ["blur(0px)", "blur(4px)"]);
+  const smallOpacity = useTransform(scrollY, MORPH_IN, [0, 1]);
+  const smallY = useTransform(scrollY, MORPH_IN, [12, 0]);
+  const smallBlur = useTransform(scrollY, MORPH_IN, ["blur(4px)", "blur(0px)"]);
 
   useEffect(() => {
     closeRef.current?.focus({ preventScroll: true });
@@ -174,29 +199,50 @@ function Drawer({ study, media, onClose }) {
         initial={hidden}
         animate={{ ...shown, transition: ENTER }}
         exit={{ ...hidden, transition: EXIT }}
-        className="case-study-drawer fixed top-2 right-2 bottom-2 z-50 flex w-[min(505px,calc(100vw-16px))] flex-col overflow-hidden rounded-[20px] bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+        className="case-study-drawer fixed top-2 right-2 bottom-2 z-50 flex w-[min(429px,calc(100vw-16px))] flex-col overflow-hidden rounded-[20px] bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
       >
-        <div className="flex shrink-0 justify-end px-6 py-4">
+        <div className="flex h-[60px] shrink-0 items-center gap-6 px-6">
+          {/* Decorative copy of the title; the h2 below stays the label. */}
+          <motion.p
+            aria-hidden="true"
+            style={
+              reduce
+                ? { opacity: smallOpacity }
+                : { opacity: smallOpacity, y: smallY, filter: smallBlur }
+            }
+            className="min-w-0 flex-1 truncate text-lg font-bold leading-8 tracking-[-0.36px]"
+          >
+            {study.title}
+          </motion.p>
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="drawer-close rounded-[8px] bg-[var(--color-drawer-button)] px-2 py-0.5 text-sm font-medium leading-[22px]"
+            aria-label="Close case study"
+            className="drawer-close ml-auto flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-drawer-button)]"
           >
-            Close
+            <Icon name="close" />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto overscroll-contain">
-          <article className="flex flex-col items-start gap-7 px-6 pt-4 pb-10">
-            <h2
+        <div
+          ref={scrollRef}
+          className="relative flex-1 overflow-y-auto overscroll-contain"
+        >
+          <article className="flex flex-col items-start gap-7 px-6 py-4">
+            <motion.h2
               id={titleId}
-              className="max-w-[373px] text-2xl font-semibold leading-8 tracking-[-0.48px]"
+              style={
+                reduce
+                  ? { opacity: bigOpacity }
+                  : { opacity: bigOpacity, scale: bigScale, filter: bigBlur }
+              }
+              className="max-w-[373px] origin-top-left text-2xl font-semibold leading-8 tracking-[-0.48px]"
             >
               {study.title}
-            </h2>
+            </motion.h2>
 
-            <dl className="grid w-full grid-cols-[119px_1fr] gap-x-4 gap-y-2 text-sm font-medium leading-[22px]">
+            <dl className="grid w-full grid-cols-[119px_1fr] gap-x-4 gap-y-2 text-[13px] font-medium leading-[19px]">
               {study.meta.map(({ icon, label, value }) => (
                 <div key={label} className="contents">
                   <dt className="flex items-center gap-2 text-[var(--color-drawer-muted)]">
@@ -209,7 +255,7 @@ function Drawer({ study, media, onClose }) {
             </dl>
 
             {media && (media.video || media.image) && (
-              <div className="relative isolate aspect-[321/242] w-full max-w-[321px] overflow-hidden rounded-[8px] bg-[var(--color-card-bg)]">
+              <div className="relative isolate aspect-[381/287] w-full overflow-hidden rounded-[9.5px] bg-[var(--color-card-bg)]">
                 {media.video ? (
                   <CardVideo src={media.video} poster={media.image ?? undefined} label={study.title} />
                 ) : (
@@ -228,10 +274,10 @@ function Drawer({ study, media, onClose }) {
                 href={study.link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="drawer-link flex w-full items-center gap-2 text-sm font-medium leading-[22px] text-[var(--color-drawer-link)]"
+                className="drawer-link flex w-full items-center gap-2 break-all text-sm font-medium leading-[22px] text-[var(--color-drawer-link)] underline"
               >
                 <Icon name="package" />
-                {study.link.label}
+                <span className="min-w-0 flex-1">{study.link.label}</span>
               </a>
             )}
 
