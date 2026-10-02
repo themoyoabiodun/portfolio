@@ -31,9 +31,9 @@ const ONSCREEN = "translateX(0%)";
 // rises into the header. A light blur blends the two into one perceived
 // change instead of two overlapping texts (animate skill, crossfade
 // recipe). Scroll-linked, so it tracks the thumb and reverses for free.
-// Distances are scrollTop in px: the large title spans 16-80px.
-const MORPH_OUT = [0, 48];
-const MORPH_IN = [36, 72];
+// Distances are scrollTop in px: the one-line large title spans 16-48px.
+const MORPH_OUT = [0, 32];
+const MORPH_IN = [24, 48];
 const TITLE_SCALE = 18 / 24; // 18px header title / 24px large title
 
 const CaseStudyContext = createContext(null);

@@ -4,7 +4,7 @@
 
 export const CASE_STUDIES = {
   "budget-fix": {
-    title: "The nav bar that gets out of the way.",
+    title: "Bottom Navigation Behaviour",
     meta: [
       { icon: "role", label: "Role", value: "Product Design, Design Engineer" },
       { icon: "project", label: "Project", value: "Exploration" },
