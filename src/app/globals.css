@@ -51,7 +51,8 @@
     --color-drawer-button: #ebebeb;
     --color-drawer-muted: #707070;
     --color-drawer-link: #0065e9;
-    --color-drawer-code: #efefef;
+    --color-drawer-code: #f7f6f3;
+    --color-drawer-text: #37352f;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -68,6 +69,7 @@
       --color-drawer-muted: #a3a3a3;
       --color-drawer-link: #4d9bff;
       --color-drawer-code: #1c1c1c;
+      --color-drawer-text: #d4d4d4;
     }
   }
 
@@ -142,6 +144,93 @@
 
   .drawer-close:active {
     transform: scale(0.97);
+  }
+
+  /* Case study body, set like a Notion page: 16px text on a 1.5 line
+     height in a softer ink than the headings, short block gaps so
+     paragraphs read as one flow, and headings that sit closer to the text
+     they introduce than to the section above them. */
+  .case-study-prose {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-drawer-text);
+  }
+
+  .case-study-prose > section + section {
+    margin-top: 2.25em;
+  }
+
+  .case-study-prose :where(p, ul, pre, h3, h4) {
+    margin: 0;
+  }
+
+  .case-study-prose :where(p, ul, pre, h4) + * {
+    margin-top: 0.5em;
+  }
+
+  .case-study-prose p {
+    text-wrap: pretty;
+  }
+
+  .case-study-prose h3,
+  .case-study-prose h4 {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .case-study-prose h3 {
+    font-size: 1.25em;
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+  }
+
+  .case-study-prose h3 + * {
+    margin-top: 0.625em;
+  }
+
+  .case-study-prose h4 {
+    font-size: 1.0625em;
+    line-height: 1.4;
+    letter-spacing: -0.006em;
+  }
+
+  .case-study-prose * + h4 {
+    margin-top: 1.5em;
+  }
+
+  .case-study-prose h4 + * {
+    margin-top: 0.375em;
+  }
+
+  .case-study-prose ul {
+    list-style: disc;
+    padding-left: 1.625em;
+  }
+
+  .case-study-prose li + li {
+    margin-top: 0.25em;
+  }
+
+  .case-study-prose li::marker {
+    color: var(--color-drawer-muted);
+  }
+
+  .case-study-prose * + pre,
+  .case-study-prose pre + * {
+    margin-top: 1em;
+  }
+
+  .case-study-prose pre {
+    overflow-x: auto;
+    padding: 1.25em 1.5em;
+    border-radius: 6px;
+    background-color: var(--color-drawer-code);
+    color: var(--color-text-primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8125em;
+    line-height: 1.6;
+    tab-size: 4;
   }
 
   /* Dotted underline with round dots. CSS "dotted" decorations render square
