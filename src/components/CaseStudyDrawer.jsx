@@ -1,0 +1,253 @@
+"use client";
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { CASE_STUDIES } from "@/content/caseStudies";
+import CardVideo from "./CardVideo";
+
+// Drawer motion (animate skill, drawer recipe): slides in from the right on
+// the iOS-like drawer curve, and leaves the way it came, faster.
+const EASE_DRAWER = [0.32, 0.72, 0, 1];
+const ENTER = { duration: 0.5, ease: EASE_DRAWER };
+const EXIT = { duration: 0.3, ease: EASE_DRAWER };
+const OFFSCREEN = "translateX(110%)";
+const ONSCREEN = "translateX(0%)";
+
+const CaseStudyContext = createContext(null);
+
+export function useCaseStudy() {
+  return useContext(CaseStudyContext);
+}
+
+// Wraps the work grid: owns which case study is open and renders the drawer.
+// `media` maps card names to their { video, image } public URLs.
+export function CaseStudyProvider({ media, children }) {
+  const [openName, setOpenName] = useState(null);
+  const returnFocus = useRef(null);
+
+  const open = useCallback((name) => {
+    if (!CASE_STUDIES[name]) return;
+    returnFocus.current = document.activeElement;
+    setOpenName(name);
+  }, []);
+
+  const close = useCallback(() => setOpenName(null), []);
+
+  return (
+    <CaseStudyContext.Provider value={{ open, has: (name) => !!CASE_STUDIES[name] }}>
+      {children}
+      <AnimatePresence
+        onExitComplete={() => {
+          returnFocus.current?.focus?.({ preventScroll: true });
+          returnFocus.current = null;
+        }}
+      >
+        {openName && (
+          <Drawer
+            key={openName}
+            study={CASE_STUDIES[openName]}
+            media={media?.[openName]}
+            onClose={close}
+          />
+        )}
+      </AnimatePresence>
+    </CaseStudyContext.Provider>
+  );
+}
+
+// Invisible full-card button: the whole card opens its case study.
+export function CaseStudyButton({ name, label }) {
+  const ctx = useCaseStudy();
+  if (!ctx?.has(name)) return null;
+  return (
+    <button
+      type="button"
+      aria-haspopup="dialog"
+      aria-label={`Open case study: ${label}`}
+      onClick={() => ctx.open(name)}
+      className="case-study-button absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
+    />
+  );
+}
+
+function Icon({ name, className = "" }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-block size-4 shrink-0 bg-current ${className}`}
+      style={{
+        mask: `url(/asset/icons/${name}.svg) center / contain no-repeat`,
+        WebkitMask: `url(/asset/icons/${name}.svg) center / contain no-repeat`,
+      }}
+    />
+  );
+}
+
+function Block({ block }) {
+  if (Array.isArray(block)) {
+    return (
+      <div className="flex flex-col gap-4">
+        {block.map((b, i) => (
+          <Block key={i} block={b} />
+        ))}
+      </div>
+    );
+  }
+  if (block.h2) {
+    return <h3 className="text-base font-semibold leading-6">{block.h2}</h3>;
+  }
+  if (block.h3) {
+    return <h4 className="text-sm font-semibold leading-[21px]">{block.h3}</h4>;
+  }
+  if (block.list) {
+    return (
+      <ul className="list-disc pl-[21px] text-sm leading-[22px]">
+        {block.list.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    );
+  }
+  if (block.code) {
+    return (
+      <pre className="overflow-x-auto rounded-[8px] bg-[var(--color-drawer-code)] p-4 font-mono text-[13px] leading-5">
+        <code>{block.code}</code>
+      </pre>
+    );
+  }
+  return <p className="text-sm leading-[22px]">{block.p}</p>;
+}
+
+function Drawer({ study, media, onClose }) {
+  const reduce = useReducedMotion();
+  const panelRef = useRef(null);
+  const closeRef = useRef(null);
+  const titleId = "case-study-title";
+
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+      // Keep keyboard focus inside the drawer while it's open.
+      if (event.key === "Tab" && panelRef.current) {
+        const focusable = panelRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  const hidden = reduce ? { opacity: 0 } : { transform: OFFSCREEN };
+  const shown = reduce ? { opacity: 1 } : { transform: ONSCREEN };
+
+  return (
+    <>
+      {/* Like Notion's side peek the page stays visible; clicking it closes. */}
+      <div className="fixed inset-0 z-40" onPointerDown={onClose} aria-hidden="true" />
+      <motion.div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        initial={hidden}
+        animate={{ ...shown, transition: ENTER }}
+        exit={{ ...hidden, transition: EXIT }}
+        className="case-study-drawer fixed top-2 right-2 bottom-2 z-50 flex w-[min(505px,calc(100vw-16px))] flex-col overflow-hidden rounded-[20px] bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+      >
+        <div className="flex shrink-0 justify-end px-6 py-4">
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            className="drawer-close rounded-[8px] bg-[var(--color-drawer-button)] px-2 py-0.5 text-sm font-medium leading-[22px]"
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto overscroll-contain">
+          <article className="flex flex-col items-start gap-7 px-6 pt-4 pb-10">
+            <h2
+              id={titleId}
+              className="max-w-[373px] text-2xl font-semibold leading-8 tracking-[-0.48px]"
+            >
+              {study.title}
+            </h2>
+
+            <dl className="grid w-full grid-cols-[119px_1fr] gap-x-4 gap-y-2 text-sm font-medium leading-[22px]">
+              {study.meta.map(({ icon, label, value }) => (
+                <div key={label} className="contents">
+                  <dt className="flex items-center gap-2 text-[var(--color-drawer-muted)]">
+                    <Icon name={icon} />
+                    {label}
+                  </dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            {media && (media.video || media.image) && (
+              <div className="relative isolate aspect-[321/242] w-full max-w-[321px] overflow-hidden rounded-[8px] bg-[var(--color-card-bg)]">
+                {media.video ? (
+                  <CardVideo src={media.video} poster={media.image ?? undefined} label={study.title} />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element -- static image
+                  <img
+                    src={media.image}
+                    alt=""
+                    className="absolute inset-0 h-full w-full rounded-[inherit] object-cover"
+                  />
+                )}
+              </div>
+            )}
+
+            {study.link && (
+              <a
+                href={study.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="drawer-link flex w-full items-center gap-2 text-sm font-medium leading-[22px] text-[var(--color-drawer-link)]"
+              >
+                <Icon name="package" />
+                {study.link.label}
+              </a>
+            )}
+
+            {study.sections.map((section, i) => (
+              <section
+                key={i}
+                className={`flex w-full flex-col ${section.some(Array.isArray) ? "gap-6" : "gap-4"}`}
+              >
+                {section.map((block, j) => (
+                  <Block key={j} block={block} />
+                ))}
+              </section>
+            ))}
+          </article>
+        </div>
+      </motion.div>
+    </>
+  );
+}

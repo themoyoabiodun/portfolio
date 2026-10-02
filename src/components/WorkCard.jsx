@@ -1,22 +1,16 @@
-import fs from "node:fs";
-import path from "node:path";
+import { CaseStudyButton } from "./CaseStudyDrawer";
 import CardVideo from "./CardVideo";
+import { workMedia } from "@/lib/publicFile";
 
-// Runs at build time (static export). Each card looks for
-// public/asset/work/<name>.mp4 (the project clip) and <name>.png (still /
-// poster frame). With neither, it falls back to the plain grey frame from
-// the design.
-function publicFile(name) {
-  return fs.existsSync(path.join(process.cwd(), "public", name)) ? `/${name}` : null;
-}
-
+// Each card looks for public/asset/work/<name>.mp4 (the project clip) and
+// <name>.png (still / poster frame); with neither it shows the plain grey
+// frame from the design. Cards with a case study open it in the drawer.
 export default function WorkCard({ name, alt, width, height, delay }) {
-  const video = publicFile(`asset/work/${name}.mp4`);
-  const image = publicFile(`asset/work/${name}.png`);
+  const { video, image } = workMedia(name);
 
   return (
     <div
-      className="relative isolate aspect-[var(--card-ratio)] w-full overflow-hidden rounded-[4px] bg-[var(--color-card-bg)] animate-fade-in-up motion-reduce:animate-fade-in"
+      className="work-card relative isolate aspect-[var(--card-ratio)] w-full overflow-hidden rounded-[4px] bg-[var(--color-card-bg)] animate-fade-in-up motion-reduce:animate-fade-in"
       style={{
         "--card-ratio": `${width} / ${height}`,
         animationDelay: `${delay}ms`,
@@ -35,6 +29,7 @@ export default function WorkCard({ name, alt, width, height, delay }) {
           />
         )
       )}
+      <CaseStudyButton name={name} label={alt} />
     </div>
   );
 }
