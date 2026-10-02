@@ -106,25 +106,17 @@ function Icon({ name, className = "" }) {
   );
 }
 
+// Body blocks render as plain semantic elements; spacing and type come from
+// .case-study-prose in globals.css so the rhythm lives in one place.
 function Block({ block }) {
   if (Array.isArray(block)) {
-    return (
-      <div className="flex flex-col gap-4">
-        {block.map((b, i) => (
-          <Block key={i} block={b} />
-        ))}
-      </div>
-    );
+    return block.map((b, i) => <Block key={i} block={b} />);
   }
-  if (block.h2) {
-    return <h3 className="text-base font-bold leading-6">{block.h2}</h3>;
-  }
-  if (block.h3) {
-    return <h4 className="text-sm font-semibold leading-[21px]">{block.h3}</h4>;
-  }
+  if (block.h2) return <h3>{block.h2}</h3>;
+  if (block.h3) return <h4>{block.h3}</h4>;
   if (block.list) {
     return (
-      <ul className="list-disc pl-[19.5px] text-[13px] leading-[19px]">
+      <ul>
         {block.list.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -133,12 +125,12 @@ function Block({ block }) {
   }
   if (block.code) {
     return (
-      <pre className="overflow-x-auto rounded-[8px] bg-[var(--color-drawer-code)] p-4 font-mono text-[13px] leading-5">
+      <pre>
         <code>{block.code}</code>
       </pre>
     );
   }
-  return <p className="text-[13px] leading-[19px]">{block.p}</p>;
+  return <p>{block.p}</p>;
 }
 
 function Drawer({ study, media, onClose }) {
@@ -281,16 +273,13 @@ function Drawer({ study, media, onClose }) {
               </a>
             )}
 
-            {study.sections.map((section, i) => (
-              <section
-                key={i}
-                className={`flex w-full flex-col ${section.some(Array.isArray) ? "gap-6" : "gap-4"}`}
-              >
-                {section.map((block, j) => (
-                  <Block key={j} block={block} />
-                ))}
-              </section>
-            ))}
+            <div className="case-study-prose w-full">
+              {study.sections.map((section, i) => (
+                <section key={i}>
+                  <Block block={section} />
+                </section>
+              ))}
+            </div>
           </article>
         </div>
       </motion.div>
