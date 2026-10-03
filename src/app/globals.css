@@ -59,6 +59,7 @@
     --color-code-comment: #6c7986;
     --color-code-string: #c41a16;
     --color-code-number: #1c00cf;
+    --color-code-function: #6f42c1;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -81,6 +82,7 @@
       --color-code-comment: #7f8c98;
       --color-code-string: #ff8170;
       --color-code-number: #d9c97c;
+      --color-code-function: #d0a8ff;
     }
   }
 
@@ -212,11 +214,11 @@
     margin-top: 28px;
   }
 
-  .case-study-prose :where(p, ul, pre, h3, h4) {
+  .case-study-prose :where(p, ul, ol, pre, h3, h4) {
     margin: 0;
   }
 
-  .case-study-prose :where(p, ul, .code-block, h3, h4) + * {
+  .case-study-prose :where(p, ul, ol, .code-block, .table-scroll, h3, h4) + * {
     margin-top: 16px;
   }
 
@@ -245,6 +247,72 @@
   .case-study-prose ul {
     list-style: disc;
     padding-left: 19.5px;
+  }
+
+  .case-study-prose ol {
+    list-style: decimal;
+    padding-left: 19.5px;
+  }
+
+  /* Items that open with a bold lead are paragraphs in their own right:
+     give them room. Plain short bullets stay tight, as in the design. */
+  .case-study-prose li:has(> strong:first-child) + li {
+    margin-top: 8px;
+  }
+
+  .case-study-prose strong {
+    font-weight: 600;
+  }
+
+  .case-study-prose :not(pre) > code {
+    padding: 1px 4px;
+    border-radius: 4px;
+    background-color: var(--color-drawer-code);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  /* Tables scroll sideways inside the drawer instead of squeezing four
+     columns into 381px. */
+  .case-study-prose .table-scroll {
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+    border-radius: 8px;
+    overscroll-behavior-x: contain;
+  }
+
+  .case-study-prose .table-scroll:focus-visible {
+    outline: 2px solid var(--color-drawer-link);
+    outline-offset: 2px;
+  }
+
+  .case-study-prose table {
+    min-width: 540px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .case-study-prose th,
+  .case-study-prose td {
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .case-study-prose thead th {
+    background-color: var(--color-drawer-code);
+    font-weight: 600;
+  }
+
+  .case-study-prose tbody tr {
+    border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  }
+
+  .case-study-prose tbody th {
+    font-weight: 600;
+    white-space: nowrap;
   }
 
   .case-study-prose pre {
@@ -281,6 +349,10 @@
 
   .tok-number {
     color: var(--color-code-number);
+  }
+
+  .tok-function {
+    color: var(--color-code-function);
   }
 
   /* Dotted underline with round dots. CSS "dotted" decorations render square
