@@ -134,6 +134,48 @@
     outline-offset: 2px;
   }
 
+  /* Copy button: the copy and check icons swap with a short scale, fade
+     and blur so it reads as one icon changing (animate skill). */
+  .code-copy {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  .code-copy:active {
+    transform: scale(0.94);
+  }
+
+  .code-copy:focus-visible {
+    outline: 2px solid var(--color-drawer-link);
+    outline-offset: 1px;
+  }
+
+  .code-copy-icon {
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      filter 150ms var(--ease-out);
+  }
+
+  .code-copy-check,
+  .code-copy[data-copied] .code-copy-icon:not(.code-copy-check) {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(2px);
+  }
+
+  .code-copy[data-copied] .code-copy-check {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  .code-copy[data-copied] {
+    color: var(--color-text-primary);
+  }
+
   .drawer-close {
     transition:
       background-color 150ms ease,
@@ -161,7 +203,7 @@
     margin: 0;
   }
 
-  .case-study-prose :where(p, ul, pre, h3, h4) + * {
+  .case-study-prose :where(p, ul, .code-block, h3, h4) + * {
     margin-top: 16px;
   }
 
@@ -194,7 +236,7 @@
 
   .case-study-prose pre {
     overflow-x: auto;
-    padding: 10px 12px;
+    padding: 10px 40px 10px 12px;
     border-radius: 8px;
     background-color: var(--color-drawer-code);
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -259,6 +301,11 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .code-copy:hover {
+    color: var(--color-text-primary);
+    background-color: color-mix(in srgb, var(--color-drawer-code) 92%, var(--color-text-primary));
+  }
+
   .drawer-close:hover {
     background-color: color-mix(in srgb, var(--color-drawer-button) 85%, var(--color-text-primary));
   }
@@ -274,8 +321,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .work-card:has(.case-study-button:active),
-  .drawer-close:active {
+  .drawer-close:active,
+  .code-copy:active {
     transform: none;
+  }
+
+  /* Icon swap keeps the fade, drops the scale and blur. */
+  .code-copy-icon {
+    transition-property: opacity;
   }
 
   /* Keep the fade, drop the movement. */

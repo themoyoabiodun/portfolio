@@ -106,6 +106,47 @@ function Icon({ name, className = "" }) {
   );
 }
 
+const COPIED_MS = 1500;
+
+function CodeBlock({ code }) {
+  const [copied, setCopied] = useState(false);
+  const timer = useRef(null);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      return;
+    }
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), COPIED_MS);
+  };
+
+  return (
+    <div className="code-block relative">
+      <pre>
+        <code>{code}</code>
+      </pre>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? "Copied" : "Copy code"}
+        data-copied={copied ? "" : undefined}
+        className="code-copy absolute top-1.5 right-1.5 flex size-7 items-center justify-center rounded-[6px] text-[var(--color-drawer-muted)]"
+      >
+        <Icon name="copy" className="code-copy-icon" />
+        <Icon name="check" className="code-copy-icon code-copy-check absolute" />
+      </button>
+      <span className="sr-only" aria-live="polite">
+        {copied ? "Copied to clipboard" : ""}
+      </span>
+    </div>
+  );
+}
+
 // Body blocks render as plain semantic elements; spacing and type come from
 // .case-study-prose in globals.css so the rhythm lives in one place.
 function Block({ block }) {
@@ -123,13 +164,7 @@ function Block({ block }) {
       </ul>
     );
   }
-  if (block.code) {
-    return (
-      <pre>
-        <code>{block.code}</code>
-      </pre>
-    );
-  }
+  if (block.code) return <CodeBlock code={block.code} />;
   return <p>{block.p}</p>;
 }
 
