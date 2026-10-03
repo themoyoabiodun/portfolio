@@ -318,7 +318,7 @@ ScrollView {
     ],
   },
   "slow-animation": {
-    title: "Interaction Study: Slow Animation",
+    title: "Fluid List Interaction",
     meta: [
       { icon: "role", label: "Role", value: "Product Designer, Design Engineer" },
       { icon: "project", label: "Project", value: "Exploration" },
