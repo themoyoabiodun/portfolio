@@ -317,4 +317,142 @@ ScrollView {
       ],
     ],
   },
+  "slow-animation": {
+    title: "Interaction Study: Slow Animation",
+    meta: [
+      { icon: "role", label: "Role", value: "Product Designer, Design Engineer" },
+      { icon: "project", label: "Project", value: "Exploration" },
+      { icon: "date", label: "Date", value: "October, 2026" },
+    ],
+    sections: [
+      [
+        {
+          p: "When you point at a row, the year moves a little to the left and an arrow appears next to it. When you move away, the arrow goes and the year slides back slowly.",
+        },
+        {
+          p: "The video shows a dark project list with 11 rows. Each row has a project name and a year. Nothing else changes on hover. The name stays the same colour and the row doesn’t light up.",
+        },
+        {
+          p: "The slow return is the key part. As you move down the list, the row you just left is still settling while the next one starts. So a soft trail follows your pointer instead of quick on-and-off flashes.",
+        },
+      ],
+      [
+        { h2: "What moves" },
+        { p: "Only two things move: the year and the arrow." },
+        {
+          list: [
+            [{ b: "The year" }, " sits on the far right. On hover, it slides a little to the left."],
+            [
+              { b: "The arrow" },
+              " is hidden at first. On hover, it starts as a short dash and grows into a full arrow next to the year.",
+            ],
+            [{ b: "The project name and row lines" }, " stay exactly the same."],
+          ],
+        },
+        {
+          p: "When you move away, the arrow shrinks back to a dash and the year slides home. Going back takes longer than coming in. That delay is what makes the trail.",
+        },
+      ],
+      [
+        { h2: "Why it works" },
+        {
+          p: "It shows the row is a link without making a big deal of it. That suits a portfolio, where the work itself should get the attention.",
+        },
+        {
+          list: [
+            [{ b: "The arrow says “click me.”" }, " It shows up right when you’re pointing at the row, not before."],
+            [
+              { b: "The year makes room." },
+              " Because the year moves aside, the arrow has its own spot. It looks planned, not stuck on.",
+            ],
+            [
+              { b: "The slow return feels natural." },
+              " Real things don’t snap back instantly. The gentle return makes the list feel smooth when you run your pointer down it.",
+            ],
+            [
+              { b: "Less is more." },
+              " Only one small thing changes per row, so the list stays calm even when many rows react at once.",
+            ],
+          ],
+        },
+      ],
+      [
+        { h2: "How to build it" },
+        {
+          p: "You only need CSS. The trick is to give the “in” and “out” movements different speeds.",
+        },
+        {
+          ordered: true,
+          list: [
+            [
+              { b: "Keep a spot for the arrow." },
+              " Put the year and arrow together on the right. Push them right so the arrow is hidden off the edge. On hover, slide them back into place.",
+            ],
+            [
+              { b: "Grow the arrow." },
+              " Use an SVG arrow and reveal its line from left to right. This gives the dash-to-arrow effect in the video.",
+            ],
+            [
+              { b: "Fast in, slow out." },
+              " Use about 250ms to show the arrow and about 550ms to hide it. The slower exit is what creates the trail.",
+            ],
+            [{ b: "Don’t forget keyboards." }, " Show the same effect when someone tabs to a row."],
+          ],
+        },
+        {
+          lang: "css",
+          code: `.row .meta {
+  transform: translateX(20px);
+  transition: transform 560ms
+    cubic-bezier(.22, 1, .36, 1);
+}
+.row .arrow path {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset 480ms
+    cubic-bezier(.22, 1, .36, 1);
+}
+
+.row:is(:hover, :focus-visible) .meta {
+  transform: none;
+  transition-duration: 260ms;
+}
+.row:is(:hover, :focus-visible) .arrow path {
+  stroke-dashoffset: 0;
+  transition-duration: 240ms;
+  transition-delay: 40ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row * {
+    transition-duration: 0ms !important;
+  }
+}`,
+        },
+      ],
+      [
+        { h2: "Things to watch out for" },
+        {
+          list: [
+            [
+              { b: "Don’t make the “in” slow." },
+              " The return can be slow, but the arrow should show up quickly. If it’s slow to appear, it feels laggy.",
+            ],
+            [
+              { b: "It can be easy to miss." },
+              " The only change is on the far right of the row. If people miss it, make the name a little brighter on hover too.",
+            ],
+            [
+              { b: "Phones have no hover." },
+              " On touch screens the arrow never shows. Either always show it on phones, or just make the whole row tappable.",
+            ],
+            [
+              { b: "Don’t use it everywhere." },
+              " A slow trail is nice on one list. If everything on the site lags behind the pointer, the site feels slow.",
+            ],
+          ],
+        },
+      ],
+    ],
+  },
 };
