@@ -9,11 +9,13 @@ export const CASE_STUDIES = {
       { icon: "role", label: "Role", value: "Product Design, Design Engineer" },
       { icon: "project", label: "Project", value: "Exploration" },
       { icon: "date", label: "Date", value: "August, 2026" },
+      {
+        icon: "github",
+        label: "Resource",
+        value: "Github Link",
+        href: "https://github.com/themoyoabiodun/bottom-navigation-behaviour",
+      },
     ],
-    link: {
-      label: "https://github.com/themoyoabiodun/bottom-navigation-behaviour",
-      href: "https://github.com/themoyoabiodun/bottom-navigation-behaviour",
-    },
     sections: [
       [
         { h2: "The problem I kept noticing" },
@@ -89,12 +91,11 @@ export const CASE_STUDIES = {
         {
           // From the package README (FloatingNavKit).
           code: `import FloatingNavKit
-
 ScrollView {
     // your content
 }
 .floatingNav {
-    MyTabBar()          // any View
+    MyTabBar() // any View
 }`,
         },
         {

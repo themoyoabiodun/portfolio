@@ -51,8 +51,7 @@
     --color-drawer-button: #ebebeb;
     --color-drawer-muted: #707070;
     --color-drawer-link: #0065e9;
-    --color-drawer-code: #f7f6f3;
-    --color-drawer-text: #37352f;
+    --color-drawer-code: #efefef;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -69,7 +68,6 @@
       --color-drawer-muted: #a3a3a3;
       --color-drawer-link: #4d9bff;
       --color-drawer-code: #1c1c1c;
-      --color-drawer-text: #d4d4d4;
     }
   }
 
@@ -136,6 +134,48 @@
     outline-offset: 2px;
   }
 
+  /* Copy button: the copy and check icons swap with a short scale, fade
+     and blur so it reads as one icon changing (animate skill). */
+  .code-copy {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  .code-copy:active {
+    transform: scale(0.94);
+  }
+
+  .code-copy:focus-visible {
+    outline: 2px solid var(--color-drawer-link);
+    outline-offset: 1px;
+  }
+
+  .code-copy-icon {
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      filter 150ms var(--ease-out);
+  }
+
+  .code-copy-check,
+  .code-copy[data-copied] .code-copy-icon:not(.code-copy-check) {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(2px);
+  }
+
+  .code-copy[data-copied] .code-copy-check {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  .code-copy[data-copied] {
+    color: var(--color-text-primary);
+  }
+
   .drawer-close {
     transition:
       background-color 150ms ease,
@@ -146,90 +186,62 @@
     transform: scale(0.97);
   }
 
-  /* Case study body, set like a Notion page: 16px text on a 1.5 line
-     height in a softer ink than the headings, short block gaps so
-     paragraphs read as one flow, and headings that sit closer to the text
-     they introduce than to the section above them. */
+  /* Case study body (Figma 2215:1183): 13/19 text, 16/24 bold section
+     headings, 14/21 semibold sub-headings. Sections sit 28px apart, blocks
+     inside them 16px, and sub-headed groups 24px. */
   .case-study-prose {
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--color-drawer-text);
+    font-size: 13px;
+    line-height: 19px;
+    color: var(--color-text-primary);
   }
 
   .case-study-prose > section + section {
-    margin-top: 2.25em;
+    margin-top: 28px;
   }
 
   .case-study-prose :where(p, ul, pre, h3, h4) {
     margin: 0;
   }
 
-  .case-study-prose :where(p, ul, pre, h4) + * {
-    margin-top: 0.5em;
+  .case-study-prose :where(p, ul, .code-block, h3, h4) + * {
+    margin-top: 16px;
   }
 
   .case-study-prose p {
     text-wrap: pretty;
   }
 
-  .case-study-prose h3,
+  .case-study-prose h3 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
   .case-study-prose h4 {
-    color: var(--color-text-primary);
+    font-size: 14px;
+    line-height: 21px;
     font-weight: 600;
     text-wrap: balance;
   }
 
-  .case-study-prose h3 {
-    font-size: 1.25em;
-    line-height: 1.3;
-    letter-spacing: -0.012em;
-  }
-
-  .case-study-prose h3 + * {
-    margin-top: 0.625em;
-  }
-
-  .case-study-prose h4 {
-    font-size: 1.0625em;
-    line-height: 1.4;
-    letter-spacing: -0.006em;
-  }
-
   .case-study-prose * + h4 {
-    margin-top: 1.5em;
-  }
-
-  .case-study-prose h4 + * {
-    margin-top: 0.375em;
+    margin-top: 24px;
   }
 
   .case-study-prose ul {
     list-style: disc;
-    padding-left: 1.625em;
-  }
-
-  .case-study-prose li + li {
-    margin-top: 0.25em;
-  }
-
-  .case-study-prose li::marker {
-    color: var(--color-drawer-muted);
-  }
-
-  .case-study-prose * + pre,
-  .case-study-prose pre + * {
-    margin-top: 1em;
+    padding-left: 19.5px;
   }
 
   .case-study-prose pre {
     overflow-x: auto;
-    padding: 1.25em 1.5em;
-    border-radius: 6px;
+    padding: 10px 40px 10px 12px;
+    border-radius: 8px;
     background-color: var(--color-drawer-code);
-    color: var(--color-text-primary);
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.8125em;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 18px;
     tab-size: 4;
   }
 
@@ -289,8 +301,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .drawer-link:hover {
-    text-decoration-thickness: 2px;
+  .code-copy:hover {
+    color: var(--color-text-primary);
+    background-color: color-mix(in srgb, var(--color-drawer-code) 92%, var(--color-text-primary));
   }
 
   .drawer-close:hover {
@@ -308,8 +321,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .work-card:has(.case-study-button:active),
-  .drawer-close:active {
+  .drawer-close:active,
+  .code-copy:active {
     transform: none;
+  }
+
+  /* Icon swap keeps the fade, drops the scale and blur. */
+  .code-copy-icon {
+    transition-property: opacity;
   }
 
   /* Keep the fade, drop the movement. */

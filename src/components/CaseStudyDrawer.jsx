@@ -106,6 +106,47 @@ function Icon({ name, className = "" }) {
   );
 }
 
+const COPIED_MS = 1500;
+
+function CodeBlock({ code }) {
+  const [copied, setCopied] = useState(false);
+  const timer = useRef(null);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      return;
+    }
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), COPIED_MS);
+  };
+
+  return (
+    <div className="code-block relative">
+      <pre>
+        <code>{code}</code>
+      </pre>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? "Copied" : "Copy code"}
+        data-copied={copied ? "" : undefined}
+        className="code-copy absolute top-1.5 right-1.5 flex size-7 items-center justify-center rounded-[6px] text-[var(--color-drawer-muted)]"
+      >
+        <Icon name="copy" className="code-copy-icon" />
+        <Icon name="check" className="code-copy-icon code-copy-check absolute" />
+      </button>
+      <span className="sr-only" aria-live="polite">
+        {copied ? "Copied to clipboard" : ""}
+      </span>
+    </div>
+  );
+}
+
 // Body blocks render as plain semantic elements; spacing and type come from
 // .case-study-prose in globals.css so the rhythm lives in one place.
 function Block({ block }) {
@@ -123,13 +164,7 @@ function Block({ block }) {
       </ul>
     );
   }
-  if (block.code) {
-    return (
-      <pre>
-        <code>{block.code}</code>
-      </pre>
-    );
-  }
+  if (block.code) return <CodeBlock code={block.code} />;
   return <p>{block.p}</p>;
 }
 
@@ -229,19 +264,32 @@ function Drawer({ study, media, onClose }) {
                   ? { opacity: bigOpacity }
                   : { opacity: bigOpacity, scale: bigScale, filter: bigBlur }
               }
-              className="max-w-[373px] origin-top-left text-2xl font-semibold leading-8 tracking-[-0.48px]"
+              className="max-w-full origin-top-left text-2xl font-bold leading-8 tracking-[-0.48px]"
             >
               {study.title}
             </motion.h2>
 
             <dl className="grid w-full grid-cols-[119px_1fr] gap-x-4 gap-y-2 text-[13px] font-medium leading-[19px]">
-              {study.meta.map(({ icon, label, value }) => (
+              {study.meta.map(({ icon, label, value, href }) => (
                 <div key={label} className="contents">
                   <dt className="flex items-center gap-2 text-[var(--color-drawer-muted)]">
                     <Icon name={icon} />
                     {label}
                   </dt>
-                  <dd>{value}</dd>
+                  <dd>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="drawer-link dotted-underline"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      value
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -259,18 +307,6 @@ function Drawer({ study, media, onClose }) {
                   />
                 )}
               </div>
-            )}
-
-            {study.link && (
-              <a
-                href={study.link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="drawer-link flex w-full items-center gap-2 break-all text-sm font-medium leading-[22px] text-[var(--color-drawer-link)] underline"
-              >
-                <Icon name="package" />
-                <span className="min-w-0 flex-1">{study.link.label}</span>
-              </a>
             )}
 
             <div className="case-study-prose w-full">
