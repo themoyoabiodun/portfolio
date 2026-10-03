@@ -16,6 +16,7 @@ import {
   useTransform,
 } from "motion/react";
 import { CASE_STUDIES } from "@/content/caseStudies";
+import { highlightSwift } from "@/lib/highlightSwift";
 import CardVideo from "./CardVideo";
 
 // Drawer motion (animate skill, drawer recipe): slides in from the right on
@@ -128,7 +129,17 @@ function CodeBlock({ code }) {
   return (
     <div className="code-block relative">
       <pre>
-        <code>{code}</code>
+        <code>
+          {highlightSwift(code).map(([text, kind], i) =>
+            kind ? (
+              <span key={i} className={`tok-${kind}`}>
+                {text}
+              </span>
+            ) : (
+              text
+            ),
+          )}
+        </code>
       </pre>
       <button
         type="button"
