@@ -24,8 +24,12 @@ import CardVideo from "./CardVideo";
 const EASE_DRAWER = [0.32, 0.72, 0, 1];
 const ENTER = { duration: 0.5, ease: EASE_DRAWER };
 const EXIT = { duration: 0.3, ease: EASE_DRAWER };
-const OFFSCREEN = "translateX(110%)";
-const ONSCREEN = "translateX(0%)";
+// Animated through Motion's x value (not a transform string) so the panel
+// rests at transform: none. A leftover identity transform keeps the panel
+// on its own compositor layer, which renders text, bold weights especially,
+// soft and grey on many screens.
+const OFFSCREEN = "110%";
+const ONSCREEN = 0;
 
 // Title morph (Figma 2217:1186): as the large title scrolls up under the
 // header, it shrinks toward the top-left and fades; the compact title then
@@ -36,6 +40,11 @@ const ONSCREEN = "translateX(0%)";
 const MORPH_OUT = [0, 32];
 const MORPH_IN = [24, 48];
 const TITLE_SCALE = 18 / 24; // 18px header title / 24px large title
+
+const progress = (y, [from, to]) => Math.min(1, Math.max(0, (y - from) / (to - from)));
+// "none" at rest: even blur(0px) rasterises text through a filter and
+// softens it.
+const blur = (px) => (px > 0.01 ? `blur(${px}px)` : "none");
 
 const CaseStudyContext = createContext(null);
 
@@ -189,10 +198,10 @@ function Drawer({ study, media, onClose }) {
   const { scrollY } = useScroll({ container: scrollRef });
   const bigOpacity = useTransform(scrollY, MORPH_OUT, [1, 0]);
   const bigScale = useTransform(scrollY, MORPH_OUT, [1, TITLE_SCALE]);
-  const bigBlur = useTransform(scrollY, MORPH_OUT, ["blur(0px)", "blur(4px)"]);
+  const bigBlur = useTransform(scrollY, (y) => blur(progress(y, MORPH_OUT) * 4));
   const smallOpacity = useTransform(scrollY, MORPH_IN, [0, 1]);
   const smallY = useTransform(scrollY, MORPH_IN, [12, 0]);
-  const smallBlur = useTransform(scrollY, MORPH_IN, ["blur(4px)", "blur(0px)"]);
+  const smallBlur = useTransform(scrollY, (y) => blur((1 - progress(y, MORPH_IN)) * 4));
 
   useEffect(() => {
     closeRef.current?.focus({ preventScroll: true });
@@ -222,8 +231,8 @@ function Drawer({ study, media, onClose }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  const hidden = reduce ? { opacity: 0 } : { transform: OFFSCREEN };
-  const shown = reduce ? { opacity: 1 } : { transform: ONSCREEN };
+  const hidden = reduce ? { opacity: 0 } : { x: OFFSCREEN };
+  const shown = reduce ? { opacity: 1 } : { x: ONSCREEN };
 
   return (
     <>
