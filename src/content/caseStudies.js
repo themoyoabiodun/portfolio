@@ -6,7 +6,7 @@ export const CASE_STUDIES = {
   "budget-fix": {
     title: "Bottom Navigation Behaviour",
     meta: [
-      { icon: "role", label: "Role", value: "Product Design, Design Engineer" },
+      { icon: "role", label: "Role", value: "Product Designer, Design Engineer" },
       { icon: "project", label: "Project", value: "Exploration" },
       { icon: "date", label: "Date", value: "August, 2026" },
       {
