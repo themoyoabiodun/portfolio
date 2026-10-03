@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -16,7 +17,7 @@ import {
   useTransform,
 } from "motion/react";
 import { CASE_STUDIES } from "@/content/caseStudies";
-import { highlightSwift } from "@/lib/highlightSwift";
+import { highlight } from "@/lib/highlight";
 import CardVideo from "./CardVideo";
 
 // Drawer motion (animate skill, drawer recipe): slides in from the right on
@@ -36,9 +37,11 @@ const ONSCREEN = 0;
 // rises into the header. A light blur blends the two into one perceived
 // change instead of two overlapping texts (animate skill, crossfade
 // recipe). Scroll-linked, so it tracks the thumb and reverses for free.
-// Distances are scrollTop in px: the one-line large title spans 16-48px.
-const MORPH_OUT = [0, 32];
-const MORPH_IN = [24, 48];
+// Distances are scrollTop in px and scale with the large title's height
+// (32px for one line): it fades over its own height, and the compact
+// title arrives from 3/4 of that height to 1.5x.
+const morphOut = (h) => [0, h];
+const morphIn = (h) => [h * 0.75, h * 1.5];
 const TITLE_SCALE = 18 / 24; // 18px header title / 24px large title
 
 const progress = (y, [from, to]) => Math.min(1, Math.max(0, (y - from) / (to - from)));
@@ -118,7 +121,7 @@ function Icon({ name, className = "" }) {
 
 const COPIED_MS = 1500;
 
-function CodeBlock({ code }) {
+function CodeBlock({ code, lang }) {
   const [copied, setCopied] = useState(false);
   const timer = useRef(null);
 
@@ -139,7 +142,7 @@ function CodeBlock({ code }) {
     <div className="code-block relative">
       <pre>
         <code>
-          {highlightSwift(code).map(([text, kind], i) =>
+          {highlight(code, lang).map(([text, kind], i) =>
             kind ? (
               <span key={i} className={`tok-${kind}`}>
                 {text}
@@ -167,6 +170,22 @@ function CodeBlock({ code }) {
   );
 }
 
+// Inline runs: strings, { b } for bold and { code } for inline code.
+function Inline({ text }) {
+  if (typeof text === "string") return text;
+  if (Array.isArray(text)) {
+    return text.map((run, i) => <Inline key={i} text={run} />);
+  }
+  if (text.b !== undefined) {
+    return (
+      <strong>
+        <Inline text={text.b} />
+      </strong>
+    );
+  }
+  return <code>{text.code}</code>;
+}
+
 // Body blocks render as plain semantic elements; spacing and type come from
 // .case-study-prose in globals.css so the rhythm lives in one place.
 function Block({ block }) {
@@ -176,16 +195,55 @@ function Block({ block }) {
   if (block.h2) return <h3>{block.h2}</h3>;
   if (block.h3) return <h4>{block.h3}</h4>;
   if (block.list) {
+    const List = block.ordered ? "ol" : "ul";
     return (
-      <ul>
-        {block.list.map((item) => (
-          <li key={item}>{item}</li>
+      <List>
+        {block.list.map((item, i) => (
+          <li key={i}>
+            <Inline text={item} />
+          </li>
         ))}
-      </ul>
+      </List>
     );
   }
-  if (block.code) return <CodeBlock code={block.code} />;
-  return <p>{block.p}</p>;
+  if (block.code) return <CodeBlock code={block.code} lang={block.lang} />;
+  if (block.table) {
+    const { head, rows } = block.table;
+    return (
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Table">
+        <table>
+          <thead>
+            <tr>
+              {head.map((cell) => (
+                <th key={cell} scope="col">
+                  {cell}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(([first, ...rest]) => (
+              <tr key={first}>
+                <th scope="row">
+                  <Inline text={first} />
+                </th>
+                {rest.map((cell, i) => (
+                  <td key={i}>
+                    <Inline text={cell} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  return (
+    <p>
+      <Inline text={block.p} />
+    </p>
+  );
 }
 
 function Drawer({ study, media, onClose }) {
@@ -195,13 +253,30 @@ function Drawer({ study, media, onClose }) {
   const scrollRef = useRef(null);
   const titleId = "case-study-title";
 
+  const titleRef = useRef(null);
+  // Large title height drives the morph distances; 32px is one line.
+  const titleHeight = useRef(32);
+  useLayoutEffect(() => {
+    const el = titleRef.current;
+    if (!el) return;
+    const measure = () => {
+      titleHeight.current = el.offsetHeight || 32;
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const { scrollY } = useScroll({ container: scrollRef });
-  const bigOpacity = useTransform(scrollY, MORPH_OUT, [1, 0]);
-  const bigScale = useTransform(scrollY, MORPH_OUT, [1, TITLE_SCALE]);
-  const bigBlur = useTransform(scrollY, (y) => blur(progress(y, MORPH_OUT) * 4));
-  const smallOpacity = useTransform(scrollY, MORPH_IN, [0, 1]);
-  const smallY = useTransform(scrollY, MORPH_IN, [12, 0]);
-  const smallBlur = useTransform(scrollY, (y) => blur((1 - progress(y, MORPH_IN)) * 4));
+  const outAt = (y) => progress(y, morphOut(titleHeight.current));
+  const inAt = (y) => progress(y, morphIn(titleHeight.current));
+  const bigOpacity = useTransform(scrollY, (y) => 1 - outAt(y));
+  const bigScale = useTransform(scrollY, (y) => 1 - (1 - TITLE_SCALE) * outAt(y));
+  const bigBlur = useTransform(scrollY, (y) => blur(outAt(y) * 4));
+  const smallOpacity = useTransform(scrollY, inAt);
+  const smallY = useTransform(scrollY, (y) => 12 * (1 - inAt(y)));
+  const smallBlur = useTransform(scrollY, (y) => blur((1 - inAt(y)) * 4));
 
   useEffect(() => {
     closeRef.current?.focus({ preventScroll: true });
@@ -278,13 +353,14 @@ function Drawer({ study, media, onClose }) {
         >
           <article className="flex flex-col items-start gap-7 px-6 py-4">
             <motion.h2
+              ref={titleRef}
               id={titleId}
               style={
                 reduce
                   ? { opacity: bigOpacity }
                   : { opacity: bigOpacity, scale: bigScale, filter: bigBlur }
               }
-              className="max-w-full origin-top-left text-2xl font-bold leading-8 tracking-[-0.48px]"
+              className="max-w-full origin-top-left text-2xl font-bold leading-8 tracking-[-0.48px] text-balance"
             >
               {study.title}
             </motion.h2>
