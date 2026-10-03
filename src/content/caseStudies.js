@@ -91,12 +91,11 @@ export const CASE_STUDIES = {
         {
           // From the package README (FloatingNavKit).
           code: `import FloatingNavKit
-
 ScrollView {
     // your content
 }
 .floatingNav {
-    MyTabBar()          // any View
+    MyTabBar() // any View
 }`,
         },
         {
