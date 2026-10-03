@@ -52,6 +52,13 @@
     --color-drawer-muted: #707070;
     --color-drawer-link: #0065e9;
     --color-drawer-code: #efefef;
+    /* Swift syntax colours, after Xcode's default themes. */
+    --color-code-keyword: #9b2393;
+    --color-code-type: #0b4f79;
+    --color-code-member: #326d74;
+    --color-code-comment: #6c7986;
+    --color-code-string: #c41a16;
+    --color-code-number: #1c00cf;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -68,6 +75,12 @@
       --color-drawer-muted: #a3a3a3;
       --color-drawer-link: #4d9bff;
       --color-drawer-code: #1c1c1c;
+      --color-code-keyword: #ff7ab2;
+      --color-code-type: #5dd8ff;
+      --color-code-member: #67b7a4;
+      --color-code-comment: #7f8c98;
+      --color-code-string: #ff8170;
+      --color-code-number: #d9c97c;
     }
   }
 
@@ -243,6 +256,31 @@
     font-size: 12px;
     line-height: 18px;
     tab-size: 4;
+  }
+
+  .tok-keyword {
+    color: var(--color-code-keyword);
+    font-weight: 600;
+  }
+
+  .tok-type {
+    color: var(--color-code-type);
+  }
+
+  .tok-member {
+    color: var(--color-code-member);
+  }
+
+  .tok-comment {
+    color: var(--color-code-comment);
+  }
+
+  .tok-string {
+    color: var(--color-code-string);
+  }
+
+  .tok-number {
+    color: var(--color-code-number);
   }
 
   /* Dotted underline with round dots. CSS "dotted" decorations render square
