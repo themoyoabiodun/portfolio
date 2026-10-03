@@ -191,6 +191,14 @@
     color: var(--color-text-primary);
   }
 
+  /* Sheet grab areas own vertical drags; the close button inside still
+     taps normally. */
+  .sheet-grab {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
   .drawer-close {
     transition:
       background-color 150ms ease,

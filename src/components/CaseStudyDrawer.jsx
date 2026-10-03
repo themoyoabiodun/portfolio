@@ -8,12 +8,14 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import {
   AnimatePresence,
   motion,
   useReducedMotion,
   useScroll,
+  useDragControls,
   useTransform,
 } from "motion/react";
 import { CASE_STUDIES } from "@/content/caseStudies";
@@ -31,6 +33,26 @@ const EXIT = { duration: 0.3, ease: EASE_DRAWER };
 // soft and grey on many screens.
 const OFFSCREEN = "110%";
 const ONSCREEN = 0;
+
+// Phones get a bottom sheet instead of the side peek (iOS sheet / Vaul
+// pattern): it rises from the bottom over a dimmed page and is dismissed by
+// dragging its header down, tapping the backdrop or the close button.
+const SHEET_QUERY = "(max-width: 639px)";
+// Dismiss on distance or on a flick (animate skill, drag-to-dismiss).
+const DISMISS_DISTANCE = 120;
+const DISMISS_VELOCITY = 500;
+
+function useMediaQuery(query) {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+}
 
 // Title morph (Figma 2217:1186): as the large title scrolls up under the
 // header, it shrinks toward the top-left and fades; the compact title then
@@ -248,6 +270,8 @@ function Block({ block }) {
 
 function Drawer({ study, media, onClose }) {
   const reduce = useReducedMotion();
+  const isSheet = useMediaQuery(SHEET_QUERY);
+  const dragControls = useDragControls();
   const panelRef = useRef(null);
   const closeRef = useRef(null);
   const scrollRef = useRef(null);
@@ -306,13 +330,38 @@ function Drawer({ study, media, onClose }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  const hidden = reduce ? { opacity: 0 } : { x: OFFSCREEN };
-  const shown = reduce ? { opacity: 1 } : { x: ONSCREEN };
+  // The sheet owns the page while it's open: no scrolling behind it.
+  useEffect(() => {
+    if (!isSheet) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    return () => {
+      root.style.overflow = previous;
+    };
+  }, [isSheet]);
+
+  const offscreen = isSheet ? { y: "100%" } : { x: OFFSCREEN };
+  const onscreen = isSheet ? { y: 0 } : { x: ONSCREEN };
+  const hidden = reduce ? { opacity: 0 } : offscreen;
+  const shown = reduce ? { opacity: 1 } : onscreen;
+  const canDrag = isSheet && !reduce;
 
   return (
     <>
-      {/* Like Notion's side peek the page stays visible; clicking it closes. */}
-      <div className="fixed inset-0 z-40" onPointerDown={onClose} aria-hidden="true" />
+      {isSheet ? (
+        <motion.div
+          className="fixed inset-0 z-40 bg-black/40"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: ENTER }}
+          exit={{ opacity: 0, transition: EXIT }}
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      ) : (
+        // Like Notion's side peek the page stays visible; clicking it closes.
+        <div className="fixed inset-0 z-40" onPointerDown={onClose} aria-hidden="true" />
+      )}
       <motion.div
         ref={panelRef}
         role="dialog"
@@ -321,9 +370,37 @@ function Drawer({ study, media, onClose }) {
         initial={hidden}
         animate={{ ...shown, transition: ENTER }}
         exit={{ ...hidden, transition: EXIT }}
-        className="case-study-drawer fixed top-2 right-2 bottom-2 z-50 flex w-[min(429px,calc(100vw-16px))] flex-col overflow-hidden rounded-[20px] bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+        drag={canDrag ? "y" : false}
+        dragControls={dragControls}
+        dragListener={false}
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={{ top: 0.04, bottom: 1 }}
+        onDragEnd={(_, info) => {
+          if (info.offset.y > DISMISS_DISTANCE || info.velocity.y > DISMISS_VELOCITY) {
+            onClose();
+          }
+        }}
+        className={`case-study-drawer fixed z-50 flex flex-col overflow-hidden bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] ${
+          isSheet
+            ? "inset-x-0 top-[calc(env(safe-area-inset-top,0px)+40px)] bottom-0 rounded-t-[20px] shadow-[0px_-4px_20px_0px_rgba(0,0,0,0.12)]"
+            : "top-2 right-2 bottom-2 w-[min(429px,calc(100vw-16px))] rounded-[20px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+        }`}
       >
-        <div className="flex h-[60px] shrink-0 items-center gap-6 px-6">
+        {isSheet && (
+          // Grab area: the handle and header drag the sheet; the body keeps
+          // native scrolling.
+          <div
+            aria-hidden="true"
+            onPointerDown={(event) => canDrag && dragControls.start(event)}
+            className="sheet-grab flex h-5 shrink-0 items-end justify-center"
+          >
+            <span className="h-[5px] w-9 rounded-full bg-[var(--color-drawer-muted)] opacity-40" />
+          </div>
+        )}
+        <div
+          onPointerDown={(event) => canDrag && dragControls.start(event)}
+          className={`flex shrink-0 items-center gap-6 px-6 ${isSheet ? "sheet-grab h-[52px]" : "h-[60px]"}`}
+        >
           {/* Decorative copy of the title; the h2 below stays the label. */}
           <motion.p
             aria-hidden="true"
@@ -351,7 +428,11 @@ function Drawer({ study, media, onClose }) {
           ref={scrollRef}
           className="relative flex-1 overflow-y-auto overscroll-contain"
         >
-          <article className="flex flex-col items-start gap-7 px-6 py-4">
+          <article
+            className={`flex flex-col items-start gap-7 px-6 pt-4 ${
+              isSheet ? "pb-[calc(24px+env(safe-area-inset-bottom,0px))]" : "pb-4"
+            }`}
+          >
             <motion.h2
               ref={titleRef}
               id={titleId}
