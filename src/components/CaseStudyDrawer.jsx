@@ -42,6 +42,33 @@ const SHEET_QUERY = "(max-width: 639px)";
 const DISMISS_DISTANCE = 120;
 const DISMISS_VELOCITY = 500;
 
+// Expand/collapse (Figma 2231:1493): the side panel grows into a window
+// that fills the viewport less a 24px margin, and back. Width and insets
+// animate on the same drawer curve the panel slides in on.
+const RESIZE = { duration: 0.45, ease: EASE_DRAWER };
+const PANEL_INSET = 12;
+const EXPANDED_INSET = 24;
+const PANEL_WIDTH = 429;
+
+function panelGeometry(expanded, viewportWidth) {
+  const inset = expanded ? EXPANDED_INSET : PANEL_INSET;
+  const width = expanded
+    ? viewportWidth - EXPANDED_INSET * 2
+    : Math.min(PANEL_WIDTH, viewportWidth - PANEL_INSET * 2);
+  return { top: inset, bottom: inset, right: inset, width };
+}
+
+function useViewportWidth() {
+  return useSyncExternalStore(
+    (onChange) => {
+      window.addEventListener("resize", onChange);
+      return () => window.removeEventListener("resize", onChange);
+    },
+    () => window.innerWidth,
+    () => 1440,
+  );
+}
+
 function useMediaQuery(query) {
   return useSyncExternalStore(
     (onChange) => {
@@ -81,6 +108,8 @@ export function useCaseStudy() {
 // `media` maps card names to their { video, image } public URLs.
 export function CaseStudyProvider({ media, children }) {
   const [openName, setOpenName] = useState(null);
+  // Remembered across case studies for the visit, like a window size.
+  const [expanded, setExpanded] = useState(false);
   const returnFocus = useRef(null);
 
   const open = useCallback((name) => {
@@ -106,6 +135,8 @@ export function CaseStudyProvider({ media, children }) {
             study={CASE_STUDIES[openName]}
             media={media?.[openName]}
             onClose={close}
+            expanded={expanded}
+            onToggleExpanded={() => setExpanded((value) => !value)}
           />
         )}
       </AnimatePresence>
@@ -192,6 +223,128 @@ function CodeBlock({ code, lang }) {
   );
 }
 
+// Tooltip timing (animate skill, tooltip recipe): a short hover delay so
+// tooltips don't flash as the pointer passes, then neighbours open
+// instantly, without the animation, while one has just been shown.
+const TOOLTIP_DELAY_MS = 400;
+const TOOLTIP_INSTANT_WINDOW_MS = 400;
+let lastTooltipClosedAt = 0;
+
+// Icon button with a hover/keyboard tooltip above it (Figma 2231:1802).
+function ActionButton({ label, onClick, buttonRef, className = "", children }) {
+  const [tip, setTip] = useState(null); // null | "open" | "instant"
+  const isOpen = useRef(false);
+  const timer = useRef(null);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const open = (mode) => {
+    isOpen.current = true;
+    setTip(mode);
+  };
+  const show = (immediate) => {
+    clearTimeout(timer.current);
+    if (Date.now() - lastTooltipClosedAt < TOOLTIP_INSTANT_WINDOW_MS) {
+      open("instant");
+    } else if (immediate) {
+      open("open");
+    } else {
+      timer.current = setTimeout(() => open("open"), TOOLTIP_DELAY_MS);
+    }
+  };
+  const hide = () => {
+    clearTimeout(timer.current);
+    // Recorded synchronously so a neighbour entered in the same pointer
+    // move sees it.
+    if (isOpen.current) lastTooltipClosedAt = Date.now();
+    isOpen.current = false;
+    setTip(null);
+  };
+
+  return (
+    <span className="relative flex">
+      <button
+        ref={buttonRef}
+        type="button"
+        aria-label={label}
+        onClick={() => {
+          hide();
+          onClick();
+        }}
+        onPointerEnter={(e) => e.pointerType === "mouse" && show(false)}
+        onPointerLeave={(e) => e.pointerType === "mouse" && hide()}
+        onFocus={(e) => e.currentTarget.matches(":focus-visible") && show(true)}
+        onBlur={hide}
+        className={`drawer-action flex size-7 shrink-0 items-center justify-center rounded-full ${className}`}
+      >
+        {children}
+      </button>
+      <span
+        aria-hidden="true"
+        data-open={tip ? "" : undefined}
+        data-instant={tip === "instant" ? "" : undefined}
+        className="drawer-tooltip"
+      >
+        {label}
+      </span>
+    </span>
+  );
+}
+
+// Maximise ↔ minimise as one icon. Drawn in the minimise orientation
+// (corners top-left and bottom-right); maximise is the same strokes pushed
+// out to the edges with diagonals, shown rotated a quarter turn. Toggling
+// turns the icon while the corners slide in or out, so it reads as the
+// same object changing state rather than a swap.
+const EXPAND_PATHS = {
+  max: {
+    a: "M2.5 6.833 L2.5 2.5 Q2.5 2.5 2.5 2.5 L6.833 2.5",
+    b: "M13.5 9.167 L13.5 13.5 Q13.5 13.5 13.5 13.5 L9.167 13.5",
+    c: "M3.016 3.016 L6.833 6.833",
+    d: "M12.984 12.984 L9.167 9.167",
+  },
+  min: {
+    a: "M3.833 7.5 L3.833 5.167 Q3.833 3.833 5.167 3.833 L7.5 3.833",
+    b: "M12.167 8.5 L12.167 10.833 Q12.167 12.167 10.833 12.167 L8.5 12.167",
+    c: "M3.833 3.833 L3.833 3.833",
+    d: "M12.167 12.167 L12.167 12.167",
+  },
+};
+const ICON_MORPH = { type: "spring", duration: 0.4, bounce: 0 };
+
+function ExpandIcon({ expanded, reduce }) {
+  const paths = expanded ? EXPAND_PATHS.min : EXPAND_PATHS.max;
+  const transition = reduce ? { duration: 0 } : ICON_MORPH;
+  return (
+    <motion.svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      initial={false}
+      animate={{ rotate: expanded ? 0 : 90 }}
+      transition={transition}
+    >
+      {["a", "b"].map((key) => (
+        <motion.path key={key} initial={false} animate={{ d: paths[key] }} transition={transition} />
+      ))}
+      {["c", "d"].map((key) => (
+        <motion.path
+          key={key}
+          initial={false}
+          animate={{ d: paths[key], opacity: expanded ? 0 : 1 }}
+          transition={transition}
+        />
+      ))}
+    </motion.svg>
+  );
+}
+
 // Inline runs: strings, { b } for bold and { code } for inline code.
 function Inline({ text }) {
   if (typeof text === "string") return text;
@@ -268,9 +421,11 @@ function Block({ block }) {
   );
 }
 
-function Drawer({ study, media, onClose }) {
+function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
   const reduce = useReducedMotion();
   const isSheet = useMediaQuery(SHEET_QUERY);
+  const viewportWidth = useViewportWidth();
+  const geometry = isSheet ? {} : panelGeometry(expanded, viewportWidth);
   const dragControls = useDragControls();
   const panelRef = useRef(null);
   const closeRef = useRef(null);
@@ -330,16 +485,15 @@ function Drawer({ study, media, onClose }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  // The sheet owns the page while it's open: no scrolling behind it.
+  // The drawer owns the page while it's open: no scrolling behind it.
   useEffect(() => {
-    if (!isSheet) return;
     const root = document.documentElement;
     const previous = root.style.overflow;
     root.style.overflow = "hidden";
     return () => {
       root.style.overflow = previous;
     };
-  }, [isSheet]);
+  }, []);
 
   const offscreen = isSheet ? { y: "100%" } : { x: OFFSCREEN };
   const onscreen = isSheet ? { y: 0 } : { x: ONSCREEN };
@@ -349,26 +503,27 @@ function Drawer({ study, media, onClose }) {
 
   return (
     <>
-      {isSheet ? (
-        <motion.div
-          className="fixed inset-0 z-40 bg-black/40"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: ENTER }}
-          exit={{ opacity: 0, transition: EXIT }}
-          onClick={onClose}
-          aria-hidden="true"
-        />
-      ) : (
-        // Like Notion's side peek the page stays visible; clicking it closes.
-        <div className="fixed inset-0 z-40" onPointerDown={onClose} aria-hidden="true" />
-      )}
+      <motion.div
+        className="fixed inset-0 z-40 bg-[var(--color-drawer-scrim)]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: ENTER }}
+        exit={{ opacity: 0, transition: EXIT }}
+        onClick={onClose}
+        aria-hidden="true"
+      />
       <motion.div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        initial={hidden}
-        animate={{ ...shown, transition: ENTER }}
+        initial={{ ...hidden, ...geometry }}
+        animate={{
+          ...shown,
+          ...geometry,
+          transition: reduce
+            ? { duration: 0 }
+            : { default: RESIZE, x: ENTER, y: ENTER, opacity: ENTER },
+        }}
         exit={{ ...hidden, transition: EXIT }}
         drag={canDrag ? "y" : false}
         dragControls={dragControls}
@@ -380,10 +535,12 @@ function Drawer({ study, media, onClose }) {
             onClose();
           }
         }}
-        className={`case-study-drawer fixed z-50 flex flex-col overflow-hidden bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] ${
+        className={`case-study-drawer fixed z-50 flex flex-col bg-[var(--color-drawer-bg)] text-[var(--color-text-primary)] ${
           isSheet
-            ? "inset-x-0 top-[calc(env(safe-area-inset-top,0px)+40px)] bottom-0 rounded-t-[20px] shadow-[0px_-4px_20px_0px_rgba(0,0,0,0.12)]"
-            : "top-2 right-2 bottom-2 w-[min(429px,calc(100vw-16px))] rounded-[20px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+            ? "inset-x-0 top-[calc(env(safe-area-inset-top,0px)+40px)] bottom-0 overflow-hidden rounded-t-[20px] shadow-[0px_-4px_20px_0px_rgba(0,0,0,0.12)]"
+            : // Not overflow-hidden: tooltips sit above the header, outside
+              // the panel. The scroll area clips its own corners.
+              "rounded-[20px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.16),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
         }`}
       >
         {isSheet && (
@@ -413,23 +570,35 @@ function Drawer({ study, media, onClose }) {
           >
             {study.title}
           </motion.p>
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label="Close case study"
-            className="drawer-close ml-auto flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-drawer-button)]"
-          >
-            <Icon name="close" />
-          </button>
+          <div className="ml-auto flex shrink-0 items-center gap-1">
+            {!isSheet && (
+              <ActionButton
+                label={expanded ? "Minimise" : "Maximise"}
+                onClick={onToggleExpanded}
+              >
+                <ExpandIcon expanded={expanded} reduce={reduce} />
+              </ActionButton>
+            )}
+            <ActionButton
+              label="Close"
+              onClick={onClose}
+              buttonRef={closeRef}
+              // Touch has no hover state, so the sheet's close button keeps
+              // a visible fill.
+              className={isSheet ? "bg-[var(--color-drawer-button)]" : ""}
+            >
+              <Icon name="close" />
+            </ActionButton>
+          </div>
         </div>
 
         <div
           ref={scrollRef}
-          className="relative flex-1 overflow-y-auto overscroll-contain"
+          className={`relative flex-1 overflow-y-auto overscroll-contain ${isSheet ? "" : "rounded-b-[20px]"}`}
         >
+          {/* Expanded, the text keeps a 470px reading column (Figma). */}
           <article
-            className={`flex flex-col items-start gap-7 px-6 pt-4 ${
+            className={`mx-auto flex w-full max-w-[518px] flex-col items-start gap-7 px-6 pt-4 ${
               isSheet ? "pb-[calc(24px+env(safe-area-inset-bottom,0px))]" : "pb-4"
             }`}
           >
@@ -472,7 +641,7 @@ function Drawer({ study, media, onClose }) {
             </dl>
 
             {media && (media.video || media.image) && (
-              <div className="relative isolate aspect-[381/287] w-full overflow-hidden rounded-[9.5px] bg-[var(--color-card-bg)]">
+              <div className="relative isolate aspect-[381/287] w-full max-w-[383px] overflow-hidden rounded-[9.5px] bg-[var(--color-card-bg)]">
                 {media.video ? (
                   <CardVideo src={media.video} poster={media.image ?? undefined} label={study.title} />
                 ) : (
