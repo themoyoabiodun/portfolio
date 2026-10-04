@@ -512,6 +512,9 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
         aria-hidden="true"
       />
       <motion.div
+        // Panel and sheet are different layouts; crossing the breakpoint
+        // while open remounts the panel so no desktop sizing lingers.
+        key={isSheet ? "sheet" : "panel"}
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -556,7 +559,11 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
         )}
         <div
           onPointerDown={(event) => canDrag && dragControls.start(event)}
-          className={`flex shrink-0 items-center gap-6 px-6 ${isSheet ? "sheet-grab h-[52px]" : "h-[60px]"}`}
+          // The compact title starts where the body text does: 24px in the
+          // side panel, and at the centred 470px reading column when
+          // maximised. Padding percentages follow the panel's width, so it
+          // tracks the resize animation.
+          className={`flex shrink-0 items-center gap-6 pr-6 pl-[max(24px,calc((100%-470px)/2))] ${isSheet ? "sheet-grab h-[52px]" : "h-[60px]"}`}
         >
           {/* Decorative copy of the title; the h2 below stays the label. */}
           <motion.p
