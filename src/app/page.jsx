@@ -20,6 +20,7 @@ const WORK = [
 ];
 
 const EXPERIENCE = [
+  { name: "Rank", logo: "/asset/experience/rank.svg" },
   { name: "Anchor", logo: "/asset/experience/anchor.svg" },
   { name: "Previous company", logo: "/asset/experience/company-yellow.png" },
   { name: "GoSource", logo: "/asset/experience/gosource.png", inset: true },
@@ -39,8 +40,8 @@ export default function Home() {
 
   return (
     // One 666px column (Figma 2175:1277): nav, intro, work and footer,
-    // left-aligned and 80px apart.
-    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[5px] pb-32 md:px-[52px]">
+    // left-aligned and 80px apart, starting 34px from the top.
+    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[22px] pb-32 md:px-[52px]">
       <Nav />
 
       <section
@@ -66,7 +67,7 @@ export default function Home() {
           className="m-0 text-sm font-medium leading-6 text-[var(--color-text-primary)] animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "120ms" }}
         >
-          Moyo is a Product designer helping founders turn their early ideas
+          Over the years, I’ve been helping founders turn their early ideas
           into shipped products. Most of my work has been in the Fintech
           ecosystem, from payment, card, and banking infrastructure at{" "}
           <LinkPreview
@@ -111,7 +112,7 @@ export default function Home() {
       >
         <section aria-labelledby="experience-heading" className="flex flex-col gap-4">
           <h2 id="experience-heading" className="text-[var(--color-text-muted)]">
-            Previous experience
+            Experience
           </h2>
           <ul className="flex items-center gap-4">
             {EXPERIENCE.map(({ name, logo, inset }) => (
