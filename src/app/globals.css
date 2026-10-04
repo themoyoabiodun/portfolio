@@ -43,6 +43,7 @@
     --color-bg: #ffffff;
     --color-text-primary: #171717;
     --color-text-secondary: #676767;
+    --color-text-muted: #707070;
     --color-card-bg: #edecec;
     --color-avatar-bg: #6c6c6c;
     --color-nav-hover: #f2f2f2;
@@ -259,12 +260,12 @@
     transition-duration: 0ms;
   }
 
-  /* Case study body (Figma 2215:1183): 13/19 text, 16/24 bold section
+  /* Case study body (Figma 2215:1183, leading updated to 22px): 13/22 text, 16/24 bold section
      headings, 14/21 semibold sub-headings. Sections sit 28px apart, blocks
      inside them 16px, and sub-headed groups 24px. */
   .case-study-prose {
     font-size: 13px;
-    line-height: 19px;
+    line-height: 22px;
     color: var(--color-text-primary);
   }
 

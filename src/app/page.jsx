@@ -1,4 +1,5 @@
 import Avatar from "@/components/Avatar";
+import CopyEmail from "@/components/CopyEmail";
 import { CaseStudyProvider } from "@/components/CaseStudyDrawer";
 import LinkPreview from "@/components/LinkPreview";
 import Nav from "@/components/Nav";
@@ -18,26 +19,51 @@ const WORK = [
   { name: "navigation", alt: "Anchor dashboard sidebar navigation", width: 233 },
 ];
 
+const EXPERIENCE = [
+  { name: "Anchor", logo: "/asset/experience/anchor.svg" },
+  { name: "Previous company", logo: "/asset/experience/company-yellow.png" },
+  { name: "GoSource", logo: "/asset/experience/gosource.png", inset: true },
+  { name: "Pocket", logo: "/asset/experience/pocket.png" },
+  { name: "The Novel Brand", logo: "/asset/experience/the-novel-brand.png" },
+];
+
+const CONTACT = [
+  { label: "linkedin.com/in/moyo99", href: "https://www.linkedin.com/in/moyo99" },
+  { label: "x.com/themoyoabiodun", href: "https://x.com/themoyoabiodun" },
+];
+
+const EMAIL = "themoyoabiodun@gmail.com";
+
 export default function Home() {
   const media = Object.fromEntries(WORK.map(({ name }) => [name, workMedia(name)]));
 
   return (
-    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[42px] pb-32 md:px-[52px]">
+    // One 666px column (Figma 2175:1277): nav, intro, work and footer,
+    // left-aligned and 80px apart.
+    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[5px] pb-32 md:px-[52px]">
       <Nav />
 
       <section
         id="about"
-        className="mt-[69px] flex scroll-mt-16 flex-col items-center gap-10 text-center"
+        className="mx-auto mt-[68px] flex max-w-[666px] scroll-mt-16 flex-col items-start gap-10"
       >
         <div
-          className="animate-fade-in-up motion-reduce:animate-fade-in"
+          className="flex flex-col items-start gap-4 animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "60ms" }}
         >
-          <Avatar src="/asset/headshot.png" alt="Moyo Abiodun" />
+          <Avatar src="/asset/headshot.png" alt="Michael Moyo Abiodun" />
+          <div className="flex flex-col gap-1 font-medium">
+            <h1 className="text-sm leading-[22px] text-[var(--color-text-primary)]">
+              Michael Moyo Abiodun
+            </h1>
+            <p className="text-[13px] leading-[19px] text-[var(--color-text-muted)]">
+              Product designer, Lagos Nigeria
+            </p>
+          </div>
         </div>
 
         <p
-          className="m-0 max-w-[443px] text-sm font-medium leading-[22px] text-[var(--color-text-primary)] animate-fade-in-up motion-reduce:animate-fade-in"
+          className="m-0 text-sm font-medium leading-6 text-[var(--color-text-primary)] animate-fade-in-up motion-reduce:animate-fade-in"
           style={{ animationDelay: "120ms" }}
         >
           Moyo is a Product designer helping founders turn their early ideas
@@ -69,7 +95,7 @@ export default function Home() {
         <section
           id="work"
           aria-label="Selected work"
-          className="mx-auto mt-20 grid max-w-[664px] scroll-mt-16 grid-cols-1 gap-2 md:grid-cols-[183fr_232fr_233fr]"
+          className="mx-auto mt-20 grid max-w-[666px] scroll-mt-16 grid-cols-1 gap-2 md:grid-cols-[183fr_232fr_233fr]"
         >
           {/* Cards continue the page's 60ms entrance stagger instead of
               arriving as one block. */}
@@ -78,6 +104,53 @@ export default function Home() {
           ))}
         </section>
       </CaseStudyProvider>
+
+      <footer
+        className="mx-auto mt-20 flex max-w-[666px] flex-col gap-10 text-sm font-medium leading-[22px] animate-fade-in-up motion-reduce:animate-fade-in sm:flex-row sm:items-start sm:justify-between"
+        style={{ animationDelay: "540ms" }}
+      >
+        <section aria-labelledby="experience-heading" className="flex flex-col gap-4">
+          <h2 id="experience-heading" className="text-[var(--color-text-muted)]">
+            Previous experience
+          </h2>
+          <ul className="flex items-center gap-4">
+            {EXPERIENCE.map(({ name, logo, inset }) => (
+              <li
+                key={name}
+                className="flex size-7 items-center justify-center overflow-hidden rounded-[8px] bg-white"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- static logo */}
+                <img
+                  src={logo}
+                  alt={name}
+                  title={name}
+                  width={inset ? 18 : 28}
+                  height={inset ? 18 : 28}
+                  className={inset ? "size-[18px]" : "size-7"}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="contact-heading" className="flex w-[220px] flex-col gap-4">
+          <h2 id="contact-heading" className="text-[var(--color-text-muted)]">
+            Get in touch
+          </h2>
+          <ul className="flex flex-col items-start gap-2 text-[var(--color-text-primary)]">
+            {CONTACT.map(({ label, href }) => (
+              <li key={href}>
+                <a href={href} target="_blank" rel="noopener noreferrer" className="dotted-underline">
+                  {label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <CopyEmail email={EMAIL} />
+            </li>
+          </ul>
+        </section>
+      </footer>
     </main>
   );
 }
