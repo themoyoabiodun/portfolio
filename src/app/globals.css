@@ -48,7 +48,10 @@
     --color-nav-hover: #f2f2f2;
     --color-nav-active: #ededed;
     --color-drawer-bg: #ffffff;
-    --color-drawer-button: #ebebeb;
+    --color-drawer-button: #ededed;
+    --color-drawer-scrim: rgba(23, 23, 23, 0.4);
+    --color-tooltip-bg: #171717;
+    --color-tooltip-text: #ffffff;
     --color-drawer-muted: #707070;
     --color-drawer-link: #0065e9;
     --color-drawer-code: #efefef;
@@ -73,6 +76,9 @@
       --color-nav-active: #262626;
       --color-drawer-bg: #111111;
       --color-drawer-button: #2a2a2a;
+      --color-drawer-scrim: rgba(0, 0, 0, 0.6);
+      --color-tooltip-bg: #f5f5f5;
+      --color-tooltip-text: #171717;
       --color-drawer-muted: #a3a3a3;
       --color-drawer-link: #4d9bff;
       --color-drawer-code: #1c1c1c;
@@ -143,7 +149,7 @@
   }
 
   .case-study-button:focus-visible,
-  .drawer-close:focus-visible,
+  .drawer-action:focus-visible,
   .drawer-link:focus-visible {
     outline: 2px solid var(--color-drawer-link);
     outline-offset: 2px;
@@ -199,14 +205,54 @@
     -webkit-user-select: none;
   }
 
-  .drawer-close {
+  /* Drawer header icon buttons (Figma 2231:1493): no fill at rest, a soft
+     fill on hover, and press feedback. */
+  .drawer-action {
+    touch-action: manipulation;
     transition:
       background-color 150ms ease,
       transform 160ms var(--ease-out);
   }
 
-  .drawer-close:active {
-    transform: scale(0.97);
+  .drawer-action:active {
+    transform: scale(0.94);
+  }
+
+  /* Tooltip (Figma 2231:1804): right-aligned above its button, growing out
+     of it. Fast, short travel; neighbours shown in quick succession skip
+     the animation (animate skill, tooltip recipe). */
+  .drawer-tooltip {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 3px);
+    display: flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 4px;
+    background-color: var(--color-tooltip-bg);
+    color: var(--color-tooltip-text);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(2px) scale(0.97);
+    transform-origin: bottom right;
+    transition:
+      opacity 125ms var(--ease-out),
+      transform 125ms var(--ease-out);
+  }
+
+  .drawer-tooltip[data-open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .drawer-tooltip[data-instant] {
+    transition-duration: 0ms;
   }
 
   /* Case study body (Figma 2215:1183): 13/19 text, 16/24 bold section
@@ -424,8 +470,8 @@
     background-color: color-mix(in srgb, var(--color-drawer-code) 92%, var(--color-text-primary));
   }
 
-  .drawer-close:hover {
-    background-color: color-mix(in srgb, var(--color-drawer-button) 85%, var(--color-text-primary));
+  .drawer-action:hover {
+    background-color: var(--color-drawer-button);
   }
 
   .link-preview-toolbar:hover .link-preview-chevron {
@@ -439,8 +485,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .work-card:has(.case-study-button:active),
-  .drawer-close:active,
-  .code-copy:active {
+  .drawer-action:active,
+  .code-copy:active,
+  .drawer-tooltip {
     transform: none;
   }
 
