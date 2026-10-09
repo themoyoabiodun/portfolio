@@ -31,7 +31,7 @@ export const SELECTED_WORKS = [
           "Making the process of moving money feel less like a task, crafted with flexibility and clarity.",
         image: {
           src: "/asset/selected/anchor-money-movement.webp",
-          alt: "Anchor Transactions page with the Move money menu open: transfer to self, to an Anchor account, to an external bank, fund a card, withdraw from a card",
+          alt: "Anchor Transactions page listing outbound transfers, with the Send Money button",
         },
         // Plays over the image: a cursor walks through a transfer.
         demo: MONEY_MOVEMENT_DEMO,

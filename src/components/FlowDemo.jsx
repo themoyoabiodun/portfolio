@@ -9,8 +9,8 @@ import {
   useTransform,
 } from "motion/react";
 
-// Smooth in-out: the camera and cursor are both moving across the screen,
-// so they accelerate and settle rather than snapping off the mark.
+// Smooth in-out: the cursor travels across the screen, so it accelerates
+// and settles rather than snapping off the mark.
 const EASE = [0.65, 0, 0.35, 1];
 const CLICK_MS = 140;
 
@@ -27,13 +27,6 @@ function sleep(ms, signal) {
       { once: true },
     );
   });
-}
-
-// Camera offset that centres `focus` at `zoom`, clamped so the screen never
-// pulls away from the frame's edges. Values are fractions of the frame.
-function frame([fx, fy], zoom, [w, h]) {
-  const clamp = (v) => Math.min(0, Math.max(1 - zoom, v));
-  return { x: clamp(0.5 - zoom * (fx / w)), y: clamp(0.5 - zoom * (fy / h)) };
 }
 
 function CursorIcon() {
@@ -57,8 +50,8 @@ function CursorIcon() {
 }
 
 // Auto-playing walkthrough of a product flow: a cursor clicks through the
-// screens while the camera follows the action. It plays only while active
-// and on screen, restarting from the top each time it comes back.
+// screens, filling in forms as it goes. It plays only while active and on
+// screen, restarting from the top each time it comes back.
 export default function FlowDemo({ demo, active }) {
   const reduceMotion = useReducedMotion();
   const rootRef = useRef(null);
@@ -67,26 +60,19 @@ export default function FlowDemo({ demo, active }) {
   const [screen, setScreen] = useState(0);
   const [fade, setFade] = useState(300);
   const [typed, setTyped] = useState("");
+  // Typed fields: how many glyphs of each are showing.
+  const [filled, setFilled] = useState({});
+  const [typing, setTyping] = useState(null);
   const [clicks, setClicks] = useState(0);
 
   const [w, h] = demo.size;
-  const camX = useMotionValue(0);
-  const camY = useMotionValue(0);
-  const zoom = useMotionValue(1);
   const curX = useMotionValue(demo.cursor[0] / w);
   const curY = useMotionValue(demo.cursor[1] / h);
   const press = useMotionValue(1);
 
-  const cameraTransform = useTransform(
-    [camX, camY, zoom],
-    ([x, y, s]) => `translate(${x * 100}%, ${y * 100}%) scale(${s})`,
-  );
-  // The cursor sits outside the camera so it stays the same size, but is
-  // placed through the camera's transform so it stays on its target.
   const cursorTransform = useTransform(
-    [camX, camY, zoom, curX, curY],
-    ([x, y, s, cx, cy]) =>
-      `translate(${(x + s * cx) * 100}%, ${(y + s * cy) * 100}%)`,
+    [curX, curY],
+    ([x, y]) => `translate(${x * 100}%, ${y * 100}%)`,
   );
 
   // Decode every screen up front so crossfades never land on a blank frame.
@@ -94,7 +80,7 @@ export default function FlowDemo({ demo, active }) {
     if (!active || ready) return;
     let cancelled = false;
     Promise.all(
-      demo.screens.map(({ src }) => {
+      demo.screens.map((src) => {
         const img = new Image();
         img.src = src;
         return img.decode().catch(() => {});
@@ -139,9 +125,8 @@ export default function FlowDemo({ demo, active }) {
     const reset = () => {
       setScreen(0);
       setTyped("");
-      camX.jump(0);
-      camY.jump(0);
-      zoom.jump(1);
+      setFilled({});
+      setTyping(null);
       curX.jump(demo.cursor[0] / w);
       curY.jump(demo.cursor[1] / h);
       press.jump(1);
@@ -149,14 +134,6 @@ export default function FlowDemo({ demo, active }) {
 
     const actions = {
       wait: ({ wait }) => sleep(wait, signal),
-      camera: ({ camera, zoom: s, duration }) => {
-        const { x, y } = frame(camera, s, demo.size);
-        return Promise.all([
-          tween(camX, x, duration),
-          tween(camY, y, duration),
-          tween(zoom, s, duration),
-        ]);
-      },
       move: ({ move: [x, y], duration }) =>
         Promise.all([
           tween(curX, x / w, duration),
@@ -170,12 +147,24 @@ export default function FlowDemo({ demo, active }) {
       screen: async ({ screen: index, fade: ms = 300 }) => {
         setFade(ms);
         setScreen(index);
+        // The next screen carries the typed text itself.
+        setFilled({});
+        setTyping(null);
         if (index === 0) setTyped("");
         await sleep(ms, signal);
       },
-      type: async ({ type, interval }) => {
-        for (let i = 1; i <= type.length; i++) {
-          setTyped(type.slice(0, i));
+      fill: async ({ fill, interval }) => {
+        setTyping(fill);
+        setFilled((prev) => ({ ...prev, [fill]: 0 }));
+        const count = demo.fields[fill].stops.length;
+        for (let i = 1; i <= count; i++) {
+          setFilled((prev) => ({ ...prev, [fill]: i }));
+          await sleep(interval, signal);
+        }
+      },
+      code: async ({ code, interval }) => {
+        for (let i = 1; i <= code.length; i++) {
+          setTyped(code.slice(0, i));
           await sleep(interval, signal);
         }
       },
@@ -198,11 +187,25 @@ export default function FlowDemo({ demo, active }) {
       controller.abort();
       running.forEach((animation) => animation.stop());
     };
-  }, [playing, demo, w, h, camX, camY, zoom, curX, curY, press]);
+  }, [playing, demo, w, h, curX, curY, press]);
 
   if (reduceMotion) return null;
 
   const showCode = demo.code?.screens.includes(screen);
+  // One frame unit in container-query width, so overlays scale with the
+  // screen.
+  const u = (n) => `${(n * 100) / w}cqw`;
+  // Text caret just after the last typed glyph of the focused field.
+  let caret = null;
+  if (typing) {
+    const { rect, stops } = demo.fields[typing];
+    const count = filled[typing] ?? 0;
+    caret = {
+      x: rect[0] + (count ? stops[count - 1] : 0) + 1,
+      y: rect[1] + rect[2] * 0.2,
+      h: rect[2] * 0.6,
+    };
+  }
 
   return (
     <div
@@ -213,11 +216,8 @@ export default function FlowDemo({ demo, active }) {
     >
       {/* The dashboard's box inside the 666×482 cover image. */}
       <div className="absolute top-[4.033%] left-[3.303%] h-[91.766%] w-[93.393%] overflow-hidden rounded-[2px] bg-white [container-type:inline-size]">
-        <motion.div
-          style={{ transform: cameraTransform }}
-          className="absolute inset-0 origin-top-left will-change-transform"
-        >
-          {demo.screens.map(({ src }, i) => (
+        <div className="absolute inset-0">
+          {demo.screens.map((src, i) => (
             // eslint-disable-next-line @next/next/no-img-element -- static export
             <img
               key={src}
@@ -246,7 +246,51 @@ export default function FlowDemo({ demo, active }) {
                 </span>
               ) : null,
             )}
-        </motion.div>
+          {Object.entries(filled).map(([name, count]) => {
+            const field = demo.fields[name];
+            const [x, y, height] = field.rect;
+            const width = count ? field.stops[count - 1] : 0;
+            return (
+              // A window onto the filled form, widened glyph by glyph, over
+              // a blank that hides the placeholder.
+              <span
+                key={name}
+                style={{
+                  left: u(x),
+                  top: u(y),
+                  width: u(field.cover),
+                  height: u(height),
+                }}
+                className="absolute bg-white"
+              >
+                <span
+                  style={{ width: u(width), height: u(height) }}
+                  className="absolute top-0 left-0 overflow-hidden"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element -- static export */}
+                  <img
+                    src={demo.screens[field.screen]}
+                    alt=""
+                    draggable={false}
+                    style={{
+                      left: u(-x),
+                      top: u(-y),
+                      width: "100cqw",
+                      maxWidth: "none",
+                    }}
+                    className="absolute"
+                  />
+                </span>
+              </span>
+            );
+          })}
+          {caret && (
+            <span
+              style={{ left: u(caret.x), top: u(caret.y), height: u(caret.h) }}
+              className="flow-demo-caret absolute w-px bg-[#171717]"
+            />
+          )}
+        </div>
         <motion.div
           style={{ transform: cursorTransform }}
           className="absolute inset-0 will-change-transform"

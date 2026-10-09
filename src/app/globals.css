@@ -504,6 +504,10 @@
     animation: flow-demo-digit 160ms var(--ease-out);
   }
 
+  .flow-demo-caret {
+    animation: flow-demo-caret 1s steps(1) infinite;
+  }
+
   /* Click feedback: a soft ring that blooms from the pointer's tip. */
   .flow-demo-ripple {
     top: -12px;
@@ -732,5 +736,11 @@
   from {
     opacity: 0;
     transform: translateY(2px);
+  }
+}
+
+@keyframes flow-demo-caret {
+  50% {
+    opacity: 0;
   }
 }
