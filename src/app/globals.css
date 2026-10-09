@@ -46,7 +46,8 @@
     --color-text-muted: #707070;
     --color-rail-bar: #f5f5f5;
     --color-rail-active: #707070;
-    --color-rail-label: #f5f5f5;
+    --color-rail-label: #171717;
+    --color-rail-label-text: #c4c4c4;
     --color-card-bg: #edecec;
     --color-avatar-bg: #6c6c6c;
     --color-nav-hover: #f2f2f2;
@@ -464,13 +465,55 @@
     cursor: default;
   }
 
+  /* Only the current feature's image shows, once decoded. Switching
+     features crossfades; arrow-key switches are instant. */
   .project-image {
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .project-image[data-loaded][data-current] {
+    opacity: 1;
+  }
+
+  .project-figure[data-instant] .project-image {
+    transition-duration: 0ms;
+  }
+
+  /* Flow demo over a feature image: fades in once its screens decode,
+     matching the cover image underneath so the hand-off is seamless. */
+  .flow-demo {
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .flow-demo[data-shown] {
+    opacity: 1;
+  }
+
+  .flow-demo-screen {
     opacity: 0;
     transition: opacity 300ms ease;
   }
 
-  .project-image[data-loaded] {
+  .flow-demo-screen[data-current] {
     opacity: 1;
+  }
+
+  .flow-demo-digit {
+    animation: flow-demo-digit 160ms var(--ease-out);
+  }
+
+  /* Click feedback: a soft ring that blooms from the pointer's tip. */
+  .flow-demo-ripple {
+    top: -12px;
+    left: -12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background-color: rgba(23, 23, 23, 0.18);
+    opacity: 0;
+    animation: flow-demo-ripple 450ms var(--ease-out);
   }
 
   .feature-caption {
@@ -536,7 +579,7 @@
     padding: 0 8px;
     border-radius: 34px;
     background-color: var(--color-rail-label);
-    color: var(--color-text-muted);
+    color: var(--color-rail-label-text);
     font-size: 13px;
     font-weight: 500;
     line-height: 19px;
@@ -671,5 +714,23 @@
 
   .nav-link:active {
     transform: none;
+  }
+}
+
+@keyframes flow-demo-ripple {
+  from {
+    opacity: 1;
+    transform: scale(0.25);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes flow-demo-digit {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
   }
 }
