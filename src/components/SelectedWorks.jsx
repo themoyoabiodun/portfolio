@@ -3,6 +3,7 @@
 import { useCallback, useId, useState } from "react";
 import { SELECTED_WORKS } from "@/content/selectedWorks";
 import { useCaseStudy } from "./CaseStudyDrawer";
+import FlowDemo from "./FlowDemo";
 
 function ReadCaseStudy({ caseStudy }) {
   const ctx = useCaseStudy();
@@ -51,6 +52,9 @@ function Project({ project }) {
   const [active, setActive] = useState(0);
   // Keyboard switches are instant: no fade on actions repeated by keys.
   const [instant, setInstant] = useState(false);
+  // Demos mount the first time their feature is shown, then stay mounted
+  // so switching back fades rather than reloading.
+  const [seen, setSeen] = useState(() => new Set([0]));
   const baseId = useId();
   const feature = project.features[active];
   const currentImage = feature.image ?? project.image;
@@ -73,6 +77,7 @@ function Project({ project }) {
     const next = (active + step + count) % count;
     setInstant(true);
     setActive(next);
+    setSeen((prev) => new Set(prev).add(next));
     document.getElementById(`${baseId}-tab-${next}`)?.focus();
   };
 
@@ -115,6 +120,7 @@ function Project({ project }) {
                 onClick={() => {
                   setInstant(false);
                   setActive(i);
+                  setSeen((prev) => new Set(prev).add(i));
                 }}
                 className="feature-pill inline-flex h-7 items-center rounded-full border px-3 text-sm font-semibold leading-[21px] whitespace-nowrap"
               >
@@ -139,6 +145,17 @@ function Project({ project }) {
             current={image.src === currentImage.src}
           />
         ))}
+        {project.features.map(
+          (item, i) =>
+            item.demo &&
+            seen.has(i) && (
+              <FlowDemo
+                key={item.title}
+                demo={item.demo}
+                active={i === active}
+              />
+            ),
+        )}
       </figure>
 
       <div

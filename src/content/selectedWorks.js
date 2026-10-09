@@ -1,3 +1,5 @@
+import { MONEY_MOVEMENT_DEMO } from "./demos/moneyMovement";
+
 // Selected Works (Figma 2241:1505). Each project has one or more features;
 // with more than one, the pills switch the caption (and the image, when the
 // feature has its own `image`) under the project. A feature's `caseStudy`
@@ -31,6 +33,8 @@ export const SELECTED_WORKS = [
           src: "/asset/selected/anchor-money-movement.webp",
           alt: "Anchor Transactions page with the Move money menu open: transfer to self, to an Anchor account, to an external bank, fund a card, withdraw from a card",
         },
+        // Plays over the image: a cursor walks through a transfer.
+        demo: MONEY_MOVEMENT_DEMO,
       },
       { title: "Timeline Management" },
       { title: "Cards Product" },

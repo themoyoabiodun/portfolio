@@ -480,6 +480,42 @@
     transition-duration: 0ms;
   }
 
+  /* Flow demo over a feature image: fades in once its screens decode,
+     matching the cover image underneath so the hand-off is seamless. */
+  .flow-demo {
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .flow-demo[data-shown] {
+    opacity: 1;
+  }
+
+  .flow-demo-screen {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .flow-demo-screen[data-current] {
+    opacity: 1;
+  }
+
+  .flow-demo-digit {
+    animation: flow-demo-digit 160ms var(--ease-out);
+  }
+
+  /* Click feedback: a soft ring that blooms from the pointer's tip. */
+  .flow-demo-ripple {
+    top: -12px;
+    left: -12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background-color: rgba(23, 23, 23, 0.18);
+    opacity: 0;
+    animation: flow-demo-ripple 450ms var(--ease-out);
+  }
+
   .feature-caption {
     animation: fade-in 200ms var(--ease-out) backwards;
   }
@@ -678,5 +714,23 @@
 
   .nav-link:active {
     transform: none;
+  }
+}
+
+@keyframes flow-demo-ripple {
+  from {
+    opacity: 1;
+    transform: scale(0.25);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes flow-demo-digit {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
   }
 }
