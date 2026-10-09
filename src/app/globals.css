@@ -101,6 +101,9 @@
   }
 
   html {
+    /* Opening a case study locks page scroll; reserving the scrollbar's
+       space stops the page shifting sideways when it disappears. */
+    scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
   }
@@ -455,32 +458,64 @@
       transform 160ms var(--ease-out);
   }
 
+  /* Shown as designed even before its case study exists; it stays
+     disabled, with a "coming soon" hint on hover. */
   .read-case-study:disabled {
     cursor: default;
-    opacity: 0.6;
+  }
+
+  .project-image {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .project-image[data-loaded] {
+    opacity: 1;
   }
 
   .feature-caption {
     animation: fade-in 200ms var(--ease-out) backwards;
   }
 
-  /* Section rail (Figma 2240:84). */
+  .feature-caption[data-instant] {
+    animation: none;
+  }
+
+  /* Section rail (Figma 2240:84): 14px bars, the current one 22px. The
+     length change is a scaleX from the right edge, not a width change, so
+     it stays on the compositor. The button's ::before widens the hit area
+     leftward without moving the bar. */
+  .section-rail-bar {
+    position: relative;
+  }
+
+  .section-rail-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 -14px;
+  }
+
   .section-rail-bar > span {
     background-color: var(--color-rail-bar);
-    transition: background-color 200ms ease;
+    transform: scaleX(calc(14 / 22));
+    transform-origin: right center;
+    transition:
+      background-color 200ms ease,
+      transform 250ms var(--ease-out);
   }
 
   .section-rail-bar[aria-current="true"] > span {
     background-color: var(--color-rail-active);
+    transform: none;
   }
 
   .section-rail-label {
     position: absolute;
     top: 0;
-    right: calc(100% + 2px);
+    right: calc(100% + 3px);
     display: flex;
     align-items: center;
-    height: 20px;
+    height: 12px;
     pointer-events: none;
     opacity: 0;
     transform: translate(4px, var(--rail-y));
@@ -583,7 +618,7 @@
   }
 
   .read-case-study:not(:disabled):hover {
-    background-color: #e2e2e2;
+    background-color: #2e2e2e;
   }
 
   .section-rail-bar:not([aria-current="true"]):hover > span {
@@ -596,6 +631,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .section-rail-bar > span {
+    transition-property: background-color;
+  }
+
   /* Section label: fade only, no slide. */
   .section-rail-label,
   .section-rail-label[data-visible] {
