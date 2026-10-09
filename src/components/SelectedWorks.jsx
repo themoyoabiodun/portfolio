@@ -68,15 +68,24 @@ function Project({ project }) {
 
   return (
     <article className="flex flex-col gap-10">
-      <div className="flex flex-col gap-4">
+      {/* Figma 2241:1511: title, summary and pills 24px apart; summary
+          paragraphs 8px apart. */}
+      <div className="flex flex-col gap-6">
         <h3 className="text-base font-semibold leading-[26px] text-[var(--color-text-primary)]">
           {project.title}
         </h3>
-        {project.summary.map((text) => (
-          <p key={text} className="text-sm font-medium leading-6 text-[var(--color-text-primary)]">
-            {text}
-          </p>
-        ))}
+        {project.summary.length > 0 && (
+          <div className="flex flex-col gap-2">
+            {project.summary.map((text) => (
+              <p
+                key={text}
+                className="text-sm font-medium leading-6 text-[var(--color-text-primary)]"
+              >
+                {text}
+              </p>
+            ))}
+          </div>
+        )}
         {hasTabs && (
           <div
             role="tablist"
@@ -97,7 +106,7 @@ function Project({ project }) {
                   setInstant(false);
                   setActive(i);
                 }}
-                className="feature-pill inline-flex h-7 items-center rounded-full border px-3 text-sm font-medium leading-[21px] whitespace-nowrap"
+                className="feature-pill inline-flex h-7 items-center rounded-full border px-3 text-sm font-semibold leading-[21px] whitespace-nowrap"
               >
                 {item.title}
               </button>
