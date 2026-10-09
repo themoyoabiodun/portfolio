@@ -120,6 +120,15 @@
     background-color: var(--color-bg);
   }
 
+  /* Form controls reset text-rendering in the browser's own styles, so they
+     would miss the root's optimizeLegibility. */
+  button,
+  input,
+  select,
+  textarea {
+    text-rendering: inherit;
+  }
+
   /* Fire taps immediately (no double-tap-zoom wait). */
   a,
   button {
