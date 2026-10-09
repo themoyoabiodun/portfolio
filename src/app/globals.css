@@ -44,6 +44,9 @@
     --color-text-primary: #171717;
     --color-text-secondary: #676767;
     --color-text-muted: #707070;
+    --color-rail-bar: #f5f5f5;
+    --color-rail-active: #707070;
+    --color-rail-label: #f5f5f5;
     --color-card-bg: #edecec;
     --color-avatar-bg: #6c6c6c;
     --color-nav-hover: #f2f2f2;
@@ -414,6 +417,97 @@
     color: var(--color-code-function);
   }
 
+  /* Selected Works feature pills (Figma 2240:72): the selected pill gets
+     a dark 1.5px ring; drawn with an outer shadow so the pill doesn't
+     shift by half a pixel. */
+  .feature-pill {
+    border-color: var(--color-nav-active);
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  .feature-pill[aria-selected="true"] {
+    border-color: var(--color-text-primary);
+    box-shadow: 0 0 0 0.5px var(--color-text-primary);
+    color: var(--color-text-primary);
+  }
+
+  .feature-pill:active,
+  .read-case-study:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  .feature-pill:focus-visible,
+  .read-case-study:focus-visible,
+  .section-rail-bar:focus-visible {
+    outline: 2px solid var(--color-drawer-link);
+    outline-offset: 2px;
+  }
+
+  .read-case-study {
+    transition:
+      background-color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  .read-case-study:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  .feature-caption {
+    animation: fade-in 200ms var(--ease-out) backwards;
+  }
+
+  /* Section rail (Figma 2240:84). */
+  .section-rail-bar > span {
+    background-color: var(--color-rail-bar);
+    transition: background-color 200ms ease;
+  }
+
+  .section-rail-bar[aria-current="true"] > span {
+    background-color: var(--color-rail-active);
+  }
+
+  .section-rail-label {
+    position: absolute;
+    top: 0;
+    right: calc(100% + 2px);
+    display: flex;
+    align-items: center;
+    height: 20px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(4px, var(--rail-y));
+    transition:
+      opacity 150ms var(--ease-out),
+      transform 200ms var(--ease-out);
+  }
+
+  .section-rail-label[data-visible] {
+    opacity: 1;
+    transform: translate(0, var(--rail-y));
+  }
+
+  .section-rail-pill {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 34px;
+    background-color: var(--color-rail-label);
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 19px;
+    white-space: nowrap;
+  }
+
   /* Dotted underline with round dots. CSS "dotted" decorations render square
      dots, so the dots are drawn as a repeating radial gradient instead:
      diameter = 10% of the font size (the design's thickness), one dot every
@@ -483,13 +577,34 @@
     transform: translateX(2px);
   }
 
+  .feature-pill[aria-selected="false"]:hover {
+    border-color: #d4d4d4;
+    color: var(--color-text-primary);
+  }
+
+  .read-case-study:not(:disabled):hover {
+    background-color: #e2e2e2;
+  }
+
+  .section-rail-bar:not([aria-current="true"]):hover > span {
+    background-color: #d4d4d4;
+  }
+
   .nav-link:not([aria-current="page"]):hover {
     background-color: var(--color-nav-hover);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Section label: fade only, no slide. */
+  .section-rail-label,
+  .section-rail-label[data-visible] {
+    transition-property: opacity;
+  }
+
   .work-card:has(.case-study-button:active),
+  .feature-pill:active,
+  .read-case-study:active,
   .drawer-action:active,
   .code-copy:active,
   .drawer-tooltip {

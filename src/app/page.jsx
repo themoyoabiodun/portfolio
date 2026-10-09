@@ -3,6 +3,8 @@ import CopyEmail from "@/components/CopyEmail";
 import { CaseStudyProvider } from "@/components/CaseStudyDrawer";
 import LinkPreview from "@/components/LinkPreview";
 import Nav from "@/components/Nav";
+import SectionRail from "@/components/SectionRail";
+import SelectedWorks from "@/components/SelectedWorks";
 import WorkCard from "@/components/WorkCard";
 import { workMedia } from "@/lib/publicFile";
 
@@ -41,8 +43,9 @@ export default function Home() {
   return (
     // One 666px column (Figma 2175:1277): nav, intro, work and footer,
     // left-aligned and 80px apart, starting 34px from the top.
-    <main className="min-h-svh bg-[var(--color-bg)] px-4 pt-[22px] pb-32 md:px-[52px]">
+    <main className="min-h-svh overflow-x-clip bg-[var(--color-bg)] px-4 pt-[22px] pb-32 md:px-[52px]">
       <Nav />
+      <SectionRail />
 
       <section
         id="about"
@@ -104,9 +107,12 @@ export default function Home() {
             <WorkCard key={item.name} {...item} height={CARD_HEIGHT} delay={180 + i * 60} />
           ))}
         </section>
+
+        <SelectedWorks />
       </CaseStudyProvider>
 
       <footer
+        id="contact"
         className="mx-auto mt-20 flex max-w-[666px] flex-col gap-10 text-sm font-medium leading-[22px] animate-fade-in-up motion-reduce:animate-fade-in sm:flex-row sm:items-start sm:justify-between"
         style={{ animationDelay: "540ms" }}
       >
