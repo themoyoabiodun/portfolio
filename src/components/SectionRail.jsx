@@ -78,9 +78,15 @@ export default function SectionRail() {
         style={{ "--rail-y": `${shown * BAR_PITCH}px` }}
       >
         <span className="section-rail-pill">{SECTIONS[shown].label}</span>
-        <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true" className="shrink-0">
-          <path d="M1.5 1 L7 4 L1.5 7 Z" fill="var(--color-rail-label)" />
-        </svg>
+        {/* Figma's rounded triangle, turned to point at the bar. */}
+        <span className="flex size-2 shrink-0 items-center justify-center">
+          <svg width="5.467" height="5" viewBox="0 0 5.46709 5" className="rotate-90">
+            <path
+              d="M1.86752 0.5C2.25242 -0.166667 3.21467 -0.166666 3.59957 0.5L5.33162 3.5C5.71652 4.16667 5.23539 5 4.46559 5H1.00149C0.231691 5 -0.249434 4.16667 0.135467 3.5L1.86752 0.5Z"
+              fill="var(--color-rail-label)"
+            />
+          </svg>
+        </span>
       </span>
       <ul className="flex flex-col items-end">
         {SECTIONS.map(({ id, label }, i) => (
