@@ -465,13 +465,19 @@
     cursor: default;
   }
 
+  /* Only the current feature's image shows, once decoded. Switching
+     features crossfades; arrow-key switches are instant. */
   .project-image {
     opacity: 0;
-    transition: opacity 300ms ease;
+    transition: opacity 250ms ease;
   }
 
-  .project-image[data-loaded] {
+  .project-image[data-loaded][data-current] {
     opacity: 1;
+  }
+
+  .project-figure[data-instant] .project-image {
+    transition-duration: 0ms;
   }
 
   .feature-caption {

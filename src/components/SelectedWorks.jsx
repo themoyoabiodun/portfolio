@@ -23,7 +23,7 @@ function ReadCaseStudy({ caseStudy }) {
 
 // Lazy images fade in once decoded instead of popping in mid-scroll. A
 // cached image may already be complete before React attaches onLoad.
-function ProjectImage({ src, alt }) {
+function ProjectImage({ src, alt, current }) {
   const [loaded, setLoaded] = useState(false);
   const ref = useCallback((img) => {
     if (img?.complete && img.naturalWidth) setLoaded(true);
@@ -33,13 +33,15 @@ function ProjectImage({ src, alt }) {
     <img
       ref={ref}
       src={src}
-      alt={alt}
+      alt={current ? alt : ""}
+      aria-hidden={current ? undefined : true}
       width={666}
       height={482}
       loading="lazy"
       decoding="async"
       onLoad={() => setLoaded(true)}
       data-loaded={loaded ? "" : undefined}
+      data-current={current ? "" : undefined}
       className="project-image absolute inset-0 h-full w-full object-cover"
     />
   );
@@ -51,6 +53,14 @@ function Project({ project }) {
   const [instant, setInstant] = useState(false);
   const baseId = useId();
   const feature = project.features[active];
+  const currentImage = feature.image ?? project.image;
+  const images = [
+    ...new Map(
+      [project.image, ...project.features.map((f) => f.image)]
+        .filter(Boolean)
+        .map((image) => [image.src, image]),
+    ).values(),
+  ];
   const hasTabs = project.features.length > 1;
   const panelId = `${baseId}-panel`;
 
@@ -115,8 +125,20 @@ function Project({ project }) {
         )}
       </div>
 
-      <figure className="relative aspect-[666/482] w-full overflow-hidden rounded-[4px] bg-[var(--color-nav-active)]">
-        <ProjectImage src={project.image.src} alt={project.image.alt} />
+      {/* Each feature can have its own screenshot; switching tabs crossfades
+          between them. All are stacked so the next one is already decoded. */}
+      <figure
+        data-instant={instant ? "" : undefined}
+        className="project-figure relative aspect-[666/482] w-full overflow-hidden rounded-[4px] bg-[var(--color-nav-active)]"
+      >
+        {images.map((image) => (
+          <ProjectImage
+            key={image.src}
+            src={image.src}
+            alt={image.alt}
+            current={image.src === currentImage.src}
+          />
+        ))}
       </figure>
 
       <div
@@ -131,9 +153,9 @@ function Project({ project }) {
           data-instant={instant ? "" : undefined}
           className="feature-caption flex flex-col gap-2"
         >
-          {feature.title && (
+          {(feature.heading ?? feature.title) && (
             <h4 className="text-base font-semibold leading-[26px] text-[var(--color-text-primary)]">
-              {feature.title}
+              {feature.heading ?? feature.title}
             </h4>
           )}
           <p className="text-sm font-medium leading-6 text-[var(--color-text-primary)]">

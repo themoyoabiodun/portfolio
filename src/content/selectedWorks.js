@@ -1,6 +1,7 @@
 // Selected Works (Figma 2241:1505). Each project has one or more features;
-// with more than one, the pills switch the caption under the image. A
-// feature's `caseStudy` (a key in CASE_STUDIES) enables "Read Case Study".
+// with more than one, the pills switch the caption (and the image, when the
+// feature has its own `image`) under the project. A feature's `caseStudy`
+// (a key in CASE_STUDIES) enables "Read Case Study".
 
 export const SELECTED_WORKS = [
   {
@@ -20,7 +21,17 @@ export const SELECTED_WORKS = [
         description:
           "This is an end to end experience of how businesses today request account supported for there entity and outside there entity capacity.",
       },
-      { title: "Money Movement" },
+      {
+        title: "Money Movement",
+        // Caption heading, when it differs from the pill label.
+        heading: "Money movement",
+        description:
+          "Making the process of moving money feel less like a task, crafted with flexibility and clarity.",
+        image: {
+          src: "/asset/selected/anchor-money-movement.webp",
+          alt: "Anchor Transactions page with the Move money menu open: transfer to self, to an Anchor account, to an external bank, fund a card, withdraw from a card",
+        },
+      },
       { title: "Timeline Management" },
       { title: "Cards Product" },
     ],
