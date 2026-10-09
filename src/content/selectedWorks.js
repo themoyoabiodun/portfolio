@@ -20,7 +20,7 @@ export const SELECTED_WORKS = [
         description:
           "This is an end to end experience of how businesses today request account supported for there entity and outside there entity capacity.",
       },
-      { title: "KYB Onboarding" },
+      { title: "Money Movement" },
       { title: "Timeline Management" },
       { title: "Cards Product" },
     ],
