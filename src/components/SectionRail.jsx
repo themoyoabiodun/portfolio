@@ -2,25 +2,25 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Right-edge section marker (Figma 2240:84 / 2240:86): one bar per page
-// section, the current one darker. Hovering a bar, or arriving at a new
-// section while scrolling, shows its name in a pill pointing at the bar.
-// Bars scroll to their section.
+// Right-edge section marker (Figma 2240:84 / 2240:86): one short bar per
+// page section; the current one is darker and longer. The label pill
+// points at the current bar while the page is scrolling (it fades once
+// scrolling settles, like an overlay scrollbar) and at any bar under the
+// pointer. Bars scroll to their section.
 const SECTIONS = [
   { id: "about", label: "About" },
   { id: "work", label: "Design" },
   { id: "selected-works", label: "Selected Works" },
   { id: "contact", label: "Get in touch" },
 ];
-const BAR_PITCH = 20; // 4px bar + 16px gap
-const LABEL_LINGER_MS = 1200;
+const BAR_PITCH = 12; // 4px bar + 8px gap
+const SCROLL_IDLE_MS = 800;
 
 export default function SectionRail() {
   const [active, setActive] = useState(0);
   const [hovered, setHovered] = useState(null);
-  const [announce, setAnnounce] = useState(false);
-  const timer = useRef(null);
-  const first = useRef(true);
+  const [scrolling, setScrolling] = useState(false);
+  const idle = useRef(null);
 
   useEffect(() => {
     let frame = 0;
@@ -40,30 +40,25 @@ export default function SectionRail() {
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const onUserScroll = () => {
+      onScroll();
+      setScrolling(true);
+      clearTimeout(idle.current);
+      idle.current = setTimeout(() => setScrolling(false), SCROLL_IDLE_MS);
+    };
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onUserScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
+      clearTimeout(idle.current);
+      window.removeEventListener("scroll", onUserScroll);
       window.removeEventListener("resize", onScroll);
     };
   }, []);
 
-  // Briefly name the section the reader has just scrolled into.
-  useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    setAnnounce(true);
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => setAnnounce(false), LABEL_LINGER_MS);
-    return () => clearTimeout(timer.current);
-  }, [active]);
-
   const shown = hovered ?? active;
-  const labelVisible = hovered !== null || announce;
+  const labelVisible = hovered !== null || scrolling;
 
   const goTo = (id) => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -87,7 +82,7 @@ export default function SectionRail() {
           <path d="M1.5 1 L7 4 L1.5 7 Z" fill="var(--color-rail-label)" />
         </svg>
       </span>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col items-end">
         {SECTIONS.map(({ id, label }, i) => (
           <li key={id}>
             <button
@@ -98,9 +93,9 @@ export default function SectionRail() {
               onFocus={() => setHovered(i)}
               onBlur={() => setHovered(null)}
               onClick={() => goTo(id)}
-              className="section-rail-bar group flex h-5 w-10 items-center"
+              className="section-rail-bar flex h-3 w-[22px] items-center justify-end"
             >
-              <span className="h-1 w-full rounded-full" />
+              <span className="h-1 w-[22px] rounded-full" />
             </button>
           </li>
         ))}

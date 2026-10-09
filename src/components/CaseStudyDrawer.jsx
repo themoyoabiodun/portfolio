@@ -20,19 +20,20 @@ import {
 } from "motion/react";
 import { CASE_STUDIES } from "@/content/caseStudies";
 import { highlight } from "@/lib/highlight";
-import CardVideo from "./CardVideo";
+import CardVideo, { holdCardVideos } from "./CardVideo";
 
 // Drawer motion (animate skill, drawer recipe): slides in from the right on
 // the iOS-like drawer curve, and leaves the way it came, faster.
 const EASE_DRAWER = [0.32, 0.72, 0, 1];
 const ENTER = { duration: 0.5, ease: EASE_DRAWER };
 const EXIT = { duration: 0.3, ease: EASE_DRAWER };
-// Animated through Motion's x value (not a transform string) so the panel
-// rests at transform: none. A leftover identity transform keeps the panel
-// on its own compositor layer, which renders text, bold weights especially,
-// soft and grey on many screens.
-const OFFSCREEN = "110%";
-const ONSCREEN = 0;
+// The side panel slides with a full transform string, which Motion runs as
+// a hardware-accelerated animation (its x/y shorthands run on the main
+// thread). Once it settles the transform is cleared: a leftover identity
+// transform keeps the panel on its own compositor layer, which renders
+// text, bold weights especially, soft and grey on many screens.
+const OFFSCREEN = "translateX(110%)";
+const ONSCREEN = "translateX(0%)";
 
 // Phones get a bottom sheet instead of the side peek (iOS sheet / Vaul
 // pattern): it rises from the bottom over a dimmed page and is dismissed by
@@ -58,15 +59,23 @@ function panelGeometry(expanded, viewportWidth) {
   return { top: inset, bottom: inset, right: inset, width };
 }
 
-function useViewportWidth() {
-  return useSyncExternalStore(
-    (onChange) => {
-      window.addEventListener("resize", onChange);
-      return () => window.removeEventListener("resize", onChange);
-    },
-    () => window.innerWidth,
-    () => 1440,
+// Width of the area fixed elements are laid out in. Measured from the
+// full-screen backdrop rather than window.innerWidth, which also counts
+// the reserved scrollbar gutter.
+function useFixedAreaWidth(ref) {
+  const [width, setWidth] = useState(() =>
+    typeof window === "undefined" ? 1440 : document.documentElement.clientWidth,
   );
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => setWidth(el.getBoundingClientRect().width);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+  return width;
 }
 
 function useMediaQuery(query) {
@@ -119,6 +128,12 @@ export function CaseStudyProvider({ media, children }) {
   }, []);
 
   const close = useCallback(() => setOpenName(null), []);
+
+  // The cards sit under the dimmed backdrop while a case study is open;
+  // pausing them frees the decoder for the drawer's own video.
+  useEffect(() => {
+    holdCardVideos(openName !== null);
+  }, [openName]);
 
   return (
     <CaseStudyContext.Provider value={{ open, has: (name) => !!CASE_STUDIES[name] }}>
@@ -424,7 +439,8 @@ function Block({ block }) {
 function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
   const reduce = useReducedMotion();
   const isSheet = useMediaQuery(SHEET_QUERY);
-  const viewportWidth = useViewportWidth();
+  const scrimRef = useRef(null);
+  const viewportWidth = useFixedAreaWidth(scrimRef);
   const geometry = isSheet ? {} : panelGeometry(expanded, viewportWidth);
   const dragControls = useDragControls();
   const panelRef = useRef(null);
@@ -495,8 +511,9 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
     };
   }, []);
 
-  const offscreen = isSheet ? { y: "100%" } : { x: OFFSCREEN };
-  const onscreen = isSheet ? { y: 0 } : { x: ONSCREEN };
+  // The sheet keeps Motion's y value: its drag gesture drives the same value.
+  const offscreen = isSheet ? { y: "100%" } : { transform: OFFSCREEN };
+  const onscreen = isSheet ? { y: 0 } : { transform: ONSCREEN };
   const hidden = reduce ? { opacity: 0 } : offscreen;
   const shown = reduce ? { opacity: 1 } : onscreen;
   const canDrag = isSheet && !reduce;
@@ -504,6 +521,7 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
   return (
     <>
       <motion.div
+        ref={scrimRef}
         className="fixed inset-0 z-40 bg-[var(--color-drawer-scrim)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: ENTER }}
@@ -525,7 +543,7 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
           ...geometry,
           transition: reduce
             ? { duration: 0 }
-            : { default: RESIZE, x: ENTER, y: ENTER, opacity: ENTER },
+            : { default: RESIZE, transform: ENTER, y: ENTER, opacity: ENTER },
         }}
         exit={{ ...hidden, transition: EXIT }}
         drag={canDrag ? "y" : false}
@@ -533,6 +551,14 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
         dragListener={false}
         dragConstraints={{ top: 0, bottom: 0 }}
         dragElastic={{ top: 0.04, bottom: 1 }}
+        onAnimationComplete={() => {
+          // A frame later, so Motion's final write has landed first.
+          requestAnimationFrame(() => {
+            if (!isSheet && !reduce && panelRef.current) {
+              panelRef.current.style.transform = "none";
+            }
+          });
+        }}
         onDragEnd={(_, info) => {
           if (info.offset.y > DISMISS_DISTANCE || info.velocity.y > DISMISS_VELOCITY) {
             onClose();
@@ -650,7 +676,12 @@ function Drawer({ study, media, onClose, expanded, onToggleExpanded }) {
             {media && (media.video || media.image) && (
               <div className="relative isolate aspect-[381/287] w-full max-w-[383px] overflow-hidden rounded-[9.5px] bg-[var(--color-card-bg)]">
                 {media.video ? (
-                  <CardVideo src={media.video} poster={media.image ?? undefined} label={study.title} />
+                  <CardVideo
+                    src={media.video}
+                    poster={media.image ?? undefined}
+                    label={study.title}
+                    standalone
+                  />
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element -- static image
                   <img
