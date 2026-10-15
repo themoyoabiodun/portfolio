@@ -451,7 +451,7 @@
   }
 
   .feature-pill:active,
-  .read-case-study:not(:disabled):active {
+  .read-case-study:active {
     transform: scale(0.97);
   }
 
@@ -466,12 +466,6 @@
     transition:
       background-color 150ms ease,
       transform 160ms var(--ease-out);
-  }
-
-  /* Shown as designed even before its case study exists; it stays
-     disabled, with a "coming soon" hint on hover. */
-  .read-case-study:disabled {
-    cursor: default;
   }
 
   /* Only the current feature's image shows, once decoded. Switching
@@ -527,14 +521,6 @@
     background-color: rgba(23, 23, 23, 0.18);
     opacity: 0;
     animation: flow-demo-ripple 450ms var(--ease-out);
-  }
-
-  .feature-caption {
-    animation: fade-in 200ms var(--ease-out) backwards;
-  }
-
-  .feature-caption[data-instant] {
-    animation: none;
   }
 
   /* Section rail (Figma 2240:84): 14px bars, the current one 22px. The
@@ -673,7 +659,7 @@
     color: var(--color-text-primary);
   }
 
-  .read-case-study:not(:disabled):hover {
+  .read-case-study:hover {
     background-color: #2e2e2e;
   }
 

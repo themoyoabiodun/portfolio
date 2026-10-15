@@ -2,29 +2,12 @@
 
 import { useCallback, useId, useState } from "react";
 import { SELECTED_WORKS } from "@/content/selectedWorks";
-import { useCaseStudy } from "./CaseStudyDrawer";
+import ReadCaseStudy from "./ReadCaseStudy";
 import FlowDemo from "./FlowDemo";
-
-function ReadCaseStudy({ caseStudy }) {
-  const ctx = useCaseStudy();
-  const available = caseStudy && ctx?.has(caseStudy);
-  return (
-    <button
-      type="button"
-      disabled={!available}
-      onClick={() => available && ctx.open(caseStudy)}
-      title={available ? undefined : "Case study coming soon"}
-      className="read-case-study inline-flex h-8 items-center rounded-[6px] bg-[var(--color-text-primary)] px-3 text-sm font-medium leading-[21px] text-white"
-    >
-      Read Case Study
-      {!available && <span className="sr-only"> (coming soon)</span>}
-    </button>
-  );
-}
 
 // Lazy images fade in once decoded instead of popping in mid-scroll. A
 // cached image may already be complete before React attaches onLoad.
-function ProjectImage({ src, alt, current }) {
+function ProjectImage({ src, alt, height = 482, current }) {
   const [loaded, setLoaded] = useState(false);
   const ref = useCallback((img) => {
     if (img?.complete && img.naturalWidth) setLoaded(true);
@@ -37,7 +20,7 @@ function ProjectImage({ src, alt, current }) {
       alt={current ? alt : ""}
       aria-hidden={current ? undefined : true}
       width={666}
-      height={482}
+      height={height}
       loading="lazy"
       decoding="async"
       onLoad={() => setLoaded(true)}
@@ -83,10 +66,9 @@ function Project({ project }) {
 
   return (
     <article className="flex flex-col gap-10">
-      {/* Figma 2241:1511: title, summary and pills 24px apart; summary
-          paragraphs 8px apart. */}
+      {/* Figma 2241:1511: title, summary and pills 24px apart. */}
       <div className="flex flex-col gap-6">
-        <h3 className="text-base font-semibold leading-[26px] text-[var(--color-text-primary)]">
+        <h3 className="text-xl font-semibold leading-[26px] text-[var(--color-text-primary)]">
           {project.title}
         </h3>
         {project.summary.length > 0 && (
@@ -94,7 +76,7 @@ function Project({ project }) {
             {project.summary.map((text) => (
               <p
                 key={text}
-                className="text-sm font-medium leading-6 text-[var(--color-text-primary)]"
+                className="text-sm leading-6 text-[var(--color-text-primary)]"
               >
                 {text}
               </p>
@@ -134,14 +116,19 @@ function Project({ project }) {
       {/* Each feature can have its own screenshot; switching tabs crossfades
           between them. All are stacked so the next one is already decoded. */}
       <figure
+        id={panelId}
+        role={hasTabs ? "tabpanel" : undefined}
+        aria-labelledby={hasTabs ? `${baseId}-tab-${active}` : undefined}
         data-instant={instant ? "" : undefined}
-        className="project-figure relative aspect-[666/482] w-full overflow-hidden rounded-[4px] bg-[var(--color-nav-active)]"
+        style={{ aspectRatio: `666 / ${currentImage.height ?? 482}` }}
+        className="project-figure relative w-full overflow-hidden rounded-[4px] bg-[var(--color-nav-active)]"
       >
         {images.map((image) => (
           <ProjectImage
             key={image.src}
             src={image.src}
             alt={image.alt}
+            height={image.height}
             current={image.src === currentImage.src}
           />
         ))}
@@ -158,27 +145,7 @@ function Project({ project }) {
         )}
       </figure>
 
-      <div
-        id={panelId}
-        role={hasTabs ? "tabpanel" : undefined}
-        aria-labelledby={hasTabs ? `${baseId}-tab-${active}` : undefined}
-        className="flex flex-col items-start gap-6"
-      >
-        {/* Keyed so a new feature's copy fades in rather than snapping. */}
-        <div
-          key={active}
-          data-instant={instant ? "" : undefined}
-          className="feature-caption flex flex-col gap-2"
-        >
-          {(feature.heading ?? feature.title) && (
-            <h4 className="text-base font-semibold leading-[26px] text-[var(--color-text-primary)]">
-              {feature.heading ?? feature.title}
-            </h4>
-          )}
-          <p className="text-sm font-medium leading-6 text-[var(--color-text-primary)]">
-            {feature.description ?? "Case study coming soon."}
-          </p>
-        </div>
+      <div>
         <ReadCaseStudy caseStudy={feature.caseStudy} />
       </div>
     </article>
@@ -195,7 +162,7 @@ export default function SelectedWorks() {
       <div className="flex items-center">
         <h2
           id="selected-works-heading"
-          className="text-[13px] font-medium leading-[19px] text-[var(--color-text-muted)]"
+          className="text-2xl leading-8 font-semibold text-[var(--color-text-muted)]"
         >
           Selected Work
         </h2>
