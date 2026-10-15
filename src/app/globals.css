@@ -451,7 +451,7 @@
   }
 
   .feature-pill:active,
-  .read-case-study:not(:disabled):active {
+  .read-case-study:active {
     transform: scale(0.97);
   }
 
@@ -466,12 +466,6 @@
     transition:
       background-color 150ms ease,
       transform 160ms var(--ease-out);
-  }
-
-  /* Shown as designed even before its case study exists; it stays
-     disabled, with a "coming soon" hint on hover. */
-  .read-case-study:disabled {
-    cursor: default;
   }
 
   /* Only the current feature's image shows, once decoded. Switching
@@ -665,7 +659,7 @@
     color: var(--color-text-primary);
   }
 
-  .read-case-study:not(:disabled):hover {
+  .read-case-study:hover {
     background-color: #2e2e2e;
   }
 

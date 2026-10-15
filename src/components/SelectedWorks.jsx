@@ -2,25 +2,8 @@
 
 import { useCallback, useId, useState } from "react";
 import { SELECTED_WORKS } from "@/content/selectedWorks";
-import { useCaseStudy } from "./CaseStudyDrawer";
+import ReadCaseStudy from "./ReadCaseStudy";
 import FlowDemo from "./FlowDemo";
-
-function ReadCaseStudy({ caseStudy }) {
-  const ctx = useCaseStudy();
-  const available = caseStudy && ctx?.has(caseStudy);
-  return (
-    <button
-      type="button"
-      disabled={!available}
-      onClick={() => available && ctx.open(caseStudy)}
-      title={available ? undefined : "Case study coming soon"}
-      className="read-case-study inline-flex h-8 items-center rounded-[6px] bg-[var(--color-text-primary)] px-3 text-sm font-medium leading-[21px] text-white"
-    >
-      Read Case Study
-      {!available && <span className="sr-only"> (coming soon)</span>}
-    </button>
-  );
-}
 
 // Lazy images fade in once decoded instead of popping in mid-scroll. A
 // cached image may already be complete before React attaches onLoad.
