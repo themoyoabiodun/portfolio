@@ -1,16 +1,20 @@
-// A light tap on touch devices. Android exposes the Vibration API; iOS Safari
-// (18+) has no API, but toggling a native switch input plays the system
-// haptic, so a hidden one is clicked instead. Must run inside a user gesture.
+// A light tap wherever the browser can produce one. The Vibration API covers
+// any browser that implements it (Chrome and Firefox on Android, and touch
+// devices running them); iOS Safari (18+) has no API, but toggling a native
+// switch input plays the system haptic, so a hidden one is clicked instead.
+// Desktop browsers have no way to drive trackpad haptics, so there it is a
+// no-op. Must run inside a user gesture.
 let iosSwitch = null;
 
 export function tapHaptic() {
   if (typeof window === "undefined") return;
-  if (!window.matchMedia("(pointer: coarse)").matches) return;
 
   if (typeof navigator.vibrate === "function") {
     navigator.vibrate(10);
     return;
   }
+  // Only touch screens have a haptic engine behind the switch.
+  if (!window.matchMedia("(pointer: coarse)").matches) return;
 
   if (!iosSwitch) {
     const input = document.createElement("input");
