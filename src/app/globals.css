@@ -529,14 +529,6 @@
     animation: flow-demo-ripple 450ms var(--ease-out);
   }
 
-  .feature-caption {
-    animation: fade-in 200ms var(--ease-out) backwards;
-  }
-
-  .feature-caption[data-instant] {
-    animation: none;
-  }
-
   /* Section rail (Figma 2240:84): 14px bars, the current one 22px. The
      length change is a scaleX from the right edge, not a width change, so
      it stays on the compositor. The button's ::before widens the hit area
