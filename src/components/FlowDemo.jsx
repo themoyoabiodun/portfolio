@@ -57,6 +57,8 @@ export default function FlowDemo({ demo, active }) {
   const rootRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
+  // Within a screen or so of the viewport: start fetching the screens.
+  const [near, setNear] = useState(false);
   const [screen, setScreen] = useState(0);
   const [fade, setFade] = useState(300);
   const [typed, setTyped] = useState("");
@@ -75,9 +77,10 @@ export default function FlowDemo({ demo, active }) {
     ([x, y]) => `translate(${x * 100}%, ${y * 100}%)`,
   );
 
-  // Decode every screen up front so crossfades never land on a blank frame.
+  // Decode every screen up front so crossfades never land on a blank frame,
+  // but only once the demo is close, so it costs nothing on first load.
   useEffect(() => {
-    if (!active || ready) return;
+    if (!active || !near || ready) return;
     let cancelled = false;
     Promise.all(
       demo.screens.map((src) => {
@@ -89,7 +92,7 @@ export default function FlowDemo({ demo, active }) {
     return () => {
       cancelled = true;
     };
-  }, [active, ready, demo]);
+  }, [active, near, ready, demo]);
 
   useEffect(() => {
     const node = rootRef.current;
@@ -99,7 +102,19 @@ export default function FlowDemo({ demo, active }) {
       { threshold: 0.35 },
     );
     observer.observe(node);
-    return () => observer.disconnect();
+    const nearby = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNear(true);
+        nearby.disconnect();
+      },
+      { rootMargin: "800px 0px" },
+    );
+    nearby.observe(node);
+    return () => {
+      observer.disconnect();
+      nearby.disconnect();
+    };
   }, []);
 
   const playing = active && ready && visible && !reduceMotion;
