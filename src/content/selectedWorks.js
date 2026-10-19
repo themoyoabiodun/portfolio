@@ -30,7 +30,6 @@ export const SELECTED_WORKS = [
       alt: "Anchor dashboard Accounts page with the Nigerian Naira account and requests for USD, MAD and GBP accounts",
     },
     features: [
-      { title: "Global Account Request" },
       {
         title: "Money Movement",
         image: {
@@ -40,6 +39,7 @@ export const SELECTED_WORKS = [
         // Plays over the image: a cursor walks through a transfer.
         demo: MONEY_MOVEMENT_DEMO,
       },
+      { title: "Global Account Request" },
       { title: "Timeline Management" },
       { title: "Cards Product" },
     ],
