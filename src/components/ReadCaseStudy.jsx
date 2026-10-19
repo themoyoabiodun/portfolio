@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { tapHaptic } from "@/lib/haptics";
 import { useCaseStudy } from "./CaseStudyDrawer";
 
-const MESSAGE = "...this case study is almost done, check back soon";
+const MESSAGE = "Check back soon";
 const MESSAGE_MS = 3200;
 // The button reshapes like a spring, but without bounce: it is text, and a
 // wobbling width reads as jitter.
@@ -25,8 +25,8 @@ function HandIcon() {
 }
 
 // "Read Case Study" opens the case study when one exists. Until then a press
-// answers instead of doing nothing: the button widens into a note that it
-// is almost done (Figma 2272:43030), then settles back.
+// answers instead of doing nothing: the button turns into a "check back
+// soon" note (Figma 2272:43030), then settles back.
 export default function ReadCaseStudy({ caseStudy }) {
   const ctx = useCaseStudy();
   const available = caseStudy && ctx?.has(caseStudy);
@@ -37,8 +37,8 @@ export default function ReadCaseStudy({ caseStudy }) {
   const contentRef = useRef(null);
   const [size, setSize] = useState(null);
 
-  // Track the label's size so the button can animate to it. On narrow
-  // screens the note wraps to two lines, so height follows too.
+  // Track the label's size so the button can animate to it. Height is
+  // tracked too, in case a note ever wraps on a narrow screen.
   useLayoutEffect(() => {
     const node = contentRef.current;
     if (!node) return;
