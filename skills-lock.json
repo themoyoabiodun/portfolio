@@ -55,6 +55,12 @@
       "skillPath": "skills/mobile-native/SKILL.md",
       "computedHash": "f221cea36642168df6d3d6d7f236237cbf1ae669138ff7df07775674223d49ad"
     },
+    "motion": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/motion/SKILL.md",
+      "computedHash": "2e2867f1538527831255aa53a27f43f7d632110fd83f31a52b7c4a9c7bb7882a"
+    },
     "pick-ui-library": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
