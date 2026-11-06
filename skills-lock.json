@@ -31,11 +31,23 @@
       "skillPath": "skills/ask-sonner/SKILL.md",
       "computedHash": "8bd257b845985f4b35b603b510a126604176521094af79c4b7347ffeb8a8f7ab"
     },
+    "blender-materials": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-materials/SKILL.md",
+      "computedHash": "e9329e2ebbe1f601fd176ac3139bbeeeee0062b1076780a41bf36d34e73e4b1b"
+    },
     "blender-modeling": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
       "skillPath": "library/cc/blender-modeling/SKILL.md",
       "computedHash": "6b9ac673e06de8d2ad9cb30e6132c4c3311ab84080bae2394edbc04e81449d51"
+    },
+    "blender-pro-workflow": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-pro-workflow/SKILL.md",
+      "computedHash": "9d21f8cf18b53a37ae4759a394d36d4bbd18ce5603c05c826bf936a51dd66b11"
     },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
