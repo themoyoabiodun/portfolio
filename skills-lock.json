@@ -85,6 +85,12 @@
       "skillPath": "library/cc/blender-skill-harmonizer/SKILL.md",
       "computedHash": "7e2d88a80e4e574c6abdae15804c2aacdd817512b4e94d7ae007b713a0a210c8"
     },
+    "blender-uv-texturing": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-uv-texturing/SKILL.md",
+      "computedHash": "d0007c2970d35dd46f4bca589622677161af71564ca962a06a69797cbc1c11f9"
+    },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
@@ -127,11 +133,29 @@
       "skillPath": "skills/prototype/SKILL.md",
       "computedHash": "77be567d8c946608fdd15e61b62ab383cdf289a194dce2479828b7eda860d3ba"
     },
+    "reference-to-3d": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/reference-to-3d/SKILL.md",
+      "computedHash": "83334685aeccd1ac5331bd89f6de5dfc57c5ca6897b07bafaf9affb1d62b1e35"
+    },
     "review-animations": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
       "skillPath": "skills/review-animations/SKILL.md",
       "computedHash": "b4e5f0f4fe3e2743c85bf7354108f48a0b9d502cb20ef5c4a9c195da91f93736"
+    },
+    "text-to-blender": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/text-to-blender/SKILL.md",
+      "computedHash": "26722318bb2900daf542e60b44374fbac9b101ce09a34b77c7d3f405985590d0"
+    },
+    "wireframe-to-3d": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/wireframe-to-3d/SKILL.md",
+      "computedHash": "e84f00f70022a701769ccb9af3de9896275549c257ed3dc77a985533089e062d"
     },
     "write-swift": {
       "source": "emilkowalski/skills",
