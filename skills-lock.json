@@ -133,6 +133,12 @@
       "skillPath": "skills/prototype/SKILL.md",
       "computedHash": "77be567d8c946608fdd15e61b62ab383cdf289a194dce2479828b7eda860d3ba"
     },
+    "quality-refinement-autoloop": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/quality-refinement-autoloop/SKILL.md",
+      "computedHash": "7294ed881ecde0c2b2a5b954f0901d29f1f2206d47628169d9698698ee76b68b"
+    },
     "reference-to-3d": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
