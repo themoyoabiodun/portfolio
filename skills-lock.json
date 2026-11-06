@@ -31,6 +31,12 @@
       "skillPath": "skills/ask-sonner/SKILL.md",
       "computedHash": "8bd257b845985f4b35b603b510a126604176521094af79c4b7347ffeb8a8f7ab"
     },
+    "blender-modeling": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-modeling/SKILL.md",
+      "computedHash": "6b9ac673e06de8d2ad9cb30e6132c4c3311ab84080bae2394edbc04e81449d51"
+    },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
