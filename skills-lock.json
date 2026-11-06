@@ -31,6 +31,30 @@
       "skillPath": "skills/ask-sonner/SKILL.md",
       "computedHash": "8bd257b845985f4b35b603b510a126604176521094af79c4b7347ffeb8a8f7ab"
     },
+    "blender-animation": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-animation/SKILL.md",
+      "computedHash": "1b452a5ce15951b737011418a941f81407468ef53d055dcc44b440aed4cbc7fd"
+    },
+    "blender-cameras": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-cameras/SKILL.md",
+      "computedHash": "89f776d715a7a066ae812a0fbc9adabecfa2c57487654ac02f1a7eee77101d24"
+    },
+    "blender-export": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-export/SKILL.md",
+      "computedHash": "9a87939f1b27b8aba584869f28deaf4cebf21ff1bdf70c1e846b5b5ee706ffe5"
+    },
+    "blender-lighting": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-lighting/SKILL.md",
+      "computedHash": "12283e0e5999d9e47e9352e8c48c67558bf2a698e561af1bd9832e4d83aaa249"
+    },
     "blender-materials": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
@@ -48,6 +72,18 @@
       "sourceType": "github",
       "skillPath": "library/cc/blender-pro-workflow/SKILL.md",
       "computedHash": "9d21f8cf18b53a37ae4759a394d36d4bbd18ce5603c05c826bf936a51dd66b11"
+    },
+    "blender-rendering": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-rendering/SKILL.md",
+      "computedHash": "22aaa929af47f9e9e10afbb55f8fa9514a7fd7b4802f2ba116ba5fdcef5f2e33"
+    },
+    "blender-skill-harmonizer": {
+      "source": "MAX-786/claude-3d-harness",
+      "sourceType": "github",
+      "skillPath": "library/cc/blender-skill-harmonizer/SKILL.md",
+      "computedHash": "7e2d88a80e4e574c6abdae15804c2aacdd817512b4e94d7ae007b713a0a210c8"
     },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
