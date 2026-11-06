@@ -73,6 +73,12 @@
       "skillPath": "library/cc/blender-pro-workflow/SKILL.md",
       "computedHash": "9d21f8cf18b53a37ae4759a394d36d4bbd18ce5603c05c826bf936a51dd66b11"
     },
+    "blender-product-polish": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "product-polish/SKILL.md",
+      "computedHash": "29682e70c838e9e8fa896b6f97fbdc5a5b90a2ed9d03f02c604a23b576307b6d"
+    },
     "blender-rendering": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
@@ -85,11 +91,41 @@
       "skillPath": "library/cc/blender-skill-harmonizer/SKILL.md",
       "computedHash": "7e2d88a80e4e574c6abdae15804c2aacdd817512b4e94d7ae007b713a0a210c8"
     },
+    "blender-threejs-export": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "threejs-export/SKILL.md",
+      "computedHash": "8be4b7e790ed1de98961471b7722437ef2eda24b4e9230b2e759eb314f252eb6"
+    },
+    "blender-toolkit": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "blender-toolkit/SKILL.md",
+      "computedHash": "6d0c9751cc87db02eec46dcdade66ea1486b40eaa61732e2fcb3cabbe00d5c20"
+    },
     "blender-uv-texturing": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
       "skillPath": "library/cc/blender-uv-texturing/SKILL.md",
       "computedHash": "d0007c2970d35dd46f4bca589622677161af71564ca962a06a69797cbc1c11f9"
+    },
+    "crane-shot": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "crane-shot/SKILL.md",
+      "computedHash": "c8d99672979097560e090f831789e5966cc7c252517815701f06b2cfdfb00bc3"
+    },
+    "dolly-rotate": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "dolly-rotate/SKILL.md",
+      "computedHash": "cee1d796c4d32044b3d51aa672bc67528718f284d125bee55a419b54a79c8814"
+    },
+    "dynamic-full-loop": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "dynamic-full-loop/SKILL.md",
+      "computedHash": "3d0cc9bdd89e5d22ce4abf5d58d30e133905f2c68a2ae2b26ed6c9b8e4ba6966"
     },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
@@ -102,6 +138,12 @@
       "sourceType": "github",
       "skillPath": "skills/find-animation-opportunities/SKILL.md",
       "computedHash": "465d087c41768e4f14ed640dd049036009f613feb55baaa5831b68b33178f9d2"
+    },
+    "image-to-3d": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "image-to-3d/SKILL.md",
+      "computedHash": "056bce5762512d07d4d7192c6fa3813c0379f72510598a657f5726241f50cb75"
     },
     "improve-animations": {
       "source": "emilkowalski/skills",
@@ -121,11 +163,53 @@
       "skillPath": "skills/motion/SKILL.md",
       "computedHash": "2e2867f1538527831255aa53a27f43f7d632110fd83f31a52b7c4a9c7bb7882a"
     },
+    "multi-image-to-3d": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "multi-image-to-3d/SKILL.md",
+      "computedHash": "9aee7fc0662280ead0b229332672203e7dd7d1bf493cfafaf3504b9c9b25553b"
+    },
+    "perfect-loop": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "perfect-loop/SKILL.md",
+      "computedHash": "01a4cb73d4f1b1246602cd28f1baffa31b1c03d4e03e5d8b06ed189eb550d943"
+    },
     "pick-ui-library": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
       "skillPath": "skills/pick-ui-library/SKILL.md",
       "computedHash": "5d2a77bf0ecafbda85aa95fb49999b6d77945d9066ec83d970b62e5b388cd686"
+    },
+    "polyhaven-hdri-showcase": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "polyhaven-hdri-showcase/SKILL.md",
+      "computedHash": "0526a745c37aee80aca06306ed0e639ff307f54d649939288da01bf7f29d3a4c"
+    },
+    "polyhaven-material-swap": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "polyhaven-material-swap/SKILL.md",
+      "computedHash": "7ea3f185216440a81e3528ee2e57875a786e69f11881523dd54058be87fad513"
+    },
+    "polyhaven-scene-builder": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "polyhaven-scene-builder/SKILL.md",
+      "computedHash": "c2fecb861e602edfe9e9c84621de9b5899bc071cc6d4eb4f0f9904c2d8556269"
+    },
+    "polyhaven-studio-setup": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "polyhaven-studio-setup/SKILL.md",
+      "computedHash": "38a70b1b99287e6230c015a6d48f0f0a06644dc62d6ea4cea54c5fdce5697aa2"
+    },
+    "polyhaven-texture-apply": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "polyhaven-texture-apply/SKILL.md",
+      "computedHash": "ac6151e8c6b4a757e474ff577d2c197fa806a9797d704daf87595bd932d1b816"
     },
     "prototype": {
       "source": "emilkowalski/skills",
@@ -151,11 +235,23 @@
       "skillPath": "skills/review-animations/SKILL.md",
       "computedHash": "b4e5f0f4fe3e2743c85bf7354108f48a0b9d502cb20ef5c4a9c195da91f93736"
     },
+    "slow-zoom": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "slow-zoom/SKILL.md",
+      "computedHash": "180e1b9c754b0627ed30f65c63b594d5724ee2363efb028f31ee8a7f5770d2ba"
+    },
     "text-to-blender": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
       "skillPath": "library/cc/text-to-blender/SKILL.md",
       "computedHash": "26722318bb2900daf542e60b44374fbac9b101ce09a34b77c7d3f405985590d0"
+    },
+    "turntable": {
+      "source": "kevinbadi/blender-skills",
+      "sourceType": "github",
+      "skillPath": "turntable/SKILL.md",
+      "computedHash": "460028d6a6deab6af100c1ddd73c2b1ba8058305c54e62f58068d4f58756e613"
     },
     "wireframe-to-3d": {
       "source": "MAX-786/claude-3d-harness",
