@@ -97,12 +97,6 @@
       "skillPath": "threejs-export/SKILL.md",
       "computedHash": "8be4b7e790ed1de98961471b7722437ef2eda24b4e9230b2e759eb314f252eb6"
     },
-    "blender-toolkit": {
-      "source": "kevinbadi/blender-skills",
-      "sourceType": "github",
-      "skillPath": "blender-toolkit/SKILL.md",
-      "computedHash": "6d0c9751cc87db02eec46dcdade66ea1486b40eaa61732e2fcb3cabbe00d5c20"
-    },
     "blender-uv-texturing": {
       "source": "MAX-786/claude-3d-harness",
       "sourceType": "github",
