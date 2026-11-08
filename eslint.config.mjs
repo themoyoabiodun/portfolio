@@ -3,5 +3,6 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 
 export default defineConfig([
   ...nextVitals,
-  globalIgnores([".next/**", "node_modules/**"]),
+  // Standalone Toolcraft apps carry their own lint and verification.
+  globalIgnores([".next/**", "node_modules/**", "tools/**"]),
 ]);
