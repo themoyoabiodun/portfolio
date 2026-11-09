@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logo/mtn">
+<mask id="mask0_0_696" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+<circle id="Ellipse 608" cx="20" cy="20" r="20" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_696)">
+<circle id="Ellipse 609" cx="20" cy="20" r="19.7917" fill="#FFC325" stroke-width="0.416667" stroke="#F2F2F2"/>
+<path id="Vector" d="M6.20044 20.6006C6.20044 28.5532 12.6477 35 20.6003 35C28.5529 35 35.0002 28.5532 35.0002 20.6006C35.0002 12.648 28.5529 6.20115 20.6003 6.20115C12.6477 6.20115 6.20044 12.648 6.20044 20.6006Z" fill="#FFC325"/>
+<path id="Vector_2" d="M6.63826 20.5994C6.63826 17.5915 12.8893 15.153 20.6003 15.153C28.3112 15.153 34.5622 17.5921 34.5622 20.5996C34.5622 23.6072 28.3115 26.0451 20.6003 26.0451C12.889 26.0451 6.63826 23.6069 6.63826 20.5994Z" fill="#006891"/>
+<path id="Vector_3" d="M6.63826 20.5994C6.63826 17.5915 12.8893 15.153 20.6003 15.153C28.3112 15.153 34.5622 17.5921 34.5622 20.5996C34.5622 23.6072 28.3115 26.0451 20.6003 26.0451C12.889 26.0451 6.63826 23.6069 6.63826 20.5994Z" stroke-width="0.041292" stroke-miterlimit="3.8636" stroke="#006891"/>
+<path id="Vector_4" d="M11.755 23.2479L13.2041 17.8385H15.4914V21.02H15.5064L17.058 17.8385H19.3814L17.9323 23.2479H16.4221L17.351 19.7781H17.336L15.4914 23.2479H14.2821V19.7781H14.2574L13.3284 23.2479H11.755Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/>
+<path id="Vector_5" d="M19.7903 23.3537L19.996 22.5849H21.6629L21.4569 23.3537H19.7903Z" fill-rule="evenodd" clip-rule="evenodd" fill="#EE4034"/>
+<path id="Vector_6" d="M20.0537 22.3701L20.8968 19.225H19.3816L19.7533 17.8385H24.4503L24.0789 19.225H22.5637L21.7208 22.3692L20.0537 22.3701Z" fill-rule="evenodd" clip-rule="evenodd" fill="#FFC325"/>
+<path id="Vector_7" d="M23.3733 23.2479L24.8215 17.8385H26.4584L27.1969 20.7329H27.2113L27.9865 17.8385H29.4997L28.0512 23.2479H26.4939L25.692 20.2935H25.6776L24.8864 23.2479H23.3733Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/>
+</g>
+</g>
+</svg>
