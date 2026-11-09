@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { SELECTED_WORKS } from "@/content/selectedWorks";
 import ReadCaseStudy from "./ReadCaseStudy";
 import FlowDemo from "./FlowDemo";
@@ -28,6 +28,60 @@ function ProjectImage({ src, alt, height = 482, current }) {
       data-current={current ? "" : undefined}
       className="project-image absolute inset-0 h-full w-full object-cover"
     />
+  );
+}
+
+// Screen recordings: muted and looping, playing only while on screen.
+// Reduced-motion users get a paused first frame with controls instead.
+function ProjectVideo({ src, sources = [], poster, alt, height = 482, current }) {
+  const [loaded, setLoaded] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (video.readyState >= 2) setLoaded(true);
+    // Fade in as soon as the poster can show, not when the video arrives.
+    if (poster) {
+      const img = new Image();
+      img.onload = () => setLoaded(true);
+      img.src = poster;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.controls = true;
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && current) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [current, poster]);
+  return (
+    <video
+      ref={ref}
+      poster={poster}
+      aria-label={current ? alt : undefined}
+      aria-hidden={current ? undefined : true}
+      width={666}
+      height={height}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      onLoadedData={() => setLoaded(true)}
+      data-loaded={loaded ? "" : undefined}
+      data-current={current ? "" : undefined}
+      className="project-image absolute inset-0 h-full w-full object-cover"
+    >
+      {sources.map((source) => (
+        <source key={source.src} src={source.src} type={source.type} />
+      ))}
+      <source src={src} type="video/mp4" />
+    </video>
   );
 }
 
@@ -123,15 +177,20 @@ function Project({ project }) {
         style={{ aspectRatio: `666 / ${currentImage.height ?? 482}` }}
         className="project-figure relative w-full overflow-hidden rounded-[4px] bg-[var(--color-nav-active)]"
       >
-        {images.map((image) => (
-          <ProjectImage
+        {images.map((image) => {
+          const Media = image.video ? ProjectVideo : ProjectImage;
+          return (
+          <Media
             key={image.src}
             src={image.src}
+            sources={image.sources}
+            poster={image.poster}
             alt={image.alt}
             height={image.height}
             current={image.src === currentImage.src}
           />
-        ))}
+          );
+        })}
         {project.features.map(
           (item, i) =>
             item.demo &&
