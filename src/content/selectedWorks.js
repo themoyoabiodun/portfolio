@@ -12,10 +12,21 @@ export const SELECTED_WORKS = [
     summary: [
       "Designed an end-to-end money movement platform for businesses and financial institutions operating across emerging markets. Built a unified dashboard that simplifies payment operations, account management, transaction tracking, and ledger reconciliation across local fiat and stablecoin rails, helping customers manage their financial operations with greater visibility, control, and confidence.",
     ],
+    // A `video` plays in place of the image: muted, looping, only on screen.
+    // `src` is the H.264 fallback; `sources` are tried first (AV1 is ~25%
+    // smaller at the same quality). `poster` shows until playback starts.
     image: {
-      src: "/asset/selected/novem.webp",
-      alt: "Novem dashboard home with balances, approvals, balance history, reconciliation and cashflow",
-      height: 488,
+      src: "/asset/selected/novem-table.mp4",
+      video: true,
+      sources: [
+        {
+          src: "/asset/selected/novem-table-av1.mp4",
+          type: 'video/mp4; codecs="av01.0.08M.08"',
+        },
+      ],
+      poster: "/asset/selected/novem-table-poster.jpg",
+      alt: "Screen recording of the Novem dashboard table",
+      height: 427,
     },
     features: [{}],
   },
