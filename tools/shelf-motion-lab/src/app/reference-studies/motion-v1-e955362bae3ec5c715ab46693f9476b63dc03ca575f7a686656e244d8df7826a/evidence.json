@@ -1,0 +1,1469 @@
+{
+  "changeMetric": "max-yuva-diff-v1",
+  "contactSheet": {
+    "columns": 11,
+    "height": 4200,
+    "path": "src/app/reference-studies/motion-v1-e955362bae3ec5c715ab46693f9476b63dc03ca575f7a686656e244d8df7826a/contact-sheet.png",
+    "rows": 10,
+    "sha256": "6825ac52036ed17edd1ec6859bdea9c961efb111fbd3ba6793c3b553ccf0b6d2",
+    "width": 5280
+  },
+  "decodedFrameCount": 323,
+  "detectedEvents": [
+    {
+      "afterFrameId": "source-frame:168",
+      "beforeFrameId": "source-frame:166",
+      "eventId": "motion-event:change:166-167-168",
+      "kind": "change",
+      "peakFrameId": "source-frame:167",
+      "score": 0.0846121568627451,
+      "windowFrameIds": [
+        "source-frame:166",
+        "source-frame:167",
+        "source-frame:168"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:183",
+      "beforeFrameId": "source-frame:181",
+      "eventId": "motion-event:change:181-182-183",
+      "kind": "change",
+      "peakFrameId": "source-frame:182",
+      "score": 0.08347294117647058,
+      "windowFrameIds": [
+        "source-frame:181",
+        "source-frame:182",
+        "source-frame:183"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:186",
+      "beforeFrameId": "source-frame:184",
+      "eventId": "motion-event:change:184-185-186",
+      "kind": "change",
+      "peakFrameId": "source-frame:185",
+      "score": 0.08665764705882353,
+      "windowFrameIds": [
+        "source-frame:184",
+        "source-frame:185",
+        "source-frame:186"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:188",
+      "beforeFrameId": "source-frame:186",
+      "eventId": "motion-event:change:186-187-188",
+      "kind": "change",
+      "peakFrameId": "source-frame:187",
+      "score": 0.08628470588235294,
+      "windowFrameIds": [
+        "source-frame:186",
+        "source-frame:187",
+        "source-frame:188"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:201",
+      "beforeFrameId": "source-frame:199",
+      "eventId": "motion-event:change:199-200-201",
+      "kind": "change",
+      "peakFrameId": "source-frame:200",
+      "score": 0.057819607843137256,
+      "windowFrameIds": [
+        "source-frame:199",
+        "source-frame:200",
+        "source-frame:201"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:203",
+      "beforeFrameId": "source-frame:201",
+      "eventId": "motion-event:change:201-202-203",
+      "kind": "change",
+      "peakFrameId": "source-frame:202",
+      "score": 0.06427921568627451,
+      "windowFrameIds": [
+        "source-frame:201",
+        "source-frame:202",
+        "source-frame:203"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:215",
+      "beforeFrameId": "source-frame:213",
+      "eventId": "motion-event:change:213-214-215",
+      "kind": "change",
+      "peakFrameId": "source-frame:214",
+      "score": 0.0556121568627451,
+      "windowFrameIds": [
+        "source-frame:213",
+        "source-frame:214",
+        "source-frame:215"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:218",
+      "beforeFrameId": "source-frame:216",
+      "eventId": "motion-event:change:216-217-218",
+      "kind": "change",
+      "peakFrameId": "source-frame:217",
+      "score": 0.05129764705882353,
+      "windowFrameIds": [
+        "source-frame:216",
+        "source-frame:217",
+        "source-frame:218"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:228",
+      "beforeFrameId": "source-frame:226",
+      "eventId": "motion-event:change:226-227-228",
+      "kind": "change",
+      "peakFrameId": "source-frame:227",
+      "score": 0.09349372549019608,
+      "windowFrameIds": [
+        "source-frame:226",
+        "source-frame:227",
+        "source-frame:228"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:248",
+      "beforeFrameId": "source-frame:246",
+      "eventId": "motion-event:change:246-247-248",
+      "kind": "change",
+      "peakFrameId": "source-frame:247",
+      "score": 0.07347529411764706,
+      "windowFrameIds": [
+        "source-frame:246",
+        "source-frame:247",
+        "source-frame:248"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:252",
+      "beforeFrameId": "source-frame:250",
+      "eventId": "motion-event:change:250-251-252",
+      "kind": "change",
+      "peakFrameId": "source-frame:251",
+      "score": 0.06213176470588235,
+      "windowFrameIds": [
+        "source-frame:250",
+        "source-frame:251",
+        "source-frame:252"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:263",
+      "beforeFrameId": "source-frame:261",
+      "eventId": "motion-event:change:261-262-263",
+      "kind": "change",
+      "peakFrameId": "source-frame:262",
+      "score": 0.08373333333333334,
+      "windowFrameIds": [
+        "source-frame:261",
+        "source-frame:262",
+        "source-frame:263"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:268",
+      "beforeFrameId": "source-frame:266",
+      "eventId": "motion-event:change:266-267-268",
+      "kind": "change",
+      "peakFrameId": "source-frame:267",
+      "score": 0.09578823529411765,
+      "windowFrameIds": [
+        "source-frame:266",
+        "source-frame:267",
+        "source-frame:268"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:280",
+      "beforeFrameId": "source-frame:278",
+      "eventId": "motion-event:change:278-279-280",
+      "kind": "change",
+      "peakFrameId": "source-frame:279",
+      "score": 0.07199176470588235,
+      "windowFrameIds": [
+        "source-frame:278",
+        "source-frame:279",
+        "source-frame:280"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:285",
+      "beforeFrameId": "source-frame:283",
+      "eventId": "motion-event:change:283-284-285",
+      "kind": "change",
+      "peakFrameId": "source-frame:284",
+      "score": 0.08003960784313725,
+      "windowFrameIds": [
+        "source-frame:283",
+        "source-frame:284",
+        "source-frame:285"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:303",
+      "beforeFrameId": "source-frame:301",
+      "eventId": "motion-event:change:301-302-303",
+      "kind": "change",
+      "peakFrameId": "source-frame:302",
+      "score": 0.0631878431372549,
+      "windowFrameIds": [
+        "source-frame:301",
+        "source-frame:302",
+        "source-frame:303"
+      ]
+    }
+  ],
+  "durationSeconds": 12.92,
+  "evidenceVersion": 1,
+  "ffmpegVersion": "ffmpeg 6.1.1-3ubuntu5",
+  "ffprobeVersion": "ffprobe 6.1.1-3ubuntu5",
+  "focusWindows": [],
+  "height": 630,
+  "maximumSourceFrameGapSeconds": 0.040000000000000924,
+  "nominalFrameRate": 25,
+  "overviewFrameIds": [
+    "source-frame:165",
+    "source-frame:167",
+    "source-frame:169",
+    "source-frame:171",
+    "source-frame:173",
+    "source-frame:175",
+    "source-frame:177",
+    "source-frame:179",
+    "source-frame:181",
+    "source-frame:183",
+    "source-frame:185",
+    "source-frame:187",
+    "source-frame:190",
+    "source-frame:192",
+    "source-frame:194",
+    "source-frame:196",
+    "source-frame:198",
+    "source-frame:200",
+    "source-frame:202",
+    "source-frame:204",
+    "source-frame:206",
+    "source-frame:208",
+    "source-frame:210",
+    "source-frame:212",
+    "source-frame:215",
+    "source-frame:217",
+    "source-frame:219",
+    "source-frame:221",
+    "source-frame:223",
+    "source-frame:225",
+    "source-frame:227",
+    "source-frame:229",
+    "source-frame:231",
+    "source-frame:233",
+    "source-frame:235",
+    "source-frame:237",
+    "source-frame:240",
+    "source-frame:242",
+    "source-frame:244",
+    "source-frame:246",
+    "source-frame:248",
+    "source-frame:250",
+    "source-frame:252",
+    "source-frame:254",
+    "source-frame:256",
+    "source-frame:258",
+    "source-frame:260",
+    "source-frame:262",
+    "source-frame:265",
+    "source-frame:267",
+    "source-frame:269",
+    "source-frame:271",
+    "source-frame:273",
+    "source-frame:275",
+    "source-frame:277",
+    "source-frame:279",
+    "source-frame:281",
+    "source-frame:283",
+    "source-frame:285",
+    "source-frame:287",
+    "source-frame:290",
+    "source-frame:292",
+    "source-frame:294",
+    "source-frame:296",
+    "source-frame:298",
+    "source-frame:300",
+    "source-frame:302",
+    "source-frame:304",
+    "source-frame:306",
+    "source-frame:308",
+    "source-frame:310",
+    "source-frame:312",
+    "source-frame:315",
+    "source-frame:317",
+    "source-frame:319",
+    "source-frame:321",
+    "source-frame:322"
+  ],
+  "overviewTargetFps": 12,
+  "reviewPartition": {
+    "count": 2,
+    "groupId": "motion-group-v1-161a12500f4bfa83b5ae7793505912e3683ac37e9d9cb3dda6b0f0401c2f1ef1",
+    "index": 1,
+    "planSha256": "12c120baba88921d3397e77f5e900a4fe266c9121ad1ce096b60b0bea32a11c9",
+    "scope": {
+      "endSeconds": 12.92,
+      "startSeconds": 0
+    }
+  },
+  "reviewedFrames": [
+    {
+      "cell": {
+        "column": 0,
+        "row": 0
+      },
+      "frameId": "source-frame:165",
+      "sourceFrameIndex": 165,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=165",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.6
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 0
+      },
+      "frameId": "source-frame:166",
+      "sourceFrameIndex": 166,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=166",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.64
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 0
+      },
+      "frameId": "source-frame:167",
+      "sourceFrameIndex": 167,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=167",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.68
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 0
+      },
+      "frameId": "source-frame:168",
+      "sourceFrameIndex": 168,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=168",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.72
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 0
+      },
+      "frameId": "source-frame:169",
+      "sourceFrameIndex": 169,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=169",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.76
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 0
+      },
+      "frameId": "source-frame:171",
+      "sourceFrameIndex": 171,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=171",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.84
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 0
+      },
+      "frameId": "source-frame:173",
+      "sourceFrameIndex": 173,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=173",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 6.92
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 0
+      },
+      "frameId": "source-frame:175",
+      "sourceFrameIndex": 175,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=175",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 0
+      },
+      "frameId": "source-frame:177",
+      "sourceFrameIndex": 177,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=177",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.08
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 0
+      },
+      "frameId": "source-frame:179",
+      "sourceFrameIndex": 179,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=179",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.16
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 0
+      },
+      "frameId": "source-frame:181",
+      "sourceFrameIndex": 181,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=181",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.24
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 1
+      },
+      "frameId": "source-frame:182",
+      "sourceFrameIndex": 182,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=182",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.28
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 1
+      },
+      "frameId": "source-frame:183",
+      "sourceFrameIndex": 183,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=183",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.32
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 1
+      },
+      "frameId": "source-frame:184",
+      "sourceFrameIndex": 184,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=184",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.36
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 1
+      },
+      "frameId": "source-frame:185",
+      "sourceFrameIndex": 185,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=185",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.4
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 1
+      },
+      "frameId": "source-frame:186",
+      "sourceFrameIndex": 186,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=186",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.44
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 1
+      },
+      "frameId": "source-frame:187",
+      "sourceFrameIndex": 187,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=187",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.48
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 1
+      },
+      "frameId": "source-frame:188",
+      "sourceFrameIndex": 188,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=188",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.52
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 1
+      },
+      "frameId": "source-frame:190",
+      "sourceFrameIndex": 190,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=190",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.6
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 1
+      },
+      "frameId": "source-frame:192",
+      "sourceFrameIndex": 192,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=192",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.68
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 1
+      },
+      "frameId": "source-frame:194",
+      "sourceFrameIndex": 194,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=194",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.76
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 1
+      },
+      "frameId": "source-frame:196",
+      "sourceFrameIndex": 196,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=196",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.84
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 2
+      },
+      "frameId": "source-frame:198",
+      "sourceFrameIndex": 198,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=198",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.92
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 2
+      },
+      "frameId": "source-frame:199",
+      "sourceFrameIndex": 199,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=199",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 7.96
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 2
+      },
+      "frameId": "source-frame:200",
+      "sourceFrameIndex": 200,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=200",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 2
+      },
+      "frameId": "source-frame:201",
+      "sourceFrameIndex": 201,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=201",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.04
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 2
+      },
+      "frameId": "source-frame:202",
+      "sourceFrameIndex": 202,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=202",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.08
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 2
+      },
+      "frameId": "source-frame:203",
+      "sourceFrameIndex": 203,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=203",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.12
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 2
+      },
+      "frameId": "source-frame:204",
+      "sourceFrameIndex": 204,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=204",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.16
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 2
+      },
+      "frameId": "source-frame:206",
+      "sourceFrameIndex": 206,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=206",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.24
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 2
+      },
+      "frameId": "source-frame:208",
+      "sourceFrameIndex": 208,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=208",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.32
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 2
+      },
+      "frameId": "source-frame:210",
+      "sourceFrameIndex": 210,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=210",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.4
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 2
+      },
+      "frameId": "source-frame:212",
+      "sourceFrameIndex": 212,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=212",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.48
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 3
+      },
+      "frameId": "source-frame:213",
+      "sourceFrameIndex": 213,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=213",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.52
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 3
+      },
+      "frameId": "source-frame:214",
+      "sourceFrameIndex": 214,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=214",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.56
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 3
+      },
+      "frameId": "source-frame:215",
+      "sourceFrameIndex": 215,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=215",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.6
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 3
+      },
+      "frameId": "source-frame:216",
+      "sourceFrameIndex": 216,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=216",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.64
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 3
+      },
+      "frameId": "source-frame:217",
+      "sourceFrameIndex": 217,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=217",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.68
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 3
+      },
+      "frameId": "source-frame:218",
+      "sourceFrameIndex": 218,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=218",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.72
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 3
+      },
+      "frameId": "source-frame:219",
+      "sourceFrameIndex": 219,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=219",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.76
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 3
+      },
+      "frameId": "source-frame:221",
+      "sourceFrameIndex": 221,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=221",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.84
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 3
+      },
+      "frameId": "source-frame:223",
+      "sourceFrameIndex": 223,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=223",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 8.92
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 3
+      },
+      "frameId": "source-frame:225",
+      "sourceFrameIndex": 225,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=225",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 3
+      },
+      "frameId": "source-frame:226",
+      "sourceFrameIndex": 226,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=226",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.04
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 4
+      },
+      "frameId": "source-frame:227",
+      "sourceFrameIndex": 227,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=227",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.08
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 4
+      },
+      "frameId": "source-frame:228",
+      "sourceFrameIndex": 228,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=228",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.12
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 4
+      },
+      "frameId": "source-frame:229",
+      "sourceFrameIndex": 229,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=229",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.16
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 4
+      },
+      "frameId": "source-frame:231",
+      "sourceFrameIndex": 231,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=231",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.24
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 4
+      },
+      "frameId": "source-frame:233",
+      "sourceFrameIndex": 233,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=233",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.32
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 4
+      },
+      "frameId": "source-frame:235",
+      "sourceFrameIndex": 235,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=235",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.4
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 4
+      },
+      "frameId": "source-frame:237",
+      "sourceFrameIndex": 237,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=237",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.48
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 4
+      },
+      "frameId": "source-frame:240",
+      "sourceFrameIndex": 240,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=240",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.6
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 4
+      },
+      "frameId": "source-frame:242",
+      "sourceFrameIndex": 242,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=242",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.68
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 4
+      },
+      "frameId": "source-frame:244",
+      "sourceFrameIndex": 244,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=244",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.76
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 4
+      },
+      "frameId": "source-frame:246",
+      "sourceFrameIndex": 246,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=246",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.84
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 5
+      },
+      "frameId": "source-frame:247",
+      "sourceFrameIndex": 247,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=247",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.88
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 5
+      },
+      "frameId": "source-frame:248",
+      "sourceFrameIndex": 248,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=248",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 9.92
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 5
+      },
+      "frameId": "source-frame:250",
+      "sourceFrameIndex": 250,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=250",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 5
+      },
+      "frameId": "source-frame:251",
+      "sourceFrameIndex": 251,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=251",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.04
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 5
+      },
+      "frameId": "source-frame:252",
+      "sourceFrameIndex": 252,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=252",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.08
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 5
+      },
+      "frameId": "source-frame:254",
+      "sourceFrameIndex": 254,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=254",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.16
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 5
+      },
+      "frameId": "source-frame:256",
+      "sourceFrameIndex": 256,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=256",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.24
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 5
+      },
+      "frameId": "source-frame:258",
+      "sourceFrameIndex": 258,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=258",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.32
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 5
+      },
+      "frameId": "source-frame:260",
+      "sourceFrameIndex": 260,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=260",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.4
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 5
+      },
+      "frameId": "source-frame:261",
+      "sourceFrameIndex": 261,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=261",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.44
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 5
+      },
+      "frameId": "source-frame:262",
+      "sourceFrameIndex": 262,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=262",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.48
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 6
+      },
+      "frameId": "source-frame:263",
+      "sourceFrameIndex": 263,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=263",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.52
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 6
+      },
+      "frameId": "source-frame:265",
+      "sourceFrameIndex": 265,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=265",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.6
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 6
+      },
+      "frameId": "source-frame:266",
+      "sourceFrameIndex": 266,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=266",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.64
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 6
+      },
+      "frameId": "source-frame:267",
+      "sourceFrameIndex": 267,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=267",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.68
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 6
+      },
+      "frameId": "source-frame:268",
+      "sourceFrameIndex": 268,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=268",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.72
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 6
+      },
+      "frameId": "source-frame:269",
+      "sourceFrameIndex": 269,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=269",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.76
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 6
+      },
+      "frameId": "source-frame:271",
+      "sourceFrameIndex": 271,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=271",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.84
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 6
+      },
+      "frameId": "source-frame:273",
+      "sourceFrameIndex": 273,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=273",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 10.92
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 6
+      },
+      "frameId": "source-frame:275",
+      "sourceFrameIndex": 275,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=275",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 6
+      },
+      "frameId": "source-frame:277",
+      "sourceFrameIndex": 277,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=277",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.08
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 6
+      },
+      "frameId": "source-frame:278",
+      "sourceFrameIndex": 278,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=278",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.12
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 7
+      },
+      "frameId": "source-frame:279",
+      "sourceFrameIndex": 279,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=279",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.16
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 7
+      },
+      "frameId": "source-frame:280",
+      "sourceFrameIndex": 280,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=280",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.2
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 7
+      },
+      "frameId": "source-frame:281",
+      "sourceFrameIndex": 281,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=281",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.24
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 7
+      },
+      "frameId": "source-frame:283",
+      "sourceFrameIndex": 283,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=283",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.32
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 7
+      },
+      "frameId": "source-frame:284",
+      "sourceFrameIndex": 284,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=284",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.36
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 7
+      },
+      "frameId": "source-frame:285",
+      "sourceFrameIndex": 285,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=285",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.4
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 7
+      },
+      "frameId": "source-frame:287",
+      "sourceFrameIndex": 287,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=287",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.48
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 7
+      },
+      "frameId": "source-frame:290",
+      "sourceFrameIndex": 290,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=290",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.6
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 7
+      },
+      "frameId": "source-frame:292",
+      "sourceFrameIndex": 292,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=292",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.68
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 7
+      },
+      "frameId": "source-frame:294",
+      "sourceFrameIndex": 294,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=294",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.76
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 7
+      },
+      "frameId": "source-frame:296",
+      "sourceFrameIndex": 296,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=296",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.84
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 8
+      },
+      "frameId": "source-frame:298",
+      "sourceFrameIndex": 298,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=298",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 11.92
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 8
+      },
+      "frameId": "source-frame:300",
+      "sourceFrameIndex": 300,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=300",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 8
+      },
+      "frameId": "source-frame:301",
+      "sourceFrameIndex": 301,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=301",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.04
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 8
+      },
+      "frameId": "source-frame:302",
+      "sourceFrameIndex": 302,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=302",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.08
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 8
+      },
+      "frameId": "source-frame:303",
+      "sourceFrameIndex": 303,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=303",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.12
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 8
+      },
+      "frameId": "source-frame:304",
+      "sourceFrameIndex": 304,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=304",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.16
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 8
+      },
+      "frameId": "source-frame:306",
+      "sourceFrameIndex": 306,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=306",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.24
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 8
+      },
+      "frameId": "source-frame:308",
+      "sourceFrameIndex": 308,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=308",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.32
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 8
+      },
+      "frameId": "source-frame:310",
+      "sourceFrameIndex": 310,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=310",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.4
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 8
+      },
+      "frameId": "source-frame:312",
+      "sourceFrameIndex": 312,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=312",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.48
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 8
+      },
+      "frameId": "source-frame:315",
+      "sourceFrameIndex": 315,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=315",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.6
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 9
+      },
+      "frameId": "source-frame:317",
+      "sourceFrameIndex": 317,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=317",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.68
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 9
+      },
+      "frameId": "source-frame:319",
+      "sourceFrameIndex": 319,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=319",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.76
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 9
+      },
+      "frameId": "source-frame:321",
+      "sourceFrameIndex": 321,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=321",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.84
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 9
+      },
+      "frameId": "source-frame:322",
+      "sourceFrameIndex": 322,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032783522101-favorite-books-carousel.mp4#frame=322",
+      "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+      "timeSeconds": 12.88
+    }
+  ],
+  "scannedFrameCount": 323,
+  "segment": {
+    "endSeconds": 12.92,
+    "startSeconds": 6.54
+  },
+  "sourceBasename": "pin-737183032783522101-favorite-books-carousel.mp4",
+  "sourceKind": "video",
+  "sourceSha256": "26951ec34c9ee56c9cd05bafc4194145de18eaa67e11243287882d16c0f78d90",
+  "studyId": "motion-v1-e955362bae3ec5c715ab46693f9476b63dc03ca575f7a686656e244d8df7826a",
+  "timing": {
+    "authority": "decoded-timestamps"
+  },
+  "timingMode": "seconds",
+  "width": 720
+}

@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
 
 import { evaluateShelfSequence, getShelfInsertIndex } from "./motion-sequence";
+import { CAROUSEL_BOOKS, DETAIL_COVER, GRID_BOOKS } from "./phone-data";
+import { evaluateCarousel, evaluateOpenBook } from "./phone-sequence";
+import {
+  CAROUSEL_DEFAULTS,
+  OPEN_BOOK_DEFAULTS,
+  OPEN_BOOK_TARGETS,
+  SCENE_MODE_TARGET,
+} from "./phone-values";
+import { evaluateSceneFrame } from "./scene-frame";
 import { shelfControlSections } from "./motion-schema-sections";
 import {
   readShelfMotionConfig,
@@ -29,19 +38,40 @@ function withValue(target: string, value: unknown): ShelfMotionConfig {
   return readShelfMotionConfig({ [target]: value });
 }
 
-type Slider = Readonly<{ max: number; min: number; target: string; type: string }>;
+type Slider = Readonly<{
+  applicability: Readonly<{ all?: readonly Readonly<{ equals?: unknown; target: string }>[] }>;
+  max: number;
+  min: number;
+  target: string;
+  type: string;
+}>;
 const sliders = shelfControlSections.flatMap((section) =>
   Object.values(section.controls as Record<string, Slider>).filter(
     (control) => control.type === "slider",
   ),
 );
 
+function modeOf(control: Slider): string {
+  const predicate = control.applicability.all?.find((entry) => entry.target === SCENE_MODE_TARGET);
+  return String(predicate?.equals ?? "shelf");
+}
+
+/** The active mode's whole loop sampled densely, as a signature. */
+function sceneSignature(values: Record<string, unknown>, loop = LOOP): string {
+  const frames = [];
+  for (let time = 0; time <= loop + 1e-9; time += loop / 160) {
+    frames.push(evaluateSceneFrame(values, time, loop));
+  }
+  return JSON.stringify(frames);
+}
+
 describe("shelf acceptance", () => {
   for (const control of sliders) {
     it(`shelf slider ${control.target} is read by the sequence`, () => {
-      const base = signature(SHELF_MOTION_DEFAULTS);
-      const low = signature(withValue(control.target, control.min));
-      const high = signature(withValue(control.target, control.max));
+      const mode = { [SCENE_MODE_TARGET]: modeOf(control) };
+      const base = sceneSignature(mode);
+      const low = sceneSignature({ ...mode, [control.target]: control.min });
+      const high = sceneSignature({ ...mode, [control.target]: control.max });
       expect(low === base && high === base).toBe(false);
     });
   }
@@ -68,7 +98,7 @@ describe("shelf acceptance", () => {
   });
 
   it("camera orbit gizmo rotates the shelf view", () => {
-    const view = shelfControlSections[0].controls.view as unknown as Readonly<{ type: string; keyframeable: boolean }>;
+    const view = shelfControlSections[1].controls.view as unknown as Readonly<{ type: string; keyframeable: boolean }>;
     expect(view.type).toBe("orientationGizmo");
     expect(view.keyframeable).toBe(false);
   });
@@ -140,11 +170,66 @@ describe("shelf acceptance", () => {
   });
 
   it("keeps the gizmo default in sync with the renderer camera default", () => {
-    const view = shelfControlSections[0].controls.view as unknown as Readonly<{ defaultValue: unknown }>;
+    const view = shelfControlSections[1].controls.view as unknown as Readonly<{ defaultValue: unknown }>;
     expect(view.defaultValue).toEqual({
       position: [...SHELF_VIEW_DEFAULT.position],
       up: [...SHELF_VIEW_DEFAULT.up],
     });
+  });
+
+  it("scene mode switches between the shelf and phone animations", () => {
+    expect(evaluateSceneFrame({ [SCENE_MODE_TARGET]: "shelf" }, 1, LOOP).mode).toBe("shelf");
+    expect(evaluateSceneFrame({ [SCENE_MODE_TARGET]: "carousel" }, 1, LOOP).mode).toBe("carousel");
+    expect(evaluateSceneFrame({ [SCENE_MODE_TARGET]: "open" }, 1, LOOP).mode).toBe("open");
+  });
+
+  it("open book source switches between grid and carousel", () => {
+    const grid = evaluateOpenBook(OPEN_BOOK_DEFAULTS, CAROUSEL_DEFAULTS, 0, LOOP);
+    const carousel = evaluateOpenBook({ ...OPEN_BOOK_DEFAULTS, source: "carousel" }, CAROUSEL_DEFAULTS, 0, LOOP);
+    expect(grid.layout).toBe("grid");
+    expect(carousel.layout).toBe("carousel");
+    expect(grid.books.length).toBe(GRID_BOOKS.length);
+    expect(carousel.books.length).toBe(CAROUSEL_BOOKS.length);
+  });
+
+  it("tapped book chooses which grid cover opens", () => {
+    const titles = GRID_BOOKS.map((_, book) => {
+      const frame = evaluateSceneFrame({ [SCENE_MODE_TARGET]: "open", [OPEN_BOOK_TARGETS.book]: String(book) }, 2.6, LOOP);
+      return frame.mode === "open" ? frame.phone.detail?.book.title : undefined;
+    });
+    expect(new Set(titles).size).toBe(GRID_BOOKS.length);
+  });
+
+  it("open book lands on the Figma detail cover and returns home", () => {
+    const detail = evaluateOpenBook(OPEN_BOOK_DEFAULTS, CAROUSEL_DEFAULTS, 2.6, LOOP);
+    const tapped = detail.books.at(-1);
+    expect(tapped?.width).toBeCloseTo(DETAIL_COVER.width, 0);
+    expect(tapped?.height).toBeCloseTo(DETAIL_COVER.height, 0);
+    expect(detail.flood.radius).toBeGreaterThan(600);
+    const first = evaluateOpenBook(OPEN_BOOK_DEFAULTS, CAROUSEL_DEFAULTS, 0, LOOP);
+    const last = evaluateOpenBook(OPEN_BOOK_DEFAULTS, CAROUSEL_DEFAULTS, LOOP - 1e-6, LOOP);
+    expect(last.flood.radius).toBeCloseTo(first.flood.radius, 3);
+    last.books.forEach((book, index) => {
+      const start = first.books.find((candidate) => candidate.key === book.key);
+      expect(start, `book ${index}`).toBeDefined();
+      expect(book.x).toBeCloseTo(start!.x, 1);
+      expect(book.y).toBeCloseTo(start!.y, 1);
+      expect(book.opacity).toBeCloseTo(start!.opacity, 2);
+    });
+  });
+
+  it("carousel loop ends where it starts", () => {
+    const first = evaluateCarousel(CAROUSEL_DEFAULTS, 0, LOOP);
+    const last = evaluateCarousel(CAROUSEL_DEFAULTS, LOOP - 1e-6, LOOP);
+    // Books parked offscreen at slot ±2 are equivalent; compare visible ones.
+    first.books.forEach((book, index) => {
+      if (Math.abs(book.x - 195) > 280) return;
+      expect(last.books[index].x).toBeCloseTo(book.x, 0);
+      expect(last.books[index].width).toBeCloseTo(book.width, 0);
+    });
+    // Design state: blue centred at 208 × 301 with neighbours at 142 wide.
+    expect(first.books[1].width).toBeCloseTo(208, 0);
+    expect(first.books[0].width).toBeCloseTo(142, 0);
   });
 
   it("compresses a long sequence to fit a short loop", () => {

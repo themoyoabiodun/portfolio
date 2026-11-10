@@ -4,6 +4,7 @@ import {
 } from "@/toolcraft/runtime";
 
 import { SHELF_MOTION_TARGETS, SHELF_VIEW_TARGET } from "./motion-values";
+import { CAROUSEL_TARGETS, OPEN_BOOK_TARGETS, SCENE_MODE_TARGET } from "./phone-values";
 import type { ShelfRenderer } from "./shelf-scene";
 
 type ShelfPasses = {
@@ -38,10 +39,25 @@ export const SHELF_DRAG_TARGETS = [
   t.settleBounce,
   t.nudge,
   t.shelfBounce,
+  ...Object.values(CAROUSEL_TARGETS),
+  OPEN_BOOK_TARGETS.arc,
+  OPEN_BOOK_TARGETS.backTime,
+  OPEN_BOOK_TARGETS.floodTime,
+  OPEN_BOOK_TARGETS.lift,
+  OPEN_BOOK_TARGETS.part,
+  OPEN_BOOK_TARGETS.press,
+  OPEN_BOOK_TARGETS.rise,
+  OPEN_BOOK_TARGETS.spineTurn,
+  OPEN_BOOK_TARGETS.stagger,
+  OPEN_BOOK_TARGETS.travelBounce,
+  OPEN_BOOK_TARGETS.travelTime,
   SHELF_VIEW_TARGET,
 ] as const;
 
 export const SHELF_CHANGE_TARGETS = [
+  SCENE_MODE_TARGET,
+  OPEN_BOOK_TARGETS.source,
+  OPEN_BOOK_TARGETS.book,
   t.insert,
   t.glow,
   t.glowColor,

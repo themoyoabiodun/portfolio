@@ -1,0 +1,598 @@
+{
+  "changeMetric": "max-yuva-diff-v1",
+  "contactSheet": {
+    "columns": 5,
+    "height": 5824,
+    "path": "src/app/reference-studies/motion-v1-4754fa7092909877a45d4cc11b24177ea27204cc8fde8c81316bf5cbeaecbb7a/contact-sheet.png",
+    "rows": 8,
+    "sha256": "8af67e6c2f9d328b56594fd7e7f8d14a12b38b767c4ab13a219fe9bdd1fac7eb",
+    "width": 1680
+  },
+  "decodedFrameCount": 222,
+  "detectedEvents": [
+    {
+      "afterFrameId": "source-frame:174",
+      "beforeFrameId": "source-frame:172",
+      "eventId": "motion-event:change:172-173-174",
+      "kind": "change",
+      "peakFrameId": "source-frame:173",
+      "score": 0.0013758235294117648,
+      "windowFrameIds": [
+        "source-frame:172",
+        "source-frame:173",
+        "source-frame:174"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:180",
+      "beforeFrameId": "source-frame:178",
+      "eventId": "motion-event:change:178-179-180",
+      "kind": "change",
+      "peakFrameId": "source-frame:179",
+      "score": 0.03055109803921569,
+      "windowFrameIds": [
+        "source-frame:178",
+        "source-frame:179",
+        "source-frame:180"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:184",
+      "beforeFrameId": "source-frame:182",
+      "eventId": "motion-event:change:182-183-184",
+      "kind": "change",
+      "peakFrameId": "source-frame:183",
+      "score": 0.021239254901960783,
+      "windowFrameIds": [
+        "source-frame:182",
+        "source-frame:183",
+        "source-frame:184"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:187",
+      "beforeFrameId": "source-frame:185",
+      "eventId": "motion-event:change:185-186-187",
+      "kind": "change",
+      "peakFrameId": "source-frame:186",
+      "score": 0.018139019607843136,
+      "windowFrameIds": [
+        "source-frame:185",
+        "source-frame:186",
+        "source-frame:187"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:189",
+      "beforeFrameId": "source-frame:187",
+      "eventId": "motion-event:change:187-188-189",
+      "kind": "change",
+      "peakFrameId": "source-frame:188",
+      "score": 0.011931254901960783,
+      "windowFrameIds": [
+        "source-frame:187",
+        "source-frame:188",
+        "source-frame:189"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:192",
+      "beforeFrameId": "source-frame:190",
+      "eventId": "motion-event:change:190-191-192",
+      "kind": "change",
+      "peakFrameId": "source-frame:191",
+      "score": 0.010923254901960784,
+      "windowFrameIds": [
+        "source-frame:190",
+        "source-frame:191",
+        "source-frame:192"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:215",
+      "beforeFrameId": "source-frame:213",
+      "eventId": "motion-event:change:213-214-215",
+      "kind": "change",
+      "peakFrameId": "source-frame:214",
+      "score": 0.00020376745098039215,
+      "windowFrameIds": [
+        "source-frame:213",
+        "source-frame:214",
+        "source-frame:215"
+      ]
+    }
+  ],
+  "durationSeconds": 8.88,
+  "evidenceVersion": 1,
+  "ffmpegVersion": "ffmpeg 6.1.1-3ubuntu5",
+  "ffprobeVersion": "ffprobe 6.1.1-3ubuntu5",
+  "focusWindows": [],
+  "height": 728,
+  "maximumSourceFrameGapSeconds": 0.040000000000000924,
+  "nominalFrameRate": 25,
+  "overviewFrameIds": [
+    "source-frame:165",
+    "source-frame:167",
+    "source-frame:169",
+    "source-frame:171",
+    "source-frame:173",
+    "source-frame:175",
+    "source-frame:177",
+    "source-frame:179",
+    "source-frame:181",
+    "source-frame:183",
+    "source-frame:185",
+    "source-frame:187",
+    "source-frame:190",
+    "source-frame:192",
+    "source-frame:194",
+    "source-frame:196",
+    "source-frame:198",
+    "source-frame:200",
+    "source-frame:202",
+    "source-frame:204",
+    "source-frame:206",
+    "source-frame:208",
+    "source-frame:210",
+    "source-frame:212",
+    "source-frame:215",
+    "source-frame:217",
+    "source-frame:219"
+  ],
+  "overviewTargetFps": 12,
+  "reviewPartition": {
+    "count": 2,
+    "groupId": "motion-group-v1-e18603735da5edb1ff3bbecb3ce7ed59a581793b51b71f5f513cfba209c3de6d",
+    "index": 1,
+    "planSha256": "42b3b83520c4f17c2e6523a1a426cfb8a68fb9696d36b1283a5170a0395676ae",
+    "scope": {
+      "endSeconds": 8.88,
+      "startSeconds": 0
+    }
+  },
+  "reviewedFrames": [
+    {
+      "cell": {
+        "column": 0,
+        "row": 0
+      },
+      "frameId": "source-frame:165",
+      "sourceFrameIndex": 165,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=165",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.6
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 0
+      },
+      "frameId": "source-frame:167",
+      "sourceFrameIndex": 167,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=167",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.68
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 0
+      },
+      "frameId": "source-frame:169",
+      "sourceFrameIndex": 169,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=169",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.76
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 0
+      },
+      "frameId": "source-frame:171",
+      "sourceFrameIndex": 171,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=171",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.84
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 0
+      },
+      "frameId": "source-frame:172",
+      "sourceFrameIndex": 172,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=172",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.88
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 1
+      },
+      "frameId": "source-frame:173",
+      "sourceFrameIndex": 173,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=173",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.92
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 1
+      },
+      "frameId": "source-frame:174",
+      "sourceFrameIndex": 174,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=174",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 6.96
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 1
+      },
+      "frameId": "source-frame:175",
+      "sourceFrameIndex": 175,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=175",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 1
+      },
+      "frameId": "source-frame:177",
+      "sourceFrameIndex": 177,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=177",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.08
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 1
+      },
+      "frameId": "source-frame:178",
+      "sourceFrameIndex": 178,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=178",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.12
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 2
+      },
+      "frameId": "source-frame:179",
+      "sourceFrameIndex": 179,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=179",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.16
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 2
+      },
+      "frameId": "source-frame:180",
+      "sourceFrameIndex": 180,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=180",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.2
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 2
+      },
+      "frameId": "source-frame:181",
+      "sourceFrameIndex": 181,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=181",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.24
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 2
+      },
+      "frameId": "source-frame:182",
+      "sourceFrameIndex": 182,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=182",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.28
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 2
+      },
+      "frameId": "source-frame:183",
+      "sourceFrameIndex": 183,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=183",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.32
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 3
+      },
+      "frameId": "source-frame:184",
+      "sourceFrameIndex": 184,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=184",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.36
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 3
+      },
+      "frameId": "source-frame:185",
+      "sourceFrameIndex": 185,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=185",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.4
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 3
+      },
+      "frameId": "source-frame:186",
+      "sourceFrameIndex": 186,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=186",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.44
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 3
+      },
+      "frameId": "source-frame:187",
+      "sourceFrameIndex": 187,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=187",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.48
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 3
+      },
+      "frameId": "source-frame:188",
+      "sourceFrameIndex": 188,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=188",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.52
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 4
+      },
+      "frameId": "source-frame:189",
+      "sourceFrameIndex": 189,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=189",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.56
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 4
+      },
+      "frameId": "source-frame:190",
+      "sourceFrameIndex": 190,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=190",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.6
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 4
+      },
+      "frameId": "source-frame:191",
+      "sourceFrameIndex": 191,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=191",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.64
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 4
+      },
+      "frameId": "source-frame:192",
+      "sourceFrameIndex": 192,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=192",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.68
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 4
+      },
+      "frameId": "source-frame:194",
+      "sourceFrameIndex": 194,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=194",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.76
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 5
+      },
+      "frameId": "source-frame:196",
+      "sourceFrameIndex": 196,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=196",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.84
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 5
+      },
+      "frameId": "source-frame:198",
+      "sourceFrameIndex": 198,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=198",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 7.92
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 5
+      },
+      "frameId": "source-frame:200",
+      "sourceFrameIndex": 200,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=200",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 5
+      },
+      "frameId": "source-frame:202",
+      "sourceFrameIndex": 202,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=202",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.08
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 5
+      },
+      "frameId": "source-frame:204",
+      "sourceFrameIndex": 204,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=204",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.16
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 6
+      },
+      "frameId": "source-frame:206",
+      "sourceFrameIndex": 206,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=206",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.24
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 6
+      },
+      "frameId": "source-frame:208",
+      "sourceFrameIndex": 208,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=208",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.32
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 6
+      },
+      "frameId": "source-frame:210",
+      "sourceFrameIndex": 210,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=210",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.4
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 6
+      },
+      "frameId": "source-frame:212",
+      "sourceFrameIndex": 212,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=212",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.48
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 6
+      },
+      "frameId": "source-frame:213",
+      "sourceFrameIndex": 213,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=213",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.52
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 7
+      },
+      "frameId": "source-frame:214",
+      "sourceFrameIndex": 214,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=214",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.56
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 7
+      },
+      "frameId": "source-frame:215",
+      "sourceFrameIndex": 215,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=215",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.6
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 7
+      },
+      "frameId": "source-frame:217",
+      "sourceFrameIndex": 217,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=217",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.68
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 7
+      },
+      "frameId": "source-frame:219",
+      "sourceFrameIndex": 219,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-826129125437093996-journal-app.mp4#frame=219",
+      "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+      "timeSeconds": 8.76
+    }
+  ],
+  "scannedFrameCount": 222,
+  "segment": {
+    "endSeconds": 8.88,
+    "startSeconds": 6.54
+  },
+  "sourceBasename": "pin-826129125437093996-journal-app.mp4",
+  "sourceKind": "video",
+  "sourceSha256": "2ec2a06c312a8e57e72b8585e301d12e6fbfb01d081eb423de423d8d07ecbc65",
+  "studyId": "motion-v1-4754fa7092909877a45d4cc11b24177ea27204cc8fde8c81316bf5cbeaecbb7a",
+  "timing": {
+    "authority": "decoded-timestamps"
+  },
+  "timingMode": "seconds",
+  "width": 336
+}

@@ -6,9 +6,8 @@ import {
 } from "@/toolcraft/runtime";
 import { readToolcraftOrientationPose } from "@/toolcraft/runtime/react";
 
-import { evaluateShelfSequence } from "./motion-sequence";
+import { evaluateSceneFrame } from "./scene-frame";
 import {
-  readShelfMotionConfig,
   SHELF_VIEW_DEFAULT,
   SHELF_VIEW_TARGET,
 } from "./motion-values";
@@ -28,19 +27,25 @@ export const shelfExportRenderer: ToolcraftProductExportRenderer = {
   async renderFrame({ context, frame, pixelRatio, rendererPipeline, signal, state, timeSeconds }) {
     signal.throwIfAborted();
     const values = evaluateToolcraftTimelineValues(state, timeSeconds);
-    const config = readShelfMotionConfig(values);
     const pose = readToolcraftOrientationPose(values[SHELF_VIEW_TARGET], SHELF_VIEW_DEFAULT);
     const duration = state.timeline.durationSeconds;
     const loopTime = getToolcraftTimelineLoopTime({ currentTimeSeconds: timeSeconds, durationSeconds: duration });
-    const sequence = evaluateShelfSequence(config, loopTime, duration);
+    const sequence = evaluateSceneFrame(values, loopTime, duration);
     const width = Math.max(1, Math.round(frame.width * pixelRatio));
     const height = Math.max(1, Math.round(frame.height * pixelRatio));
 
-    const draw = () => {
+    const draw = async () => {
       const scene = createShelfRenderer();
       try {
         scene.resize(width, height);
-        scene.apply(sequence, config.glowColor, pose, frame.width / frame.height);
+        const aspect = frame.width / frame.height;
+        if (sequence.mode === "shelf") {
+          scene.apply(sequence.shelf, sequence.glowColor, pose, aspect);
+        } else {
+          await scene.whenReady();
+          signal.throwIfAborted();
+          scene.applyPhone(sequence.phone, { defaultPosition: SHELF_VIEW_DEFAULT.position, position: pose.position }, aspect);
+        }
         signal.throwIfAborted();
         scene.present(context, frame.x, frame.y, frame.width, frame.height);
       } finally {
@@ -48,6 +53,6 @@ export const shelfExportRenderer: ToolcraftProductExportRenderer = {
       }
     };
     if (rendererPipeline) await rendererPipeline.runPass(exportRenderPass, undefined, draw);
-    else draw();
+    else await draw();
   },
 };

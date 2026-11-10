@@ -82,7 +82,7 @@ export const SHELF_VIEW_DEFAULT = Object.freeze({
 
 export const SHELF_BACKGROUND_TARGET = "appearance.background";
 export const SHELF_BACKGROUND_DEFAULT = "#F2EEE7";
-export const SHELF_DEFAULT_LOOP_SECONDS = 3.2;
+export const SHELF_DEFAULT_LOOP_SECONDS = 4.8;
 
 function readNumber(value: unknown, fallback: number): number {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;

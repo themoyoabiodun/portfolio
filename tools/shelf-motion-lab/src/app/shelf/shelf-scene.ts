@@ -8,6 +8,8 @@ type Any = any;
 const THREE: Any = ThreeModule;
 
 import { HERO_BOOK, SHELF_BOOKS, type ShelfBook } from "./shelf-books";
+import type { PhoneFrame } from "./phone-sequence";
+import { type PhoneCameraPose, PhoneStage } from "./phone-scene";
 import {
   SHELF_FRONT_Z,
   SHELF_TOP_Y,
@@ -185,6 +187,10 @@ function glowTexture(): PixelData {
 /** The only surface product code sees: plain methods, no DOM or Three types. */
 export interface ShelfRenderer {
   apply(frame: ShelfSequenceFrame, glowColor: string, camera: ShelfCameraPose, aspect: number): void;
+  /** Poses the phone screens (carousel and open-book modes). */
+  applyPhone(frame: PhoneFrame, camera: PhoneCameraPose, aspect: number): void;
+  /** Resolves once phone artwork (Figma icons) is loaded. */
+  whenReady(): Promise<void>;
   dispose(): void;
   hits(ndcX: number, ndcY: number): boolean;
   /** Renders, then copies the frame into a 2D destination rectangle. */
@@ -209,6 +215,8 @@ type BookMesh = Readonly<{
 }>;
 
 class ShelfScene implements ShelfRenderer {
+  private active: "phone" | "shelf" = "shelf";
+  private phone: PhoneStage | null = null;
   private readonly camera = new THREE.PerspectiveCamera(26, 16 / 9, 0.1, 100);
   private readonly renderer: Any;
   private readonly scene = new THREE.Scene();
@@ -227,6 +235,7 @@ class ShelfScene implements ShelfRenderer {
       alpha: true,
       antialias: true,
       preserveDrawingBuffer: true,
+      stencil: true,
     });
     this.renderer.setClearColor(0x000000, 0);
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -399,6 +408,21 @@ class ShelfScene implements ShelfRenderer {
     this.camera.up.set(camera.up[0], camera.up[1], camera.up[2]);
     this.camera.lookAt(CAMERA_TARGET);
     this.camera.updateProjectionMatrix();
+    this.active = "shelf";
+  }
+
+  private phoneStage(): PhoneStage {
+    this.phone ??= new PhoneStage();
+    return this.phone;
+  }
+
+  applyPhone(frame: PhoneFrame, camera: PhoneCameraPose, aspect: number): void {
+    this.phoneStage().apply(frame, camera, aspect);
+    this.active = "phone";
+  }
+
+  whenReady(): Promise<void> {
+    return this.phoneStage().ready;
   }
 
   private size = { height: 0, width: 0 };
@@ -418,7 +442,16 @@ class ShelfScene implements ShelfRenderer {
     width: number,
     height: number,
   ): void {
-    this.renderer.render(this.scene, this.camera);
+    if (this.active === "phone" && this.phone) {
+      // Flat Figma colours must not be tone-mapped.
+      this.renderer.toneMapping = THREE.NoToneMapping;
+      this.renderer.shadowMap.enabled = false;
+      this.renderer.render(this.phone.scene, this.phone.camera);
+    } else {
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.render(this.scene, this.camera);
+    }
     destination.drawImage(this.renderer.domElement, x, y, width, height);
   }
 
@@ -431,6 +464,7 @@ class ShelfScene implements ShelfRenderer {
   }
 
   dispose(): void {
+    this.phone?.dispose();
     for (const resource of this.owned) resource.dispose();
     this.owned.length = 0;
     this.renderer.dispose();

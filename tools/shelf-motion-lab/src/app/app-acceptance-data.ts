@@ -11,6 +11,9 @@ import {
   SHELF_VIEW_TARGET,
 } from "./shelf/motion-values";
 
+import { appReferenceInputs, getReferenceCoverage } from "./reference-inputs";
+import { OPEN_BOOK_TARGETS, SCENE_MODE_TARGET } from "./shelf/phone-values";
+
 export { appControlSectionInventory } from "./app-control-inventory";
 
 const persistenceSlices =
@@ -24,14 +27,14 @@ export const appTransferMode: ToolcraftTransferMode = {
   animationIntent: {
     loopDuration: {
       evidence:
-        "The default sequence (entry, pick-up, flight, drop, settle and reset) totals 3.2 seconds at its default timings.",
+        "4.8 seconds fits the shelf add with a confirmation hold, four 1.2-second carousel swipes, and the open-book round trip with a detail hold.",
       seconds: SHELF_DEFAULT_LOOP_SECONDS,
       source: "product-derived",
     },
     mode: "timeline-playback",
   },
   mode: "new-toolcraft-app",
-  referenceInputs: [],
+  referenceInputs: appReferenceInputs,
 };
 
 export const appProductReadiness: ToolcraftProductReadiness = {
@@ -93,9 +96,9 @@ export const appProductReadiness: ToolcraftProductReadiness = {
   mode: "product",
   productName: "Shelf Motion Lab",
   productSummary:
-    "A 3D shelf scene that plays the add-to-shelf animation of a book on a looping timeline.",
+    "A 3D motion lab for a reading app: the add-to-shelf animation, the home carousel swipe and the open-book transition to the detail page, each on a looping timeline.",
   requestedBehavior:
-    "Control how a book animates when it is added to a shelf, with a confirming feel and a 3D presentation: tune pick-up, flight, landing and confirmation, scrub the timeline, orbit the camera and export a frame.",
+    "Control how a book animates when it is added to a shelf, when the home carousel slides between books, and when a tapped book transitions to its detail page (from the Book Stack Figma screens), leaning towards 3D: tune every beat, scrub the timeline, orbit the camera and export a frame.",
   viewInteraction: {
     mode: "orbit",
     orientationTargets: [SHELF_VIEW_TARGET],
@@ -124,6 +127,9 @@ const sliderRows: ToolcraftComponentAcceptance[] = shelfControlSections.flatMap(
         fixture: "paused timeline at the phase the slider shapes",
         id: `shelf.${control.target}`,
         kind: "control",
+        ...(getReferenceCoverage(`shelf.${control.target}`).length > 0
+          ? { motionReferenceCoverage: getReferenceCoverage(`shelf.${control.target}`) }
+          : {}),
         target: control.target,
         userAction: `Pause the timeline, scrub to the affected phase and drag ${label}.`,
       };
@@ -151,6 +157,60 @@ export const appAcceptance: readonly ToolcraftComponentAcceptance[] = [
     userAction: "Change Canvas width and a motion slider, move Controls, then reload.",
   },
   ...sliderRows,
+  {
+    automated: true,
+    automatedTestName: "scene mode switches between the shelf and phone animations",
+    browser: {
+      budget: "standard",
+      file: SPEC,
+      testName: "browser acceptance: Animation switches the scene",
+    },
+    componentType: "segmented",
+    evidence: "rendered-pixels",
+    expectedObservable: "Shelf, Carousel and Open book render the shelf, the home carousel and the library grid, each with only its own controls.",
+    fixture: "paused timeline at loop start",
+    id: "scene.mode",
+    kind: "control",
+    optionCoverage: ["shelf", "carousel", "open"],
+    target: SCENE_MODE_TARGET,
+    userAction: "Select Shelf, Carousel and Open book.",
+  },
+  {
+    automated: true,
+    automatedTestName: "open book source switches between grid and carousel",
+    browser: {
+      budget: "standard",
+      file: SPEC,
+      testName: "browser acceptance: Open from switches the starting layout",
+    },
+    componentType: "segmented",
+    evidence: "rendered-pixels",
+    expectedObservable: "Grid opens a cover from the library grid; Carousel opens the centred home carousel cover and hides Tapped book.",
+    fixture: "Open book mode, paused mid-travel",
+    id: "openBook.source",
+    kind: "control",
+    optionCoverage: ["grid", "carousel"],
+    target: OPEN_BOOK_TARGETS.source,
+    userAction: "Select Grid and Carousel in Open from.",
+  },
+  {
+    automated: true,
+    automatedTestName: "tapped book chooses which grid cover opens",
+    browser: {
+      budget: "standard",
+      file: SPEC,
+      testName: "browser acceptance: Tapped book chooses the travelling cover",
+    },
+    componentType: "select",
+    evidence: "rendered-pixels",
+    expectedObservable: "Each option sends a different grid cover to the detail page with its own title and progress.",
+    fixture: "Open book mode from the grid, paused on the detail page",
+    id: "openBook.book",
+    kind: "control",
+    optionCoverage: ["0", "1", "2", "3", "4", "5"],
+    target: OPEN_BOOK_TARGETS.book,
+    userAction: "Choose each Tapped book option.",
+  },
   {
     automated: true,
     automatedTestName: "shelf insert position moves the landing slot",
@@ -336,7 +396,7 @@ export const appAcceptance: readonly ToolcraftComponentAcceptance[] = [
     evidence: "timeline-output",
     expectedObservable:
       "Scrubbing moves the book through pick-up, flight and landing; the loop is forward-only and its first and last frames match, also after a duration edit.",
-    fixture: "3.2 second add-to-shelf loop",
+    fixture: "4.8 second loop in every mode",
     id: "shelf.timeline",
     kind: "runtime",
     target: "timeline.playback",

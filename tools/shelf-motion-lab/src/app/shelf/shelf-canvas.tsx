@@ -10,12 +10,8 @@ import {
   useToolcraftViewportInteractionActive,
 } from "@/toolcraft/runtime/react";
 
-import { evaluateShelfSequence } from "./motion-sequence";
-import {
-  readShelfMotionConfig,
-  SHELF_VIEW_DEFAULT,
-  SHELF_VIEW_TARGET,
-} from "./motion-values";
+import { SHELF_VIEW_DEFAULT, SHELF_VIEW_TARGET } from "./motion-values";
+import { evaluateSceneFrame } from "./scene-frame";
 import { previewRenderPass, sceneResourcesPass } from "./shelf-pipeline";
 import { createShelfRenderer, type ShelfRenderer } from "./shelf-scene";
 import styles from "./shelf-canvas.module.css";
@@ -32,6 +28,7 @@ export function ShelfCanvas(): React.JSX.Element {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const sceneRef = React.useRef<ShelfRenderer | null>(null);
   const [sceneReady, setSceneReady] = React.useState(false);
+  const [artworkReady, setArtworkReady] = React.useState(false);
   const [canvasId] = React.useState(() => `shelf-${(nextCanvasId += 1)}`);
   const sceneFrame = useToolcraftProductSceneFrame();
   const rendererPipeline = useToolcraftPipeline();
@@ -43,7 +40,6 @@ export function ShelfCanvas(): React.JSX.Element {
   const viewportActive = useToolcraftViewportInteractionActive();
   const devicePixelRatio = typeof window === "undefined" ? 1 : window.devicePixelRatio || 1;
 
-  const config = React.useMemo(() => readShelfMotionConfig(values), [values]);
   const cameraPose = React.useMemo(
     () => readToolcraftOrientationPose(values[SHELF_VIEW_TARGET], SHELF_VIEW_DEFAULT),
     [values],
@@ -53,8 +49,8 @@ export function ShelfCanvas(): React.JSX.Element {
     durationSeconds,
   });
   const frame = React.useMemo(
-    () => evaluateShelfSequence(config, loopTime, durationSeconds),
-    [config, durationSeconds, loopTime],
+    () => evaluateSceneFrame(values, loopTime, durationSeconds),
+    [durationSeconds, loopTime, values],
   );
 
   const cssWidth = sceneFrame.kind === "ready" ? sceneFrame.rect.width : 0;
@@ -72,6 +68,10 @@ export function ShelfCanvas(): React.JSX.Element {
       if (!active) return;
       sceneRef.current = scene;
       setSceneReady(true);
+      // Redraw once the Figma artwork for the phone screens has loaded.
+      void scene.whenReady().then(() => {
+        if (active) setArtworkReady(true);
+      });
     };
     if (rendererPipeline) {
       void rendererPipeline
@@ -106,7 +106,9 @@ export function ShelfCanvas(): React.JSX.Element {
     if (!destination) return undefined;
     const draw = () => {
       scene.resize(backingWidth, backingHeight);
-      scene.apply(frame, config.glowColor, cameraPose, cssWidth / cssHeight);
+      const aspect = cssWidth / cssHeight;
+      if (frame.mode === "shelf") scene.apply(frame.shelf, frame.glowColor, cameraPose, aspect);
+      else scene.applyPhone(frame.phone, { defaultPosition: SHELF_VIEW_DEFAULT.position, position: cameraPose.position }, aspect);
       destination.clearRect(0, 0, backingWidth, backingHeight);
       scene.present(destination, 0, 0, backingWidth, backingHeight);
     };
@@ -114,10 +116,10 @@ export function ShelfCanvas(): React.JSX.Element {
     else draw();
     return undefined;
   }, [
+    artworkReady,
     backingHeight,
     backingWidth,
     cameraPose,
-    config.glowColor,
     cssHeight,
     cssWidth,
     deferred,
@@ -131,8 +133,7 @@ export function ShelfCanvas(): React.JSX.Element {
       <canvas
         className={styles.canvas}
         data-shelf-backing={`${backingWidth}x${backingHeight}`}
-        data-shelf-glow={frame.glow.intensity.toFixed(3)}
-        data-shelf-insert-index={frame.insertIndex}
+        data-shelf-mode={frame.mode}
         data-shelf-phase={frame.phase}
         data-shelf-ready={String(sceneReady)}
         data-shelf-time={loopTime.toFixed(3)}

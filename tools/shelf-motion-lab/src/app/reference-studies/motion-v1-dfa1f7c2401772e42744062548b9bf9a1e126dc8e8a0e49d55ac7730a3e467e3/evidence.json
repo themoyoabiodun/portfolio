@@ -1,0 +1,993 @@
+{
+  "changeMetric": "max-yuva-diff-v1",
+  "contactSheet": {
+    "columns": 11,
+    "height": 2016,
+    "path": "src/app/reference-studies/motion-v1-dfa1f7c2401772e42744062548b9bf9a1e126dc8e8a0e49d55ac7730a3e467e3/contact-sheet.png",
+    "rows": 7,
+    "sha256": "50666ce5a1528b2a423b4400ae820fb97148a235f6d9a80f466b06dd6f7a2257",
+    "width": 5280
+  },
+  "decodedFrameCount": 250,
+  "detectedEvents": [
+    {
+      "afterFrameId": "source-frame:144",
+      "beforeFrameId": "source-frame:142",
+      "eventId": "motion-event:change:142-143-144",
+      "kind": "change",
+      "peakFrameId": "source-frame:143",
+      "score": 0.010134078431372548,
+      "windowFrameIds": [
+        "source-frame:142",
+        "source-frame:143",
+        "source-frame:144"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:146",
+      "beforeFrameId": "source-frame:144",
+      "eventId": "motion-event:change:144-145-146",
+      "kind": "change",
+      "peakFrameId": "source-frame:145",
+      "score": 0.009724941176470587,
+      "windowFrameIds": [
+        "source-frame:144",
+        "source-frame:145",
+        "source-frame:146"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:149",
+      "beforeFrameId": "source-frame:147",
+      "eventId": "motion-event:change:147-148-149",
+      "kind": "change",
+      "peakFrameId": "source-frame:148",
+      "score": 0.11272627450980392,
+      "windowFrameIds": [
+        "source-frame:147",
+        "source-frame:148",
+        "source-frame:149"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:153",
+      "beforeFrameId": "source-frame:151",
+      "eventId": "motion-event:change:151-152-153",
+      "kind": "change",
+      "peakFrameId": "source-frame:152",
+      "score": 0.015432117647058824,
+      "windowFrameIds": [
+        "source-frame:151",
+        "source-frame:152",
+        "source-frame:153"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:158",
+      "beforeFrameId": "source-frame:156",
+      "eventId": "motion-event:change:156-157-158",
+      "kind": "change",
+      "peakFrameId": "source-frame:157",
+      "score": 0.011035019607843137,
+      "windowFrameIds": [
+        "source-frame:156",
+        "source-frame:157",
+        "source-frame:158"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:163",
+      "beforeFrameId": "source-frame:161",
+      "eventId": "motion-event:change:161-162-163",
+      "kind": "change",
+      "peakFrameId": "source-frame:162",
+      "score": 0.011749058823529413,
+      "windowFrameIds": [
+        "source-frame:161",
+        "source-frame:162",
+        "source-frame:163"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:188",
+      "beforeFrameId": "source-frame:186",
+      "eventId": "motion-event:change:186-187-188",
+      "kind": "change",
+      "peakFrameId": "source-frame:187",
+      "score": 0.008595254901960786,
+      "windowFrameIds": [
+        "source-frame:186",
+        "source-frame:187",
+        "source-frame:188"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:193",
+      "beforeFrameId": "source-frame:191",
+      "eventId": "motion-event:change:191-192-193",
+      "kind": "change",
+      "peakFrameId": "source-frame:192",
+      "score": 0.00992741176470588,
+      "windowFrameIds": [
+        "source-frame:191",
+        "source-frame:192",
+        "source-frame:193"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:203",
+      "beforeFrameId": "source-frame:201",
+      "eventId": "motion-event:change:201-202-203",
+      "kind": "change",
+      "peakFrameId": "source-frame:202",
+      "score": 0.001731105882352941,
+      "windowFrameIds": [
+        "source-frame:201",
+        "source-frame:202",
+        "source-frame:203"
+      ]
+    },
+    {
+      "afterFrameId": "source-frame:229",
+      "beforeFrameId": "source-frame:227",
+      "eventId": "motion-event:change:227-228-229",
+      "kind": "change",
+      "peakFrameId": "source-frame:228",
+      "score": 0.00005721490196078431,
+      "windowFrameIds": [
+        "source-frame:227",
+        "source-frame:228",
+        "source-frame:229"
+      ]
+    }
+  ],
+  "durationSeconds": 10,
+  "evidenceVersion": 1,
+  "ffmpegVersion": "ffmpeg 6.1.1-3ubuntu5",
+  "ffprobeVersion": "ffprobe 6.1.1-3ubuntu5",
+  "focusWindows": [],
+  "height": 432,
+  "maximumSourceFrameGapSeconds": 0.040000000000000924,
+  "nominalFrameRate": 25,
+  "overviewFrameIds": [
+    "source-frame:140",
+    "source-frame:142",
+    "source-frame:144",
+    "source-frame:146",
+    "source-frame:148",
+    "source-frame:150",
+    "source-frame:152",
+    "source-frame:154",
+    "source-frame:156",
+    "source-frame:158",
+    "source-frame:160",
+    "source-frame:162",
+    "source-frame:165",
+    "source-frame:167",
+    "source-frame:169",
+    "source-frame:171",
+    "source-frame:173",
+    "source-frame:175",
+    "source-frame:177",
+    "source-frame:179",
+    "source-frame:181",
+    "source-frame:183",
+    "source-frame:185",
+    "source-frame:187",
+    "source-frame:190",
+    "source-frame:192",
+    "source-frame:194",
+    "source-frame:196",
+    "source-frame:198",
+    "source-frame:200",
+    "source-frame:202",
+    "source-frame:204",
+    "source-frame:206",
+    "source-frame:208",
+    "source-frame:210",
+    "source-frame:212",
+    "source-frame:215",
+    "source-frame:217",
+    "source-frame:219",
+    "source-frame:221",
+    "source-frame:223",
+    "source-frame:225",
+    "source-frame:227",
+    "source-frame:229",
+    "source-frame:231",
+    "source-frame:233",
+    "source-frame:235",
+    "source-frame:237",
+    "source-frame:240",
+    "source-frame:242",
+    "source-frame:244",
+    "source-frame:246",
+    "source-frame:248"
+  ],
+  "overviewTargetFps": 12,
+  "reviewPartition": {
+    "count": 2,
+    "groupId": "motion-group-v1-f2ec839ae4497a9e1e931b706548699707462f41b94c3a7fb21da6a7e38ed422",
+    "index": 1,
+    "planSha256": "237cb474f0409804631b3e89ecde7245b9bb9537ccf85ddb871635b0ad08812d",
+    "scope": {
+      "endSeconds": 10,
+      "startSeconds": 0
+    }
+  },
+  "reviewedFrames": [
+    {
+      "cell": {
+        "column": 0,
+        "row": 0
+      },
+      "frameId": "source-frame:140",
+      "sourceFrameIndex": 140,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=140",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.6
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 0
+      },
+      "frameId": "source-frame:142",
+      "sourceFrameIndex": 142,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=142",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.68
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 0
+      },
+      "frameId": "source-frame:143",
+      "sourceFrameIndex": 143,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=143",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.72
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 0
+      },
+      "frameId": "source-frame:144",
+      "sourceFrameIndex": 144,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=144",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.76
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 0
+      },
+      "frameId": "source-frame:145",
+      "sourceFrameIndex": 145,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=145",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.8
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 0
+      },
+      "frameId": "source-frame:146",
+      "sourceFrameIndex": 146,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=146",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.84
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 0
+      },
+      "frameId": "source-frame:147",
+      "sourceFrameIndex": 147,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=147",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.88
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 0
+      },
+      "frameId": "source-frame:148",
+      "sourceFrameIndex": 148,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=148",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.92
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 0
+      },
+      "frameId": "source-frame:149",
+      "sourceFrameIndex": 149,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=149",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 5.96
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 0
+      },
+      "frameId": "source-frame:150",
+      "sourceFrameIndex": 150,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=150",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 0
+      },
+      "frameId": "source-frame:151",
+      "sourceFrameIndex": 151,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=151",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.04
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 1
+      },
+      "frameId": "source-frame:152",
+      "sourceFrameIndex": 152,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=152",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.08
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 1
+      },
+      "frameId": "source-frame:153",
+      "sourceFrameIndex": 153,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=153",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.12
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 1
+      },
+      "frameId": "source-frame:154",
+      "sourceFrameIndex": 154,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=154",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.16
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 1
+      },
+      "frameId": "source-frame:156",
+      "sourceFrameIndex": 156,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=156",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.24
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 1
+      },
+      "frameId": "source-frame:157",
+      "sourceFrameIndex": 157,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=157",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.28
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 1
+      },
+      "frameId": "source-frame:158",
+      "sourceFrameIndex": 158,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=158",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.32
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 1
+      },
+      "frameId": "source-frame:160",
+      "sourceFrameIndex": 160,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=160",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.4
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 1
+      },
+      "frameId": "source-frame:161",
+      "sourceFrameIndex": 161,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=161",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.44
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 1
+      },
+      "frameId": "source-frame:162",
+      "sourceFrameIndex": 162,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=162",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.48
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 1
+      },
+      "frameId": "source-frame:163",
+      "sourceFrameIndex": 163,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=163",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.52
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 1
+      },
+      "frameId": "source-frame:165",
+      "sourceFrameIndex": 165,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=165",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.6
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 2
+      },
+      "frameId": "source-frame:167",
+      "sourceFrameIndex": 167,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=167",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.68
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 2
+      },
+      "frameId": "source-frame:169",
+      "sourceFrameIndex": 169,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=169",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.76
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 2
+      },
+      "frameId": "source-frame:171",
+      "sourceFrameIndex": 171,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=171",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.84
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 2
+      },
+      "frameId": "source-frame:173",
+      "sourceFrameIndex": 173,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=173",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 6.92
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 2
+      },
+      "frameId": "source-frame:175",
+      "sourceFrameIndex": 175,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=175",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 2
+      },
+      "frameId": "source-frame:177",
+      "sourceFrameIndex": 177,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=177",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.08
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 2
+      },
+      "frameId": "source-frame:179",
+      "sourceFrameIndex": 179,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=179",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.16
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 2
+      },
+      "frameId": "source-frame:181",
+      "sourceFrameIndex": 181,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=181",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.24
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 2
+      },
+      "frameId": "source-frame:183",
+      "sourceFrameIndex": 183,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=183",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.32
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 2
+      },
+      "frameId": "source-frame:185",
+      "sourceFrameIndex": 185,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=185",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.4
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 2
+      },
+      "frameId": "source-frame:186",
+      "sourceFrameIndex": 186,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=186",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.44
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 3
+      },
+      "frameId": "source-frame:187",
+      "sourceFrameIndex": 187,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=187",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.48
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 3
+      },
+      "frameId": "source-frame:188",
+      "sourceFrameIndex": 188,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=188",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.52
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 3
+      },
+      "frameId": "source-frame:190",
+      "sourceFrameIndex": 190,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=190",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.6
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 3
+      },
+      "frameId": "source-frame:191",
+      "sourceFrameIndex": 191,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=191",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.64
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 3
+      },
+      "frameId": "source-frame:192",
+      "sourceFrameIndex": 192,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=192",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.68
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 3
+      },
+      "frameId": "source-frame:193",
+      "sourceFrameIndex": 193,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=193",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.72
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 3
+      },
+      "frameId": "source-frame:194",
+      "sourceFrameIndex": 194,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=194",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.76
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 3
+      },
+      "frameId": "source-frame:196",
+      "sourceFrameIndex": 196,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=196",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.84
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 3
+      },
+      "frameId": "source-frame:198",
+      "sourceFrameIndex": 198,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=198",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 7.92
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 3
+      },
+      "frameId": "source-frame:200",
+      "sourceFrameIndex": 200,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=200",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 3
+      },
+      "frameId": "source-frame:201",
+      "sourceFrameIndex": 201,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=201",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.04
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 4
+      },
+      "frameId": "source-frame:202",
+      "sourceFrameIndex": 202,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=202",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.08
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 4
+      },
+      "frameId": "source-frame:203",
+      "sourceFrameIndex": 203,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=203",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.12
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 4
+      },
+      "frameId": "source-frame:204",
+      "sourceFrameIndex": 204,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=204",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.16
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 4
+      },
+      "frameId": "source-frame:206",
+      "sourceFrameIndex": 206,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=206",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.24
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 4
+      },
+      "frameId": "source-frame:208",
+      "sourceFrameIndex": 208,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=208",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.32
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 4
+      },
+      "frameId": "source-frame:210",
+      "sourceFrameIndex": 210,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=210",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.4
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 4
+      },
+      "frameId": "source-frame:212",
+      "sourceFrameIndex": 212,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=212",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.48
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 4
+      },
+      "frameId": "source-frame:215",
+      "sourceFrameIndex": 215,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=215",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.6
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 4
+      },
+      "frameId": "source-frame:217",
+      "sourceFrameIndex": 217,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=217",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.68
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 4
+      },
+      "frameId": "source-frame:219",
+      "sourceFrameIndex": 219,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=219",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.76
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 4
+      },
+      "frameId": "source-frame:221",
+      "sourceFrameIndex": 221,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=221",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.84
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 5
+      },
+      "frameId": "source-frame:223",
+      "sourceFrameIndex": 223,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=223",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 8.92
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 5
+      },
+      "frameId": "source-frame:225",
+      "sourceFrameIndex": 225,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=225",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 5
+      },
+      "frameId": "source-frame:227",
+      "sourceFrameIndex": 227,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=227",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.08
+    },
+    {
+      "cell": {
+        "column": 3,
+        "row": 5
+      },
+      "frameId": "source-frame:228",
+      "sourceFrameIndex": 228,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=228",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.12
+    },
+    {
+      "cell": {
+        "column": 4,
+        "row": 5
+      },
+      "frameId": "source-frame:229",
+      "sourceFrameIndex": 229,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=229",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.16
+    },
+    {
+      "cell": {
+        "column": 5,
+        "row": 5
+      },
+      "frameId": "source-frame:231",
+      "sourceFrameIndex": 231,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=231",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.24
+    },
+    {
+      "cell": {
+        "column": 6,
+        "row": 5
+      },
+      "frameId": "source-frame:233",
+      "sourceFrameIndex": 233,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=233",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.32
+    },
+    {
+      "cell": {
+        "column": 7,
+        "row": 5
+      },
+      "frameId": "source-frame:235",
+      "sourceFrameIndex": 235,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=235",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.4
+    },
+    {
+      "cell": {
+        "column": 8,
+        "row": 5
+      },
+      "frameId": "source-frame:237",
+      "sourceFrameIndex": 237,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=237",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.48
+    },
+    {
+      "cell": {
+        "column": 9,
+        "row": 5
+      },
+      "frameId": "source-frame:240",
+      "sourceFrameIndex": 240,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=240",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.6
+    },
+    {
+      "cell": {
+        "column": 10,
+        "row": 5
+      },
+      "frameId": "source-frame:242",
+      "sourceFrameIndex": 242,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=242",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.68
+    },
+    {
+      "cell": {
+        "column": 0,
+        "row": 6
+      },
+      "frameId": "source-frame:244",
+      "sourceFrameIndex": 244,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=244",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.76
+    },
+    {
+      "cell": {
+        "column": 1,
+        "row": 6
+      },
+      "frameId": "source-frame:246",
+      "sourceFrameIndex": 246,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=246",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.84
+    },
+    {
+      "cell": {
+        "column": 2,
+        "row": 6
+      },
+      "frameId": "source-frame:248",
+      "sourceFrameIndex": 248,
+      "sourceLocator": "/home/user/portfolio/tools/shelf-motion-lab/docs/references/pin-737183032798006421-flipping-notebook.mp4#frame=248",
+      "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+      "timeSeconds": 9.92
+    }
+  ],
+  "scannedFrameCount": 250,
+  "segment": {
+    "endSeconds": 10,
+    "startSeconds": 5.54
+  },
+  "sourceBasename": "pin-737183032798006421-flipping-notebook.mp4",
+  "sourceKind": "video",
+  "sourceSha256": "c984f9fa964fcf3dc2ea16439ce094788a4c97ac937ac1def8d93c143f4f8fef",
+  "studyId": "motion-v1-dfa1f7c2401772e42744062548b9bf9a1e126dc8e8a0e49d55ac7730a3e467e3",
+  "timing": {
+    "authority": "decoded-timestamps"
+  },
+  "timingMode": "seconds",
+  "width": 720
+}

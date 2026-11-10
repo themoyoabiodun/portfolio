@@ -1,7 +1,42 @@
 import type { ToolcraftControlSectionInventoryEntry } from "./acceptance/types";
 import { SHELF_MOTION_TARGETS as t, SHELF_VIEW_TARGET } from "./shelf/motion-values";
+import {
+  CAROUSEL_TARGETS as c,
+  OPEN_BOOK_TARGETS as o,
+  SCENE_MODE_TARGET,
+} from "./shelf/phone-values";
+
+const MODE_REQUEST_TEXT =
+  "I also want the tool to cater for the sliding view of the book in the homepage. I've added the design.\n\nhttps://www.figma.com/design/5YusE8XzdQictaWqt2Bf9C/Book-Stack?node-id=74-2077&t=9ZfWvedQB1untbxS-11";
 
 export const appControlSectionInventory: readonly ToolcraftControlSectionInventoryEntry[] = [
+  {
+    entity: "Animated scene",
+    entityId: "animated-scene",
+    finiteSelectors: [
+      {
+        affectedTargets: [],
+        productMode: {
+          request: {
+            messageRef:
+              "claude.ai/code session_01Sky6R6ztZW1ACzimqFPcu9, user message adding Figma node 74-2077 (home carousel)",
+            messageText: MODE_REQUEST_TEXT,
+            quote: "I also want the tool to cater for the sliding view of the book in the homepage.",
+            source: "user-message",
+          },
+          sharedTargets: [SHELF_VIEW_TARGET, "export.image.format", "export.image.resolution"],
+        },
+        reason: "Chooses the shelf add, the home carousel swipe or the open-book transition and their controls.",
+        role: "branch",
+        target: SCENE_MODE_TARGET,
+      },
+    ],
+    groupingReason:
+      "The animation being tuned and the camera that views it apply to every scene.",
+    id: "scene",
+    targets: [SCENE_MODE_TARGET, SHELF_VIEW_TARGET],
+    title: "Scene",
+  },
   {
     entity: "Shelf scene",
     entityId: "shelf-scene",
@@ -12,10 +47,9 @@ export const appControlSectionInventory: readonly ToolcraftControlSectionInvento
         target: t.insert,
       },
     ],
-    groupingReason:
-      "The landing slot and the camera view both describe where the add happens on the shelf.",
+    groupingReason: "The landing slot decides where on the shelf the add happens.",
     id: "shelf",
-    targets: [t.insert, SHELF_VIEW_TARGET],
+    targets: [t.insert],
     title: "Shelf",
   },
   {
@@ -69,6 +103,48 @@ export const appControlSectionInventory: readonly ToolcraftControlSectionInvento
     id: "confirmation",
     targets: [t.glow, t.glowColor],
     title: "Confirmation",
+  },
+  {
+    entity: "Home carousel swipe",
+    entityId: "home-carousel-swipe",
+    finiteSelectors: [],
+    groupingReason:
+      "Drag, snap, neighbour depth and title handoff jointly shape one swipe between covers.",
+    id: "carousel",
+    targets: Object.values(c),
+    title: "Carousel",
+  },
+  {
+    entity: "Open-book travel",
+    entityId: "open-book-travel",
+    finiteSelectors: [
+      {
+        affectedTargets: [],
+        reason: "The source layout decides whether a grid cover can be chosen.",
+        role: "branch",
+        target: o.source,
+      },
+      {
+        reason: "The tapped book changes which grid cover travels to the detail page.",
+        role: "parameter",
+        target: o.book,
+      },
+    ],
+    groupingReason:
+      "Source, press, lift, travel, spine turn, arc and parting shape the cover's trip to the detail page.",
+    id: "open-book",
+    targets: [o.source, o.book, o.press, o.lift, o.travelTime, o.travelBounce, o.spineTurn, o.arc, o.part],
+    title: "Open Book",
+  },
+  {
+    entity: "Detail page reveal",
+    entityId: "detail-page-reveal",
+    finiteSelectors: [],
+    groupingReason:
+      "The colour flood, staggered rise and back transition shape how the detail page arrives and leaves.",
+    id: "detail",
+    targets: [o.floodTime, o.stagger, o.rise, o.backTime],
+    title: "Detail Page",
   },
   {
     entity: "Output background",
